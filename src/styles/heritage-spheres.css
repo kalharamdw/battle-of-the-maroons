@@ -1,0 +1,1028 @@
+/* ==========================================================================
+   BATTLE OF THE MAROONS — 100+ YEARS CRICKET HERITAGE SECTION
+   3D Spherical Archival Video Objects & Museum Experience
+   ========================================================================== */
+
+/* Overall Section Overrides & Atmospheric Canvas */
+#scene-04 {
+  min-height: 100vh;
+  padding: calc(var(--nav-height) + 40px) var(--gutter) 80px;
+  background: #040203;
+  overflow: visible;
+}
+
+#scene-04 .scene-media-layer {
+  opacity: 0.18; /* Subtle background texture so 3D spheres take center stage */
+  filter: blur(12px);
+}
+
+#scene-04 .scene-overlay {
+  background: radial-gradient(ellipse 90% 75% at 50% 40%, rgba(13, 5, 9, 0.95) 0%, #040203 100%);
+  opacity: 0.95 !important;
+}
+
+#scene-04 .scene-content {
+  max-width: 1360px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Hide original repetitive text scrimmage in scene 04 as it is now integrated into the museum experience */
+#scene-04 .scene-text-scrim {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   MUSEUM ATMOSPHERE & BACKGROUND LIGHTING
+   -------------------------------------------------------------------------- */
+.heritage-museum-experience {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+}
+
+.heritage-atmosphere {
+  position: absolute;
+  inset: -60px -40px;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.heritage-spotlight {
+  position: absolute;
+  width: 380px;
+  height: 480px;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+.spotlight-left {
+  left: 8%;
+  top: 80px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.28) 0%, transparent 70%);
+}
+
+.spotlight-center {
+  left: 50%;
+  top: -80px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(217, 119, 6, 0.45) 0%, rgba(139, 21, 43, 0.25) 50%, transparent 70%);
+}
+
+.spotlight-right {
+  right: 8%;
+  top: 80px;
+  background: radial-gradient(circle, rgba(226, 232, 240, 0.22) 0%, transparent 70%);
+}
+
+/* --------------------------------------------------------------------------
+   EDITORIAL HEADER (PRESERVED HISTORICAL DETAILS)
+   -------------------------------------------------------------------------- */
+.heritage-editorial-header {
+  text-align: center;
+  max-width: 980px;
+  margin: 0 auto 50px;
+  position: relative;
+  z-index: 5;
+}
+
+.heritage-badge-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.heritage-century-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(139, 21, 43, 0.6) 0%, rgba(35, 10, 16, 0.85) 100%);
+  border: 1px solid var(--border-gold);
+  border-radius: 100px;
+  padding: 6px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.pill-spark {
+  font-size: 1rem;
+}
+
+.heritage-centenary-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--color-silver);
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.heritage-main-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--color-chalk);
+  margin-bottom: 16px;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+}
+
+.heritage-sub-heading {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.4vw, 1.25rem);
+  font-weight: 400;
+  color: var(--color-wool);
+  margin-bottom: 28px;
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.9;
+}
+
+/* Preserved Stepped Ribbon */
+.heritage-stepped-ribbon {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 16px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.heritage-ribbon-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(18, 9, 13, 0.65);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: 30px;
+  padding: 8px 18px;
+  backdrop-filter: blur(10px);
+  transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+.heritage-ribbon-item:hover {
+  border-color: var(--color-gold);
+  transform: translateY(-2px);
+}
+
+.ribbon-marker {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--color-gold);
+  background: rgba(212, 175, 55, 0.15);
+  padding: 2px 7px;
+  border-radius: 12px;
+}
+
+.ribbon-text {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-chalk);
+  letter-spacing: 0.02em;
+}
+
+/* --------------------------------------------------------------------------
+   THE THREE 3D ARCHIVAL VIDEO SPHERES
+   -------------------------------------------------------------------------- */
+.heritage-spheres-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1180px;
+  margin: 30px auto 60px;
+  perspective: 1400px;
+  transform-style: preserve-3d;
+  z-index: 5;
+}
+
+.heritage-spheres-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 36px);
+  align-items: start;
+  width: 100%;
+}
+
+.heritage-sphere-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+/* Triangle arrangement: Center ball elevated as apex, side balls forming base */
+.heritage-sphere-wrapper[data-sphere-idx="0"] {
+  margin-top: 155px;
+}
+
+.heritage-sphere-wrapper[data-sphere-idx="1"] {
+  margin-top: 0;
+  z-index: 3;
+}
+
+.heritage-sphere-wrapper[data-sphere-idx="2"] {
+  margin-top: 155px;
+}
+
+/* The Core 3D Glass Sphere Object */
+.heritage-3d-orb {
+  position: relative;
+  width: clamp(260px, 22vw, 340px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 
+    0 24px 50px rgba(0, 0, 0, 0.95),
+    0 0 1px rgba(255, 255, 255, 0.35);
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+  user-select: none;
+  outline: none;
+}
+
+.heritage-3d-orb:hover,
+.heritage-3d-orb:focus-visible {
+  box-shadow: 
+    0 32px 70px rgba(0, 0, 0, 0.98),
+    0 0 30px rgba(212, 175, 55, 0.35);
+}
+
+/* Layer 1: Media Core (Video & Poster) */
+.orb-media-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #000;
+}
+
+.orb-video,
+.orb-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+  transition: opacity 0.8s ease, filter 0.5s ease;
+}
+
+/* Chapter 1: The Legends — Classic Monochrome Silver Halide 1920s Archival Film */
+.heritage-sphere-wrapper[data-sphere-id="legends"] .orb-video,
+.heritage-sphere-wrapper[data-sphere-id="legends"] .orb-poster {
+  filter: grayscale(100%) contrast(1.24) brightness(0.92);
+}
+
+.heritage-sphere-wrapper[data-sphere-id="legends"]:hover .orb-video,
+.heritage-sphere-wrapper[data-sphere-id="legends"]:hover .orb-poster {
+  filter: grayscale(100%) contrast(1.28) brightness(0.98);
+}
+
+/* Chapter 2: The Rivalry — Warm Archival Vintage Color Film (1960s-1970s Kodachrome / Warm Ektachrome) */
+.heritage-sphere-wrapper[data-sphere-id="rivalry"] .orb-video,
+.heritage-sphere-wrapper[data-sphere-id="rivalry"] .orb-poster {
+  /* Rich warm vintage color with nostalgic amber/sepia warmth, not plain B&W */
+  filter: sepia(0.38) saturate(1.48) contrast(1.16) brightness(0.98) hue-rotate(-8deg);
+}
+
+.heritage-sphere-wrapper[data-sphere-id="rivalry"]:hover .orb-video,
+.heritage-sphere-wrapper[data-sphere-id="rivalry"]:hover .orb-poster {
+  filter: sepia(0.28) saturate(1.68) contrast(1.22) brightness(1.04) hue-rotate(-5deg);
+}
+
+/* Chapter 3: The Legacy — Crisp, Authentic Natural Broadcast Color */
+.heritage-sphere-wrapper[data-sphere-id="legacy"] .orb-video,
+.heritage-sphere-wrapper[data-sphere-id="legacy"] .orb-poster {
+  /* 100% natural, crisp authentic color without artificial tint */
+  filter: contrast(1.06) brightness(1.0) saturate(1.1);
+}
+
+.heritage-sphere-wrapper[data-sphere-id="legacy"]:hover .orb-video,
+.heritage-sphere-wrapper[data-sphere-id="legacy"]:hover .orb-poster {
+  filter: contrast(1.1) brightness(1.03) saturate(1.18);
+}
+
+.orb-video {
+  opacity: 0;
+  z-index: 2;
+}
+
+.heritage-3d-orb.video-active .orb-video {
+  opacity: 1;
+}
+
+.orb-poster {
+  opacity: 1;
+  z-index: 1;
+}
+
+.heritage-3d-orb.video-active .orb-poster {
+  opacity: 0;
+}
+
+/* Layer 2: Vintage Film Grain & Vignette Overlay */
+.orb-film-grain {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: 3;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 50% 50%, transparent 40%, rgba(0, 0, 0, 0.55) 80%, rgba(0, 0, 0, 0.92) 100%);
+  mix-blend-mode: multiply;
+}
+
+/* Chapter 2: Warm Archival Grain & Golden Amber Vignette */
+.heritage-sphere-wrapper[data-sphere-id="rivalry"] .orb-film-grain {
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(217, 119, 6, 0.12) 35%, rgba(139, 21, 43, 0.28) 75%, rgba(0, 0, 0, 0.92) 100%),
+    radial-gradient(circle at 35% 25%, rgba(255, 210, 140, 0.14) 0%, transparent 60%);
+  mix-blend-mode: multiply;
+}
+
+/* Chapter 3: Natural Archival Atmosphere */
+.heritage-sphere-wrapper[data-sphere-id="legacy"] .orb-film-grain {
+  background: 
+    radial-gradient(circle at 50% 50%, transparent 45%, rgba(0, 0, 0, 0.45) 80%, rgba(0, 0, 0, 0.9) 100%);
+  mix-blend-mode: multiply;
+}
+
+/* Layer 3: Internal Volumetric Concave Shadow */
+.orb-inner-volume {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: 4;
+  pointer-events: none;
+  background: radial-gradient(circle at 35% 28%, transparent 42%, rgba(0, 0, 0, 0.35) 75%, rgba(0, 0, 0, 0.9) 100%);
+  box-shadow: 
+    inset 0 0 45px rgba(0, 0, 0, 0.96),
+    inset 0 0 16px rgba(0, 0, 0, 0.85);
+}
+
+/* Layer 4: Chapter-Specific Identity Rim Glow */
+.orb-rim-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: 5;
+  pointer-events: none;
+  transition: box-shadow 0.5s ease, border-color 0.5s ease;
+}
+
+.orb-rim-legends {
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 
+    0 0 35px rgba(212, 175, 55, 0.32),
+    inset 0 0 24px rgba(212, 175, 55, 0.22);
+}
+
+/* Chapter 2: Warm Vintage Amber / Bronze Rim Glow */
+.orb-rim-rivalry {
+  border: 1px solid rgba(217, 119, 6, 0.45);
+  box-shadow: 
+    0 0 45px rgba(217, 119, 6, 0.42),
+    0 0 18px rgba(180, 83, 9, 0.35),
+    inset 0 0 28px rgba(217, 119, 6, 0.25);
+}
+
+/* Chapter 3: Pristine Silver / Platinum Heritage Rim Glow */
+.orb-rim-legacy {
+  border: 1px solid rgba(226, 232, 240, 0.45);
+  box-shadow: 
+    0 0 38px rgba(226, 232, 240, 0.35),
+    0 0 15px rgba(255, 255, 255, 0.22),
+    inset 0 0 24px rgba(226, 232, 240, 0.2);
+}
+
+.heritage-3d-orb:hover .orb-rim-legends {
+  box-shadow: 0 0 50px rgba(212, 175, 55, 0.55), inset 0 0 32px rgba(212, 175, 55, 0.35);
+}
+
+.heritage-3d-orb:hover .orb-rim-rivalry {
+  border-color: rgba(245, 158, 11, 0.7);
+  box-shadow: 
+    0 0 65px rgba(245, 158, 11, 0.65),
+    0 0 24px rgba(217, 119, 6, 0.48),
+    inset 0 0 35px rgba(245, 158, 11, 0.35);
+}
+
+.heritage-3d-orb:hover .orb-rim-legacy {
+  border-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 
+    0 0 55px rgba(226, 232, 240, 0.6),
+    0 0 24px rgba(255, 255, 255, 0.45),
+    inset 0 0 32px rgba(226, 232, 240, 0.35);
+}
+
+/* Layer 5: Optical Curved Specular Highlights */
+.orb-specular-crescent {
+  position: absolute;
+  top: 4%;
+  left: 6%;
+  width: 65%;
+  height: 48%;
+  border-radius: 50%;
+  z-index: 6;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 35% 25%, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.18) 30%, transparent 65%);
+  transform: rotate(-25deg);
+  mix-blend-mode: screen;
+}
+
+.orb-bounce-light {
+  position: absolute;
+  bottom: 5%;
+  right: 8%;
+  width: 50%;
+  height: 35%;
+  border-radius: 50%;
+  z-index: 6;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 65% 80%, rgba(255, 255, 255, 0.18) 0%, transparent 55%);
+  mix-blend-mode: screen;
+}
+
+/* Dynamic Glare Moving with Pointer */
+.orb-dynamic-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: 7;
+  pointer-events: none;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.35) 0%, transparent 60%);
+  opacity: 0.6;
+  mix-blend-mode: screen;
+  transition: opacity 0.3s ease;
+}
+
+/* Layer 6: Glass HUD & On-Sphere Controls */
+.orb-glass-hud {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 20px 22px;
+  pointer-events: none;
+}
+
+.orb-chapter-tag {
+  align-self: center;
+  background: rgba(10, 4, 7, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 100px;
+  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-chalk);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+
+.orb-controls-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: auto;
+  pointer-events: auto;
+  margin-bottom: 4px;
+}
+
+.orb-play-btn,
+.orb-expand-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(14, 6, 10, 0.75);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.orb-play-btn:hover,
+.orb-expand-btn:hover {
+  transform: scale(1.15);
+  background: var(--color-gold);
+  color: var(--color-pitch);
+  border-color: var(--color-gold);
+}
+
+/* Floor Contact Shadow */
+.sphere-ground-shadow {
+  width: 70%;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 75%);
+  filter: blur(10px);
+  margin: 22px auto 0;
+  pointer-events: none;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* --------------------------------------------------------------------------
+   ARCHIVAL CAPTION CARD (BELOW SPHERES)
+   -------------------------------------------------------------------------- */
+.sphere-caption-card {
+  text-align: center;
+  margin-top: 18px;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.sphere-era-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--color-silver);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.era-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.sphere-chapter-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+  font-weight: 800;
+  color: var(--color-chalk);
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+  transition: color 0.3s ease;
+}
+
+.heritage-sphere-wrapper:hover .sphere-chapter-title {
+  color: var(--color-gold);
+}
+
+/* Chapter 2 Archival HUD & Caption Accents */
+.heritage-sphere-wrapper[data-sphere-id="rivalry"] .orb-chapter-tag {
+  border-color: rgba(217, 119, 6, 0.45);
+  color: #fbbf24;
+}
+
+.heritage-sphere-wrapper[data-sphere-id="rivalry"]:hover .sphere-chapter-title {
+  color: #fbbf24;
+}
+
+.heritage-sphere-wrapper[data-sphere-id="rivalry"] .sphere-chapter-subtitle {
+  color: #f59e0b;
+}
+
+.heritage-sphere-wrapper[data-sphere-id="rivalry"] .sphere-stat-pill {
+  border-color: rgba(217, 119, 6, 0.35);
+  color: #fbbf24;
+}
+
+/* Chapter 3 Natural Silver Heritage Accents */
+.heritage-sphere-wrapper[data-sphere-id="legacy"] .orb-chapter-tag {
+  border-color: rgba(226, 232, 240, 0.35);
+  color: #e2e8f0;
+}
+
+.heritage-sphere-wrapper[data-sphere-id="legacy"]:hover .sphere-chapter-title {
+  color: #ffffff;
+}
+
+.heritage-sphere-wrapper[data-sphere-id="legacy"] .sphere-chapter-subtitle {
+  color: #e2e8f0;
+}
+
+.heritage-sphere-wrapper[data-sphere-id="legacy"] .sphere-stat-pill {
+  border-color: rgba(226, 232, 240, 0.28);
+  color: #e2e8f0;
+}
+
+.sphere-chapter-subtitle {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.sphere-chapter-desc {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--color-wool);
+  margin-bottom: 14px;
+  opacity: 0.88;
+}
+
+.sphere-stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(22, 10, 16, 0.7);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 100px;
+  padding: 4px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.stat-icon {
+  font-size: 0.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   PRESERVED HISTORICAL INAUGURAL QUOTE & FOUNDERS CITATION
+   -------------------------------------------------------------------------- */
+.heritage-inaugural-footer {
+  width: 100%;
+  max-width: 920px;
+  margin: 30px auto 0;
+  position: relative;
+  z-index: 5;
+}
+
+.heritage-inaugural-footer .legacy-quote-card {
+  margin-top: 0;
+  background: rgba(12, 5, 8, 0.85);
+  border: 1px solid var(--border-gold);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+  border-radius: 20px;
+  padding: 42px 36px 32px;
+  text-align: center;
+}
+
+.heritage-provenance-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  flex-wrap: wrap;
+}
+
+.provenance-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.prov-num {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--color-gold);
+}
+
+.prov-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-silver);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+.provenance-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(212, 175, 55, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   FULLSCREEN ARCHIVAL THEATER MODAL
+   -------------------------------------------------------------------------- */
+.heritage-theater-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.theater-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 1, 3, 0.94);
+  backdrop-filter: blur(20px);
+}
+
+.theater-content-box {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1080px;
+  background: #090306;
+  border: 1px solid var(--border-gold);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.98), 0 0 40px rgba(139, 21, 43, 0.4);
+}
+
+.theater-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(14, 5, 9, 0.85);
+  border: 1px solid var(--border-gold);
+  color: var(--color-chalk);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.theater-close-btn:hover {
+  transform: rotate(90deg) scale(1.1);
+  background: var(--color-gold);
+  color: var(--color-pitch);
+}
+
+.theater-media-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.theater-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: filter 0.4s ease;
+}
+
+.theater-chapter-legends .theater-video {
+  filter: grayscale(100%) contrast(1.22) brightness(0.95);
+}
+
+/* Chapter 2: Warm Vintage Archival Color */
+.theater-chapter-rivalry .theater-video {
+  filter: sepia(0.35) saturate(1.48) contrast(1.16) brightness(0.98) hue-rotate(-8deg);
+}
+
+/* Chapter 3: Crisp, Authentic Natural Color */
+.theater-chapter-legacy .theater-video {
+  filter: contrast(1.05) brightness(1.0) saturate(1.1);
+}
+
+.theater-editorial-bar {
+  padding: 28px 36px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  background: linear-gradient(180deg, rgba(16, 7, 11, 0.95) 0%, #060204 100%);
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.theater-title-group {
+  max-width: 420px;
+}
+
+.theater-chapter-pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 1px solid;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.theater-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--color-chalk);
+  margin-bottom: 4px;
+}
+
+.theater-sub {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-gold);
+}
+
+.theater-desc-group {
+  flex: 1;
+}
+
+.theater-desc {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--color-wool);
+  margin-bottom: 14px;
+}
+
+.theater-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.theater-stat-badge {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-gold);
+}
+
+.theater-provenance-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: var(--color-silver);
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .heritage-spheres-stage {
+    max-width: 960px;
+  }
+
+  .heritage-spheres-grid {
+    gap: 16px;
+  }
+
+  .heritage-3d-orb {
+    width: clamp(210px, 24vw, 270px);
+  }
+
+  .heritage-sphere-wrapper[data-sphere-idx="0"],
+  .heritage-sphere-wrapper[data-sphere-idx="2"] {
+    margin-top: 110px;
+  }
+
+  .theater-editorial-bar {
+    flex-direction: column;
+    gap: 16px;
+    padding: 22px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  #scene-04 {
+    min-height: auto !important;
+    padding: 28px 14px 28px !important;
+  }
+
+  .heritage-editorial-header {
+    margin-bottom: 18px !important;
+  }
+
+  .heritage-badge-row {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .heritage-stepped-ribbon {
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .heritage-ribbon-item {
+    width: 100%;
+    max-width: 440px;
+    justify-content: flex-start;
+    padding: 6px 12px;
+  }
+
+  /* Mobile Stacked Spheres */
+  .heritage-spheres-grid {
+    grid-template-columns: 1fr;
+    gap: 22px !important;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  /* Reset triangle margin-top offset on mobile single column */
+  .heritage-sphere-wrapper[data-sphere-idx="0"],
+  .heritage-sphere-wrapper[data-sphere-idx="1"],
+  .heritage-sphere-wrapper[data-sphere-idx="2"] {
+    margin-top: 0 !important;
+  }
+
+  .heritage-3d-orb {
+    width: 220px !important;
+  }
+
+  .orb-glass-hud {
+    padding: 16px 14px 18px !important;
+  }
+
+  .orb-controls-badge {
+    gap: 12px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .orb-play-btn,
+  .orb-expand-btn {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 0.78rem !important;
+  }
+
+  .sphere-caption-card {
+    max-width: 300px;
+    margin-top: 10px !important;
+    padding: 14px 12px !important;
+  }
+
+  .heritage-inaugural-footer {
+    margin-top: 24px !important;
+  }
+
+  .heritage-inaugural-footer .legacy-quote-card {
+    padding: 20px 14px 16px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .heritage-provenance-row {
+    gap: 12px;
+  }
+
+  .provenance-divider {
+    display: none;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .heritage-3d-orb {
+    transition: none !important;
+  }
+
+  .spotlight-left,
+  .spotlight-center,
+  .spotlight-right {
+    filter: blur(50px) !important;
+  }
+}

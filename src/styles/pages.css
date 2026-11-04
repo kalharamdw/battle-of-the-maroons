@@ -1,0 +1,678 @@
+/* ==========================================================================
+   BATTLE OF THE MAROONS — SUBPAGES STYLES
+   About, Match Centre, Historical Records, Teams, News, Gallery, & Contact
+   ========================================================================== */
+
+/* Subpage Hero Header */
+.page-hero {
+  position: relative;
+  padding: calc(var(--nav-height) + 60px) 0 60px;
+  background: linear-gradient(180deg, rgba(34, 5, 11, 0.95) 0%, rgba(14, 7, 10, 0.98) 100%);
+  border-bottom: 1px solid var(--border-light);
+  text-align: center;
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 30%, rgba(140, 29, 46, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.page-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 16px;
+}
+
+.page-hero-title {
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-weight: 900;
+  color: var(--color-wool);
+  margin-bottom: 14px;
+}
+
+.page-hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--color-wool-muted);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* Page Section Spacing */
+.page-section {
+  padding: 80px 0;
+  position: relative;
+}
+
+.page-section.darker {
+  background: var(--color-charcoal);
+  border: none;
+}
+
+.section-header-block {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.section-header-block h2 {
+  font-size: clamp(1.8rem, 3.8vw, 3rem);
+  margin-bottom: 12px;
+}
+
+.section-header-block p {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   THE BATTLE / ABOUT PAGE
+   -------------------------------------------------------------------------- */
+.about-origins-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.about-text-content h3 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--color-wool);
+}
+
+.about-text-content p {
+  margin-bottom: 18px;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.about-highlight-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-gold);
+  border-radius: 16px;
+  padding: 32px;
+  backdrop-filter: blur(10px);
+}
+
+/* Timeline Components */
+.heritage-timeline {
+  position: relative;
+  max-width: 860px;
+  margin: 40px auto 0;
+  padding-left: 30px;
+}
+
+.heritage-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 7px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--color-crimson), var(--color-gold));
+}
+
+.timeline-milestone-item {
+  position: relative;
+  margin-bottom: 36px;
+}
+
+.timeline-milestone-item::before {
+  content: '';
+  position: absolute;
+  left: -29px;
+  top: 4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  border: 3px solid var(--color-pitch);
+  box-shadow: 0 0 10px var(--color-gold);
+}
+
+.timeline-year-tag {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  margin-bottom: 4px;
+}
+
+.timeline-event-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-wool);
+  margin-bottom: 6px;
+}
+
+.timeline-event-desc {
+  font-size: 0.95rem;
+  color: var(--color-wool-muted);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   TEAMS PAGE
+   -------------------------------------------------------------------------- */
+.team-view-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.team-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 28px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-wool-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.team-tab-btn.active.ananda {
+  background: rgba(107, 20, 36, 0.6);
+  border-color: var(--color-gold);
+  color: var(--color-wool);
+  box-shadow: 0 4px 20px rgba(107, 20, 36, 0.5);
+}
+
+.team-tab-btn.active.nalanda {
+  background: rgba(107, 20, 36, 0.6);
+  border-color: var(--color-silver);
+  color: var(--color-wool);
+  box-shadow: 0 4px 20px rgba(107, 20, 36, 0.5);
+}
+
+.team-tab-flag {
+  width: 28px;
+  height: 18px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+/* Hall of Fame Cards */
+.hof-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 36px;
+}
+
+.hof-card {
+  background: rgba(18, 9, 13, 0.85);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.hof-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-gold);
+}
+
+.hof-photo-wrap {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background: var(--color-charcoal);
+}
+
+.hof-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform var(--transition-smooth);
+}
+
+.hof-card:hover .hof-photo-wrap img {
+  transform: scale(1.05);
+}
+
+.hof-card-content {
+  padding: 20px;
+}
+
+.hof-player-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-wool);
+  margin-bottom: 8px;
+}
+
+.hof-player-feat {
+  font-size: 0.88rem;
+  color: var(--color-wool-muted);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   NEWS & ARTICLES PAGE
+   -------------------------------------------------------------------------- */
+.news-featured-card {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 36px;
+  background: rgba(18, 9, 13, 0.85);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 48px;
+  backdrop-filter: blur(14px);
+}
+
+.news-featured-img-wrap {
+  position: relative;
+  min-height: 380px;
+  overflow: hidden;
+}
+
+.news-featured-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.news-featured-content {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.news-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.news-card-cat {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  background: rgba(212, 175, 55, 0.12);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.news-card-date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-wool-subtle);
+}
+
+.news-articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.news-card {
+  background: rgba(18, 9, 13, 0.8);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.news-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-light);
+}
+
+.news-card-thumb {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.news-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth);
+}
+
+.news-card:hover .news-card-thumb img {
+  transform: scale(1.05);
+}
+
+.news-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.news-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-wool);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.news-card-excerpt {
+  font-size: 0.9rem;
+  color: var(--color-wool-muted);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.news-read-more-link {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.news-read-more-link:hover {
+  color: var(--color-gold-bright);
+}
+
+/* --------------------------------------------------------------------------
+   CHERISHED MOMENTS (GOLDEN MEMORIES) STYLES
+   -------------------------------------------------------------------------- */
+.cherished-entry-card {
+  background: rgba(18, 9, 13, 0.88);
+  border: 1px solid var(--border-light);
+  border-radius: 18px;
+  padding: clamp(24px, 4vw, 44px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  margin-bottom: 44px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cherished-entry-card:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.85), 0 0 35px rgba(212, 175, 55, 0.2);
+  transform: translateY(-4px);
+}
+
+.cherished-header {
+  margin-bottom: 24px;
+}
+
+.cherished-header h2 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--color-wool);
+  margin: 10px 0 6px;
+  line-height: 1.2;
+}
+
+.cherished-sub {
+  font-family: var(--font-mono);
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  color: var(--color-gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cherished-img-frame {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8);
+  background-color: #0c0508;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cherished-img-frame img {
+  width: 100%;
+  height: 100%;
+  max-height: 520px;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.cherished-img-frame:hover img {
+  transform: scale(1.03);
+}
+
+.cherished-img-frame.aspect-tall {
+  height: 280px;
+}
+
+.cherished-img-frame.aspect-tall img {
+  object-fit: cover;
+}
+
+.cherished-sub-card {
+  background: rgba(12, 5, 8, 0.75);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s ease;
+}
+
+.cherished-sub-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-gold);
+  background: rgba(24, 10, 16, 0.9);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.85);
+}
+
+.cherished-caption {
+  font-size: 0.88rem;
+  color: var(--color-wool-muted);
+  line-height: 1.6;
+  margin-top: 14px;
+}
+
+.cherished-details-box {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.roster-meta-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(8, 3, 5, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+
+.roster-meta-row {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--color-wool-muted);
+}
+
+.roster-label {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-right: 8px;
+  display: inline-block;
+}
+
+/* --------------------------------------------------------------------------
+   CONTACT PAGE OFFICIAL COMMITTEE STYLES
+   -------------------------------------------------------------------------- */
+.committee-officer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.committee-officer-item {
+  background: rgba(14, 6, 10, 0.75);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.committee-officer-item:hover {
+  border-color: var(--color-gold);
+  background: rgba(28, 10, 18, 0.9);
+  transform: translateY(-2px);
+}
+
+.committee-officer-role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.committee-officer-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-wool);
+}
+
+.committee-officer-phone {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--color-gold);
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 3px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-top: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.committee-officer-phone:hover {
+  color: #ffffff;
+  background: rgba(212, 175, 55, 0.25);
+  border-color: var(--color-gold);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
+  text-decoration: none;
+}
+
+.souvenirs-notice-box {
+  background: linear-gradient(135deg, rgba(45, 12, 20, 0.95) 0%, rgba(20, 6, 12, 0.95) 100%);
+  border: 1.5px solid var(--color-gold);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin: 36px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75), 0 0 25px rgba(212, 175, 55, 0.25);
+}
+
+.alumni-networks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.alumni-network-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  color: var(--color-wool);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: all 0.25s ease;
+}
+
+.alumni-network-link:hover {
+  background: rgba(140, 29, 46, 0.35);
+  border-color: var(--color-gold);
+  color: #ffd700;
+  transform: translateX(4px);
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE GRID UTILITIES FOR CHERISHED MOMENTS & CONTACT
+   -------------------------------------------------------------------------- */
+.cherished-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin: 24px 0;
+}
+
+.cherished-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.contact-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 900px) {
+  .contact-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cherished-grid-2,
+  .cherished-grid-3 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+

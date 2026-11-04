@@ -1,0 +1,1270 @@
+{
+  "event": {
+    "eventName": "Battle of the Maroons",
+    "edition": "97",
+    "season": "2027",
+    "isDateConfirmed": true,
+    "tentativeMatchDate": "2027-03-12T05:00:00.000Z",
+    "confirmedStartDate": "2027-03-12T05:00:00.000Z",
+    "confirmedEndDate": null,
+    "lastConcludedEvent": {
+      "edition": "96th Battle of the Maroons",
+      "threeDayDates": "February 27, 28 & March 01, 2026",
+      "oneDayDate": "March 07, 2026 (Historic 1st Day-Night Encounter Under Lights)",
+      "venue": "Sinhalese Sports Club (SSC) Grounds, Colombo 07",
+      "jointCommitteeCoChairs": [
+        {
+          "name": "Mahela Jayawardena",
+          "school": "Nalanda College",
+          "role": "Co-Chair Organising Committee"
+        },
+        {
+          "name": "Upali Dharmadasa",
+          "school": "Ananda College",
+          "role": "Co-Chair Organising Committee"
+        }
+      ]
+    },
+    "venue": "Sinhalese Sports Club (SSC) Grounds, Colombo",
+    "matchFormats": [
+      {
+        "type": "3-Day Traditional Encounter",
+        "trophy": "Dr. N. M. Perera Memorial Challenge Trophy",
+        "oversPerDay": "90 Overs per day",
+        "dressCode": "Traditional Cricket Whites"
+      },
+      {
+        "type": "50-Over One Day Encounter",
+        "trophy": "P. De S. Kularatne Memorial Trophy",
+        "timing": "Day-Night Encounter (Under Lights)",
+        "dressCode": "Colored Clothing / Maroon & Gold vs Maroon & Silver"
+      }
+    ],
+    "ticketing": {
+      "status": "COMING_SOON",
+      "statusMessage": "Official Ticket Sales for the Next Encounter will be opened following Joint Committee announcement.",
+      "officialUrl": "#/ticketing",
+      "isPrototype": true,
+      "note": "All ticket selections on this frontend are for preview/planning purposes. No monetary payments are charged."
+    },
+    "socialLinks": {
+      "facebook": "https://www.facebook.com/battleofthemaroons/",
+      "youtube": "https://www.youtube.com/@BattleoftheMaroonsOfficial",
+      "instagram": "https://www.instagram.com/battleofthemaroons/",
+      "twitter": "https://twitter.com/maroonsbattle",
+      "officialWebsite": "https://battleofthemaroons.lk/"
+    },
+    "year": 2027,
+    "seriesTitle": "97th Battle of the Maroons",
+    "matchDates": "March 2027 • SSC Colombo",
+    "venueName": "Sinhalese Sports Club (SSC) Grounds, Colombo",
+    "countdownTarget": "2027-03-12T05:00:00.000Z",
+    "isConfirmed": true,
+    "ticketingActive": true,
+    "ticketingStatus": "AVAILABLE",
+    "lastUpdatedBy": "admin",
+    "updatedAt": "2026-11-04T06:20:53.001Z",
+    "thirdPartyBookingUrl": "https://www.tickets.lk/event/97th-battle-of-the-maroons",
+    "thirdPartyBookingTitle": "Book via Tickets.lk Partner Portal",
+    "ticketingMode": "HYBRID"
+  },
+  "sponsors": [
+    {
+      "_id": "sp_1792489865092_1",
+      "id": "sp_1792489865092_1",
+      "name": "SLT-MOBITEL",
+      "tier": "platinum",
+      "title": "Platinum Sponsor",
+      "role": "",
+      "logo": "/assets/images/sponsors/slt_mobitel.png",
+      "website": "https://www.mobitel.lk/",
+      "description": "The National Telecommunications and Mobile Network Provider of Sri Lanka.",
+      "displayOrder": 1,
+      "isActive": true,
+      "createdAt": "2026-10-20T09:51:05.092Z"
+    },
+    {
+      "_id": "sp_1792489865092_2",
+      "id": "sp_1792489865092_2",
+      "name": "Sampath Bank",
+      "tier": "gold",
+      "title": "Official Banking Partner",
+      "role": "",
+      "logo": "/assets/images/sponsors/sampath_bank.jpg",
+      "website": "https://www.sampath.lk/",
+      "description": "Leading private commercial bank supporting sporting excellence in Sri Lanka.",
+      "displayOrder": 2,
+      "isActive": true,
+      "createdAt": "2026-10-20T09:51:05.092Z"
+    },
+    {
+      "_id": "sp_1792489865092_3",
+      "id": "sp_1792489865092_3",
+      "name": "Mastercard",
+      "tier": "gold",
+      "title": "Priceless Experience Partner",
+      "role": "",
+      "logo": "/assets/images/sponsors/mastercard.png",
+      "website": "https://www.mastercard.com/",
+      "description": "Global technology in payments connecting millions around the world.",
+      "displayOrder": 3,
+      "isActive": true,
+      "createdAt": "2026-10-20T09:51:05.092Z"
+    },
+    {
+      "_id": "sp_1792489865092_4",
+      "id": "sp_1792489865092_4",
+      "name": "Elephant House",
+      "tier": "officialPartner",
+      "title": "",
+      "role": "Official Beverage & Ice Cream Partner",
+      "logo": "/assets/images/sponsors/elephant_house.png",
+      "website": "https://www.elephanthouse.lk/",
+      "description": "",
+      "displayOrder": 4,
+      "isActive": true,
+      "createdAt": "2026-10-20T09:51:05.092Z"
+    },
+    {
+      "_id": "sp_1792489865092_5",
+      "id": "sp_1792489865092_5",
+      "name": "Moose Clothing Company",
+      "tier": "officialPartner",
+      "title": "",
+      "role": "Official Clothing Partner",
+      "logo": "/assets/images/sponsors/moose_clothing.png",
+      "website": "https://mooseclothingcompany.com/",
+      "description": "",
+      "displayOrder": 5,
+      "isActive": true,
+      "createdAt": "2026-10-20T09:51:05.092Z"
+    },
+    {
+      "_id": "sp_1792489865092_6",
+      "id": "sp_1792489865092_6",
+      "name": "Uber",
+      "tier": "officialPartner",
+      "title": "",
+      "role": "Official Mobility Partner",
+      "logo": "/assets/images/sponsors/uber.png",
+      "website": "https://www.uber.com/lk/en/ride/",
+      "description": "",
+      "displayOrder": 6,
+      "isActive": true,
+      "createdAt": "2026-10-20T09:51:05.092Z"
+    },
+    {
+      "_id": "sp_1792489865092_7",
+      "id": "sp_1792489865092_7",
+      "name": "Munchee",
+      "tier": "officialPartner",
+      "title": "",
+      "role": "Official Biscuits Partner",
+      "logo": "/assets/images/sponsors/munchee.png",
+      "website": "https://cbllk.com/",
+      "description": "",
+      "displayOrder": 7,
+      "isActive": true,
+      "createdAt": "2026-10-20T09:51:05.092Z"
+    },
+    {
+      "_id": "sp_1792489865092_8",
+      "id": "sp_1792489865092_8",
+      "name": "NCINGA",
+      "tier": "officialPartner",
+      "title": "",
+      "role": "Official Technology Partner",
+      "logo": "/assets/images/sponsors/ncinga.png",
+      "website": "https://www.ncinga.net/",
+      "description": "",
+      "displayOrder": 8,
+      "isActive": true,
+      "createdAt": "2026-10-20T09:51:05.092Z"
+    },
+    {
+      "_id": "sp_1792489865092_9",
+      "id": "sp_1792489865092_9",
+      "name": "Prima KottuMee",
+      "tier": "officialPartner",
+      "title": "",
+      "role": "Official Hot N Spicy Partner",
+      "logo": "/assets/images/sponsors/kottumee.png",
+      "website": "https://primakottumee.com/",
+      "description": "",
+      "displayOrder": 9,
+      "isActive": true,
+      "createdAt": "2026-10-20T09:51:05.092Z"
+    },
+    {
+      "_id": "sp_1792489865092_10",
+      "id": "sp_1792489865092_10",
+      "name": "Keells Krest",
+      "tier": "officialPartner",
+      "title": "",
+      "role": "Official Food Partner",
+      "logo": "/assets/images/sponsors/keells_krest.jpg",
+      "website": "https://www.keellsfoods.com/keells-krest/",
+      "description": "",
+      "displayOrder": 10,
+      "isActive": true,
+      "createdAt": "2026-10-20T09:51:05.092Z"
+    },
+    {
+      "_id": "sp_1792489865092_11",
+      "id": "sp_1792489865092_11",
+      "name": "Domino's Pizza",
+      "tier": "officialPartner",
+      "title": "",
+      "role": "Official Pizza Partner",
+      "logo": "/assets/images/sponsors/dominos.png",
+      "website": "https://www.facebook.com/dominospizzasrilanka/",
+      "description": "",
+      "displayOrder": 11,
+      "isActive": true,
+      "createdAt": "2026-10-20T09:51:05.092Z"
+    },
+    {
+      "_id": "sp_1792489865092_12",
+      "id": "sp_1792489865092_12",
+      "name": "Anton",
+      "tier": "officialPartner",
+      "title": "",
+      "role": "Silver Partner",
+      "logo": "/assets/images/sponsors/anton.png",
+      "website": "https://anton.lk/",
+      "description": "",
+      "displayOrder": 12,
+      "isActive": true,
+      "createdAt": "2026-10-20T09:51:05.092Z"
+    }
+  ],
+  "news": [
+    {
+      "_id": "history-under-lights-day-night",
+      "id": "history-under-lights-day-night",
+      "slug": "history-under-lights-day-night",
+      "title": "History Under the Lights! 48th One Day Encounter Goes Day-Night at SSC",
+      "summary": "A rivalry of legends. A bond of brothers. And now, a historic first. For the first time in the history of the series dating back to 1924, the Maroon flag flies high under the lights at SSC for the Day-Night One Day encounter.",
+      "content": "\n      <p>A rivalry of legends. A bond of brothers. And now, a historic first in the storied annals of Sri Lankan school cricket.</p>\n      <p>The Battle of the Maroons Joint Organising Committee announced that the 48th One Day Encounter between Ananda College and Nalanda College will be played under lights as a Day-Night encounter at the prestigious Sinhalese Sports Club (SSC) grounds in Colombo.</p>\n      <p>Speaking at the announcement, Co-Chairs Mahela Jayawardena and Upali Dharmadasa stated that this innovation brings an electrifying modern spectacle to one of the most cherished sporting traditions in South Asia, enabling thousands of working alumni, families, and young cricketers to experience the vibrant festival atmosphere after dusk.</p>\n      <p>Both teams will compete in coloured clothing with a white ball under international-standard broadcast floodlights, marking a revolutionary milestone for the P. De S. Kularatne Memorial Trophy.</p>\n    ",
+      "category": "Announcements",
+      "author": "Varuna Ratnaweera",
+      "coverImage": "/assets/images/matches/1day_match_2026_dn.jpg",
+      "isFeatured": false,
+      "isPublished": true,
+      "displayOrder": 1,
+      "publishedAt": "2025-12-31T18:30:00.000Z"
+    },
+    {
+      "_id": "maroons-salutation-cinnamon-grand",
+      "id": "maroons-salutation-cinnamon-grand",
+      "slug": "maroons-salutation-cinnamon-grand",
+      "title": "Battle of the Maroons 96th Edition Launched at Cinnamon Grand Gala",
+      "summary": "The Joint Organising Committee organized a colourful gala at the Cinnamon Grand Hotel to honour sponsors of the 95th encounter, present Rs 25 million to the colleges, and unveil plans for the 96th edition.",
+      "content": "\n      <p>The Battle of the Maroons Joint Organising Committee organised a colourful function at the Cinnamon Grand Hotel on 20th November to pay tribute to the sponsoring companies of the 95th Battle of the Maroons and to officially launch the 96th Battle of the Maroons scheduled at the SSC grounds.</p>\n      <p>Sri Lanka Cricketing Legend Mahela Jayawardena, who Co-Chairs the BoM Organising Committee with Upali Dharmadasa, welcomed the participants and paid a glowing tribute to the partnering companies who made it possible for the organisers to achieve their ambitious development targets.</p>\n      <p>A generous contribution of Rs 25 million from the proceeds of the 95th big match was presented directly to the two Principals, Mr. Lal Dissanayake (Ananda College) and Mr. Iran Champika Silva (Nalanda College), to support grassroots cricket facilities and student welfare.</p>\n      <p>The ceremonial first ticket of the 96th Battle of the Maroons was presented to two of Sri Lanka's most esteemed cricketing legends from Ananda and Nalanda, Brendon Kuruppu and Hemantha Devapriya.</p>\n    ",
+      "category": "Events",
+      "author": "Varuna Ratnaweera",
+      "coverImage": "/assets/images/news/maroons_salutation_2025.jpeg",
+      "isFeatured": false,
+      "isPublished": true,
+      "displayOrder": 2,
+      "publishedAt": "2025-12-10T18:30:00.000Z"
+    },
+    {
+      "_id": "public-notice-unauthorised-promotion",
+      "id": "public-notice-unauthorised-promotion",
+      "slug": "public-notice-unauthorised-promotion",
+      "title": "Public Notice: Unauthorised Flight Package and Booking Advisory",
+      "summary": "Joint Committee clarifies that circulating social media flight promotions from Melbourne are not endorsed or approved by either school or the committee.",
+      "content": "\n      <p>It has come to the attention of the Joint Organising Committee that social media advertisements have been circulating promoting a 'Battle of the Maroons: Special Group Flight Package' from Melbourne to Colombo.</p>\n      <p>We wish to clarify that this promotion is NOT organized, endorsed, or approved by the official Battle of the Maroons Joint Organising Committee or by the administrations of Ananda College or Nalanda College.</p>\n      <p>We kindly urge all old boys, families, and supporters not to consider this as an official offer and to exercise extreme caution before committing funds or personal details.</p>\n      <p>All verified information, including official travel arrangements and ticket sales, is communicated exclusively through our verified web portal at battleofthemaroons.lk and recognized alumni association channels.</p>\n    ",
+      "category": "Advisory",
+      "author": "Varuna Ratnaweera",
+      "coverImage": "/assets/images/news/public_notice_2025.jpeg",
+      "isFeatured": false,
+      "isPublished": true,
+      "displayOrder": 3,
+      "publishedAt": "2025-12-17T18:30:00.000Z"
+    },
+    {
+      "_id": "six-charter-flights-big-match",
+      "id": "six-charter-flights-big-match",
+      "slug": "six-charter-flights-big-match",
+      "title": "Maroons Arrived in 6 Charter Flights from London & Melbourne for Big Match",
+      "summary": "Hundreds of overseas alumni flew back on special SriLankan Airlines charter flights flown and coordinated entirely by Anandian and Nalandian pilots and air traffic controllers.",
+      "content": "\n      <p>Many Anandians and Nalandians based overseas make it a sacred point to return to Sri Lanka during March every year to cherish the camaraderie of the Big Match.</p>\n      <p>For the first time in the history of the Ananda–Nalanda Big Match, the Organising Committee partnered with national carrier SriLankan Airlines to arrange preferential reservations and dedicated flights from Melbourne and London.</p>\n      <p>In an extraordinary display of heritage, the pilots who captained the aircraft, the senior flight attendants, and the air traffic controllers who guided the planes safely into Bandaranaike International Airport were all proud alumni of Ananda and Nalanda Colleges.</p>\n      <p>Passengers burst into spirited school anthems as the flights touched down in Colombo, kicking off a week of unforgettable festivities.</p>\n    ",
+      "category": "Community",
+      "author": "Varuna Ratnaweera",
+      "coverImage": "/assets/images/news/charter_flights_2025.jpg",
+      "isFeatured": false,
+      "isPublished": true,
+      "displayOrder": 4,
+      "publishedAt": "2025-02-28T18:30:00.000Z"
+    },
+    {
+      "_id": "historic-3-day-game-high-scoring-draw",
+      "id": "historic-3-day-game-high-scoring-draw",
+      "slug": "historic-3-day-game-high-scoring-draw",
+      "title": "Historic Inaugural 3-Day Game Ends in High-Scoring Draw at SSC",
+      "summary": "95th Battle of the Maroons witnessed majestic centuries from Dinada Athalage (131) and Nadul Jayalath (111) in front of Sidath Wettimuni and Roshan Mahanama.",
+      "content": "\n      <p>Many expected a decisive result in the 95th Battle of the Maroons, which for the first time in the encounter's history dating back to 1924, was staged across three days.</p>\n      <p>With an opening ceremony graced by Mr. Sidath Wettimuni and Mr. Roshan Mahanama, spectators were treated to batsmanship of the highest pedigree. Dinada Athalage steered Ananda to 324/6 declared with an exquisite 131 in 287 balls, while Nadul Jayalath anchored Nalanda with a gritty 111 in 192 deliveries to reach 325/6 declared.</p>\n      <p>Sharada Jayarathne captured 4 for 58 for Ananda. Brief weather interruptions on days two and three ultimately led to a sporting draw, with both sets of players receiving ovations from packed stands.</p>\n    ",
+      "category": "Match Reports",
+      "author": "Varuna Ratnaweera",
+      "coverImage": "/assets/images/matches/bom95_dinada_century.jpg",
+      "isFeatured": false,
+      "isPublished": true,
+      "displayOrder": 5,
+      "publishedAt": "2025-03-03T18:30:00.000Z"
+    },
+    {
+      "_id": "parade-of-the-maroons-and-friction-show",
+      "id": "parade-of-the-maroons-and-friction-show",
+      "slug": "parade-of-the-maroons-and-friction-show",
+      "title": "Parade of the Maroons & Friction Musical Extravaganza Rocks Colombo",
+      "summary": "A massive vehicle procession of decorated vintage cars, trucks, and floats traversed the streets of Colombo, culminating in the annual Friction musical festival.",
+      "content": "\n      <p>The annual Parade of the Maroons brought the streets of Colombo to a celebratory standstill as thousands of students, past cricketers, and distinguished old boys joined a colourful motorcade spanning several kilometers.</p>\n      <p>Flags of maroon, gold, and silver fluttered from sports cars and open-top lorries equipped with brass and papare ensembles. The procession culminated at the grounds for the Friction Musical Show, headlined by top Sri Lankan artists, celebrating the unbroken fellowship between both colleges.</p>\n    ",
+      "category": "Events",
+      "author": "Varuna Ratnaweera",
+      "coverImage": "/assets/images/news/parade_2025.jpg",
+      "isFeatured": false,
+      "isPublished": true,
+      "displayOrder": 6,
+      "publishedAt": "2025-01-31T18:30:00.000Z"
+    }
+  ],
+  "teams": [
+    {
+      "school": "ananda",
+      "name": "Ananda College",
+      "established": 1886,
+      "captain": "Kanchana De Silva (Captain 2027)",
+      "squad": [
+        {
+          "name": "Ashinsha Nainayake",
+          "role": "Captain / All-rounder",
+          "specialism": "Right-hand bat / Right-arm medium"
+        },
+        {
+          "name": "Dinada Athalage",
+          "role": "Vice Captain / All-rounder",
+          "specialism": "Right-hand bat / Off-break (95th BoM Centurion 131)"
+        },
+        {
+          "name": "Kenul De Zoysa",
+          "role": "Top-order Batsman",
+          "specialism": "Right-hand bat (95th BoM 73 runs)"
+        },
+        {
+          "name": "Nethula Edirimanne",
+          "role": "Top-order Batsman",
+          "specialism": "Right-hand bat (95th BoM 49 runs)"
+        },
+        {
+          "name": "Sharada Jayarathne",
+          "role": "Strike Bowler",
+          "specialism": "Right-arm fast-medium (95th BoM 4/58)"
+        },
+        {
+          "name": "Kithma Vidanapathirana",
+          "role": "Middle-order Batsman",
+          "specialism": "Right-hand bat"
+        },
+        {
+          "name": "Danindu Sellapperuma",
+          "role": "Opening Batsman",
+          "specialism": "Left-hand bat"
+        },
+        {
+          "name": "Ahan Wickramasinghe",
+          "role": "Wicketkeeper Batsman",
+          "specialism": "Right-hand bat"
+        },
+        {
+          "name": "Janidu Jayawardena",
+          "role": "Spin Bowler",
+          "specialism": "Slow left-arm orthodox"
+        },
+        {
+          "name": "Dasun Chamara",
+          "role": "Seam Bowler",
+          "specialism": "Right-arm fast"
+        }
+      ],
+      "motto": "Appamado Amato Padam (Heedfulness is the path to Deathlessness)",
+      "recentCaptain": "Kanchana De Silva (Captain 2027)",
+      "viceCaptain": "Dinada Athalage",
+      "headCoach": "Dinesh Chandimal",
+      "principal": "Mr. Lal Dissanayake",
+      "bigMatchWins": 12,
+      "oneDayWins": 26,
+      "verifiedSquadMembers": [
+        {
+          "name": "Ashinsha Nainayake",
+          "role": "Captain / All-rounder",
+          "specialism": "Right-hand bat / Right-arm medium"
+        },
+        {
+          "name": "Dinada Athalage",
+          "role": "Vice Captain / All-rounder",
+          "specialism": "Right-hand bat / Off-break (95th BoM Centurion 131)"
+        },
+        {
+          "name": "Kenul De Zoysa",
+          "role": "Top-order Batsman",
+          "specialism": "Right-hand bat (95th BoM 73 runs)"
+        },
+        {
+          "name": "Nethula Edirimanne",
+          "role": "Top-order Batsman",
+          "specialism": "Right-hand bat (95th BoM 49 runs)"
+        },
+        {
+          "name": "Sharada Jayarathne",
+          "role": "Strike Bowler",
+          "specialism": "Right-arm fast-medium (95th BoM 4/58)"
+        },
+        {
+          "name": "Kithma Vidanapathirana",
+          "role": "Middle-order Batsman",
+          "specialism": "Right-hand bat"
+        },
+        {
+          "name": "Danindu Sellapperuma",
+          "role": "Opening Batsman",
+          "specialism": "Left-hand bat"
+        },
+        {
+          "name": "Ahan Wickramasinghe",
+          "role": "Wicketkeeper Batsman",
+          "specialism": "Right-hand bat"
+        },
+        {
+          "name": "Janidu Jayawardena",
+          "role": "Spin Bowler",
+          "specialism": "Slow left-arm orthodox"
+        },
+        {
+          "name": "Dasun Chamara",
+          "role": "Seam Bowler",
+          "specialism": "Right-arm fast"
+        }
+      ],
+      "schoolKey": "ananda",
+      "cricketHallOfFame": [
+        {
+          "name": "Arjuna Ranatunga",
+          "feat": "Captain of Sri Lanka's 1996 Cricket World Cup Champions; scored Sri Lanka's first Test half-century (54) at age 18 in 1982.",
+          "image": "/assets/images/history/legend_arjuna_ranatunga.jpg"
+        },
+        {
+          "name": "Sidath Wettimuni",
+          "feat": "Scored Sri Lanka's historic first Test century at Lord's (190 runs vs England, 1984); legendary opening batsman.",
+          "image": "/assets/images/history/sidath_wettimuni.jpg"
+        },
+        {
+          "name": "Marvan Atapattu",
+          "feat": "Former Sri Lanka Test Captain; over 5,500 Test runs, 6 Test Double Centuries; BoM centurion (1991).",
+          "image": "/assets/images/history/marvan_atapattu.jpg"
+        },
+        {
+          "name": "Dinesh Chandimal",
+          "feat": "Sri Lanka National Captain across all formats; wicketkeeper-batsman; 80th BoM Captain.",
+          "image": "/assets/images/history/dinesh_chandimal.jpg"
+        },
+        {
+          "name": "Brendon Kuruppu",
+          "feat": "Scored a double century on Test debut (201* vs New Zealand 1987); 1996 World Cup selection committee member.",
+          "image": "/assets/images/history/brendon_kuruppu.jpg"
+        },
+        {
+          "name": "Thilina Kandamby",
+          "feat": "Sri Lanka ODI & T20 international; Big Match centurion (144 in 1999); leading coach.",
+          "image": "/assets/images/history/thilina_kandamby.jpg"
+        },
+        {
+          "name": "Mithra Wettimuni",
+          "feat": "Sri Lanka opening batsman and 1970 Ananda Captain; part of the famous Wettimuni cricketing family.",
+          "image": "/assets/images/history/mithra_wettimuni.jpg"
+        }
+      ]
+    },
+    {
+      "school": "nalanda",
+      "name": "Nalanda College",
+      "established": 1924,
+      "captain": "Test Captain 123",
+      "squad": [
+        {
+          "name": "Sadew Samarasinghe",
+          "role": "Captain / Opening Batsman",
+          "specialism": "Left-hand bat (95th BoM 40 runs & 2 wickets)"
+        },
+        {
+          "name": "Nadul Jayalath",
+          "role": "Vice Captain / Top-order Batsman",
+          "specialism": "Right-hand bat (95th BoM Centurion 111)"
+        },
+        {
+          "name": "Nemidu Akmeemana",
+          "role": "Top-order Batsman",
+          "specialism": "Right-hand bat (95th BoM 43 runs)"
+        },
+        {
+          "name": "Lithum Wijesekera",
+          "role": "Top-order Batsman",
+          "specialism": "Left-hand bat (48th One Day 29* runs)"
+        },
+        {
+          "name": "Malsha Fernando",
+          "role": "Middle-order Batsman",
+          "specialism": "Right-hand bat (95th BoM 34* runs)"
+        },
+        {
+          "name": "Manasa De Silva",
+          "role": "All-rounder",
+          "specialism": "Right-hand bat / Right-arm off break"
+        },
+        {
+          "name": "Hasitha Ratnayake",
+          "role": "Strike Bowler",
+          "specialism": "Right-arm fast-medium (48th One Day 4/46)"
+        },
+        {
+          "name": "Osanda Pamuditha",
+          "role": "Fast Bowler",
+          "specialism": "Left-arm fast (95th BoM 2 wickets)"
+        },
+        {
+          "name": "Punsara Rajakaruna",
+          "role": "Spin Bowler",
+          "specialism": "Right-arm leg-break (95th BoM 2 wickets)"
+        },
+        {
+          "name": "Thisara Dewdunu",
+          "role": "Fielder / Batsman",
+          "specialism": "Right-hand bat (95th BoM Best Fielder Award)"
+        }
+      ],
+      "recentCaptain": "Test Captain 123",
+      "headCoach": "Shantha Kalavitigoda",
+      "viceCaptain": "Nadul Jayalath",
+      "schoolKey": "nalanda",
+      "motto": "Apadana Sobhini Panna (Wisdom Beautifies Character)",
+      "principal": "Mr. Iran Champika Silva",
+      "bigMatchWins": 7,
+      "oneDayWins": 15,
+      "verifiedSquadMembers": [
+        {
+          "name": "Sadew Samarasinghe",
+          "role": "Captain / Opening Batsman",
+          "specialism": "Left-hand bat (95th BoM 40 runs & 2 wickets)"
+        },
+        {
+          "name": "Nadul Jayalath",
+          "role": "Vice Captain / Top-order Batsman",
+          "specialism": "Right-hand bat (95th BoM Centurion 111)"
+        },
+        {
+          "name": "Nemidu Akmeemana",
+          "role": "Top-order Batsman",
+          "specialism": "Right-hand bat (95th BoM 43 runs)"
+        },
+        {
+          "name": "Lithum Wijesekera",
+          "role": "Top-order Batsman",
+          "specialism": "Left-hand bat (48th One Day 29* runs)"
+        },
+        {
+          "name": "Malsha Fernando",
+          "role": "Middle-order Batsman",
+          "specialism": "Right-hand bat (95th BoM 34* runs)"
+        },
+        {
+          "name": "Manasa De Silva",
+          "role": "All-rounder",
+          "specialism": "Right-hand bat / Right-arm off break"
+        },
+        {
+          "name": "Hasitha Ratnayake",
+          "role": "Strike Bowler",
+          "specialism": "Right-arm fast-medium (48th One Day 4/46)"
+        },
+        {
+          "name": "Osanda Pamuditha",
+          "role": "Fast Bowler",
+          "specialism": "Left-arm fast (95th BoM 2 wickets)"
+        },
+        {
+          "name": "Punsara Rajakaruna",
+          "role": "Spin Bowler",
+          "specialism": "Right-arm leg-break (95th BoM 2 wickets)"
+        },
+        {
+          "name": "Thisara Dewdunu",
+          "role": "Fielder / Batsman",
+          "specialism": "Right-hand bat (95th BoM Best Fielder Award)"
+        }
+      ],
+      "cricketHallOfFame": [
+        {
+          "name": "Bandula Warnapura",
+          "feat": "Sri Lanka's Inaugural Test Captain (1982); captained Sri Lanka in first 4 Tests and 1979 World Cup; 1971 Nalanda Captain.",
+          "image": "/assets/images/history/bandula_warnapura.jpg"
+        },
+        {
+          "name": "Mahela Jayawardena",
+          "feat": "ICC Cricket Hall of Fame; over 11,814 Test runs & 12,650 ODI runs; 2007 World Cup finalist captain; BoM Committee Co-Chair.",
+          "image": "/assets/images/history/farewell_mahela.jpg"
+        },
+        {
+          "name": "Roshan Mahanama",
+          "feat": "1996 World Cup winner; ICC Match Referee; world record partnership with Sanath Jayasuriya (576 runs); 1984 Nalanda Captain.",
+          "image": "/assets/images/history/roshan_mahanama.jpg"
+        },
+        {
+          "name": "Asanka Gurusinghe",
+          "feat": "1996 World Cup winner; scored 65 runs in the 1996 World Cup Final; 1985 Nalanda Captain.",
+          "image": "/assets/images/history/asanka_gurusinghe.jpg"
+        },
+        {
+          "name": "Kumar Dharmasena",
+          "feat": "1996 World Cup winner; ICC Elite Umpire of the Year (David Shepherd Trophy); BoM centurion (105 in 1989).",
+          "image": "/assets/images/history/kumar_dharmasena_icc.jpg"
+        },
+        {
+          "name": "Chandika Hathurusinghe",
+          "feat": "Sri Lanka international cricketer and high-profile international head coach (Sri Lanka, Bangladesh).",
+          "image": "/assets/images/history/chandika_hathurusinghe.jpg"
+        },
+        {
+          "name": "Shantha Kalavitigoda",
+          "feat": "Holds all-time highest individual score in Battle of the Maroons history with 149 runs in 1997.",
+          "image": "/assets/images/history/shantha_kalavitigoda.jpg"
+        }
+      ]
+    }
+  ],
+  "matches": {
+    "featuredMatches": [
+      {
+        "id": "bom-95th-3day",
+        "title": "95th Battle of the Maroons (3-Day Historic Encounter)",
+        "subTitle": "The Inaugural 3-Day Format Encounter",
+        "format": "3-Day Traditional Match",
+        "trophy": "Dr. N. M. Perera Memorial Challenge Trophy",
+        "dates": "February 28, March 01 & 02, 2025",
+        "venue": "Sinhalese Sports Club (SSC) Grounds, Colombo",
+        "toss": "Nalanda College won the toss and elected to field first",
+        "result": "Match Drawn",
+        "status": "CONCLUDED",
+        "summary": "A thrilling high-scoring contest worked out over three days for the first time in the series history dating back to 1924. Featuring majestic centuries from Dinada Athalage (131 for Ananda) and Nadul Jayalath (111 for Nalanda). Both sides declared at 324 and 325 respectively before rain curbed the final session.",
+        "bannerImage": "/assets/images/matches/95th_encounter_final_2025.jpg",
+        "scorecards": {
+          "innings": [
+            {
+              "team": "Ananda College",
+              "inningsNumber": "1st Innings",
+              "score": "324/6 declared",
+              "overs": "92.2",
+              "batting": [
+                {
+                  "player": "Danindu Sellapperuma",
+                  "runs": 0,
+                  "balls": 3,
+                  "fours": 0,
+                  "dismissal": "c sub b Osanda Pamuditha"
+                },
+                {
+                  "player": "Dinada Athalage",
+                  "runs": 131,
+                  "balls": 287,
+                  "fours": 11,
+                  "dismissal": "c & b Punsara Rajakaruna"
+                },
+                {
+                  "player": "Nethula Edirimanne",
+                  "runs": 49,
+                  "balls": 98,
+                  "fours": 5,
+                  "dismissal": "lbw b Osanda Pamuditha"
+                },
+                {
+                  "player": "Kenul De Zoysa",
+                  "runs": 73,
+                  "balls": 142,
+                  "fours": 7,
+                  "dismissal": "b Punsara Rajakaruna"
+                },
+                {
+                  "player": "Kithma Vidanapathirana",
+                  "runs": 32,
+                  "balls": 38,
+                  "fours": 4,
+                  "dismissal": "run out"
+                },
+                {
+                  "player": "Ashinsha Nainayake (c)",
+                  "runs": 18,
+                  "balls": 24,
+                  "fours": 2,
+                  "dismissal": "not out"
+                },
+                {
+                  "player": "Sharada Jayarathne",
+                  "runs": 12,
+                  "balls": 14,
+                  "fours": 1,
+                  "dismissal": "not out"
+                }
+              ],
+              "bowling": [
+                {
+                  "bowler": "Osanda Pamuditha",
+                  "overs": "22.2",
+                  "maidens": 4,
+                  "runs": 80,
+                  "wickets": 2
+                },
+                {
+                  "bowler": "Punsara Rajakaruna",
+                  "overs": "24.0",
+                  "maidens": 5,
+                  "runs": 69,
+                  "wickets": 2
+                },
+                {
+                  "bowler": "Sadew Samarasinghe",
+                  "overs": "18.0",
+                  "maidens": 3,
+                  "runs": 58,
+                  "wickets": 0
+                },
+                {
+                  "bowler": "Hasitha Ratnayake",
+                  "overs": "16.0",
+                  "maidens": 2,
+                  "runs": 62,
+                  "wickets": 0
+                }
+              ]
+            },
+            {
+              "team": "Nalanda College",
+              "inningsNumber": "1st Innings",
+              "score": "325/6 declared",
+              "overs": "88.4",
+              "batting": [
+                {
+                  "player": "Sadew Samarasinghe (c)",
+                  "runs": 40,
+                  "balls": 84,
+                  "fours": 4,
+                  "dismissal": "c keeper b Sharada Jayarathne"
+                },
+                {
+                  "player": "Nadul Jayalath",
+                  "runs": 111,
+                  "balls": 192,
+                  "fours": 12,
+                  "dismissal": "c sub b Sharada Jayarathne"
+                },
+                {
+                  "player": "Nemidu Akmeemana",
+                  "runs": 43,
+                  "balls": 88,
+                  "fours": 5,
+                  "dismissal": "c & b Sharada Jayarathne"
+                },
+                {
+                  "player": "Manupa Manmitha",
+                  "runs": 23,
+                  "balls": 46,
+                  "fours": 2,
+                  "dismissal": "lbw b Sharada Jayarathne"
+                },
+                {
+                  "player": "Malsha Fernando",
+                  "runs": 34,
+                  "balls": 68,
+                  "fours": 3,
+                  "dismissal": "not out"
+                },
+                {
+                  "player": "Manasa De Silva",
+                  "runs": 25,
+                  "balls": 42,
+                  "fours": 2,
+                  "dismissal": "not out"
+                }
+              ],
+              "bowling": [
+                {
+                  "bowler": "Sharada Jayarathne",
+                  "overs": "28.4",
+                  "maidens": 6,
+                  "runs": 58,
+                  "wickets": 4
+                },
+                {
+                  "bowler": "Dinada Athalage",
+                  "overs": "20.0",
+                  "maidens": 4,
+                  "runs": 68,
+                  "wickets": 1
+                },
+                {
+                  "bowler": "Kenul De Zoysa",
+                  "overs": "18.0",
+                  "maidens": 3,
+                  "runs": 74,
+                  "wickets": 1
+                }
+              ]
+            },
+            {
+              "team": "Ananda College",
+              "inningsNumber": "2nd Innings",
+              "score": "27/1",
+              "overs": "7.0",
+              "batting": [
+                {
+                  "player": "Danindu Sellapperuma",
+                  "runs": 14,
+                  "balls": 22,
+                  "fours": 2,
+                  "dismissal": "not out"
+                },
+                {
+                  "player": "Nethula Edirimanne",
+                  "runs": 9,
+                  "balls": 18,
+                  "fours": 1,
+                  "dismissal": "c keeper b Osanda Pamuditha"
+                }
+              ],
+              "bowling": [
+                {
+                  "bowler": "Osanda Pamuditha",
+                  "overs": "3.0",
+                  "maidens": 1,
+                  "runs": 12,
+                  "wickets": 1
+                },
+                {
+                  "bowler": "Punsara Rajakaruna",
+                  "overs": "3.0",
+                  "maidens": 0,
+                  "runs": 14,
+                  "wickets": 0
+                }
+              ]
+            }
+          ]
+        },
+        "awards": [
+          {
+            "title": "Man of the Match",
+            "recipient": "Dinada Athalage",
+            "school": "Ananda College",
+            "note": "131 Runs & All-round contribution"
+          },
+          {
+            "title": "Best Batsman",
+            "recipient": "Nadul Jayalath",
+            "school": "Nalanda College",
+            "note": "111 Runs in 192 balls"
+          },
+          {
+            "title": "Best Bowler",
+            "recipient": "Sharada Jayarathne",
+            "school": "Ananda College",
+            "note": "4 wickets for 58 runs"
+          },
+          {
+            "title": "Best Fielder",
+            "recipient": "Thisara Dewdunu",
+            "school": "Nalanda College",
+            "note": "Outstanding catching & ground stops"
+          },
+          {
+            "title": "Best Allrounder",
+            "recipient": "Dinada Athalage",
+            "school": "Ananda College",
+            "note": "Century & tight bowling spells"
+          }
+        ],
+        "dignitaries": [
+          "Opening Ceremony: Sidath Wettimuni (Ananda) & Roshan Mahanama (Nalanda)",
+          "Post-Match Awards: Nelson Mendis (Past Coach, Nalanda) & Imal Kaluthotage (Old Anandian Sports Patron)"
+        ]
+      },
+      {
+        "id": "bom-48th-oneday",
+        "title": "48th One Day Encounter",
+        "subTitle": "P. De S. Kularatne Memorial Trophy",
+        "format": "50 Overs Limited Overs Match",
+        "trophy": "P. De S. Kularatne Memorial Trophy (Shared)",
+        "dates": "March 16, 2025",
+        "venue": "Sinhalese Sports Club (SSC) Grounds, Colombo",
+        "toss": "Nalanda College won the toss and elected to field first",
+        "result": "No Decision (Rain Interruption)",
+        "status": "CONCLUDED",
+        "summary": "Two stalwarts of Maroons cricket, Mr. Saliya Senanayake and Mr. Palitha Seneviratne (captains in the 1970s), graced the opening. Ananda posted 249/9 in 50 overs with Kenul de Zoysa scoring 39. Nalanda were 62/2 in 12.2 overs when torrential rain stopped play. As minimum 20 overs required for D/L method could not be completed, the match was declared a no-decision and the trophy was shared.",
+        "bannerImage": "/assets/images/matches/48th_oneday_2025.jpg",
+        "scorecards": {
+          "innings": [
+            {
+              "team": "Ananda College",
+              "inningsNumber": "1st Innings",
+              "score": "249/9",
+              "overs": "50.0",
+              "batting": [
+                {
+                  "player": "Kenul de Zoysa",
+                  "runs": 39,
+                  "balls": 61,
+                  "fours": 3,
+                  "dismissal": "c & b Hasitha Ratnayake"
+                },
+                {
+                  "player": "Nethul Edirimanne",
+                  "runs": 34,
+                  "balls": 48,
+                  "fours": 3,
+                  "dismissal": "c sub b Sadew Samarasinghe"
+                },
+                {
+                  "player": "Ashinsha Nainayake (c)",
+                  "runs": 30,
+                  "balls": 36,
+                  "fours": 2,
+                  "dismissal": "run out"
+                },
+                {
+                  "player": "Dinada Athalage",
+                  "runs": 29,
+                  "balls": 42,
+                  "fours": 2,
+                  "dismissal": "c & b Hasitha Ratnayake"
+                }
+              ],
+              "bowling": [
+                {
+                  "bowler": "Hasitha Ratnayake",
+                  "overs": "10.0",
+                  "maidens": 1,
+                  "runs": 46,
+                  "wickets": 4
+                },
+                {
+                  "bowler": "Sadew Samarasinghe",
+                  "overs": "10.0",
+                  "maidens": 0,
+                  "runs": 41,
+                  "wickets": 2
+                }
+              ]
+            },
+            {
+              "team": "Nalanda College",
+              "inningsNumber": "2nd Innings",
+              "score": "62/2",
+              "overs": "12.2",
+              "batting": [
+                {
+                  "player": "Lithum Wijesekera",
+                  "runs": 29,
+                  "balls": 38,
+                  "fours": 3,
+                  "dismissal": "not out"
+                },
+                {
+                  "player": "Sadew Samarasinghe (c)",
+                  "runs": 16,
+                  "balls": 24,
+                  "fours": 1,
+                  "dismissal": "c keeper"
+                }
+              ],
+              "bowling": [
+                {
+                  "bowler": "Sharada Jayarathne",
+                  "overs": "6.0",
+                  "maidens": 1,
+                  "runs": 28,
+                  "wickets": 1
+                },
+                {
+                  "bowler": "Dinada Athalage",
+                  "overs": "5.2",
+                  "maidens": 0,
+                  "runs": 31,
+                  "wickets": 1
+                }
+              ]
+            }
+          ]
+        },
+        "awards": [
+          {
+            "title": "Trophy Presentation",
+            "recipient": "P. De S. Kularatne Memorial Trophy Shared",
+            "school": "Both Captains",
+            "note": "Presented by Chief Guest Upul Gamage (Nalanda 50th BoM Captain)"
+          }
+        ]
+      },
+      {
+        "id": "bom-96th-edition",
+        "title": "96th Battle of the Maroons & Historic Day-Night Encounter",
+        "subTitle": "Sri Lanka's Premier Big Match Festival",
+        "format": "3-Day Encounter & 1-Day Day-Night",
+        "dates": "February 27, 28 & March 01, 2026 (3-Day) | March 07, 2026 (Day-Night)",
+        "venue": "Sinhalese Sports Club (SSC) Grounds, Colombo",
+        "toss": "Official Toss on Match Morning",
+        "result": "Historic 96th Edition Concluded at SSC",
+        "status": "ARCHIVED",
+        "summary": "Launched at the Cinnamon Grand Hotel by Co-Chairs Mahela Jayawardena and Upali Dharmadasa. Featured Rs 25 million presentation to the college principals and the groundbreaking introduction of the One Day match under lights.",
+        "bannerImage": "/assets/images/matches/1day_match_2026_dn.jpg",
+        "scorecards": null
+      }
+    ]
+  },
+  "gallery": [
+    {
+      "_id": "gal_3",
+      "id": "gal_3",
+      "title": "Dinada Athalage Reaches 131 Century",
+      "category": "matches",
+      "categoryLabel": "Match Action",
+      "year": "2025",
+      "image": "/assets/images/matches/bom95_dinada_century.jpg",
+      "imageUrl": "/assets/images/matches/bom95_dinada_century.jpg",
+      "caption": "Dinada Athalage of Ananda College raises his bat to the crowd after completing a masterclass 131 in the 95th encounter.",
+      "location": "SSC Grounds",
+      "displayOrder": 1,
+      "isFeatured": true,
+      "isActive": true
+    },
+    {
+      "_id": "gal_4",
+      "id": "gal_4",
+      "title": "Nadul Jayalath Celebrating Century (111)",
+      "category": "matches",
+      "categoryLabel": "Match Action",
+      "year": "2025",
+      "image": "/assets/images/matches/bom95_nadul_century.jpg",
+      "imageUrl": "/assets/images/matches/bom95_nadul_century.jpg",
+      "caption": "Nadul Jayalath anchors Nalanda's reply with a glorious 111 runs under pressure.",
+      "location": "SSC Grounds",
+      "displayOrder": 2,
+      "isFeatured": true,
+      "isActive": true
+    },
+    {
+      "_id": "gal_5",
+      "id": "gal_5",
+      "title": "95th Encounter Opening Ceremony with Titans",
+      "category": "ceremonies",
+      "categoryLabel": "Ceremonies",
+      "year": "2025",
+      "image": "/assets/images/matches/bom95_opening_ceremony.jpg",
+      "imageUrl": "/assets/images/matches/bom95_opening_ceremony.jpg",
+      "caption": "Sri Lankan cricket legends Sidath Wettimuni and Roshan Mahanama greet the young players before the toss.",
+      "location": "Maitland Place Pavilion",
+      "displayOrder": 3,
+      "isFeatured": true,
+      "isActive": true
+    },
+    {
+      "_id": "gal_6",
+      "id": "gal_6",
+      "title": "Historic Nalanda Victory in 92nd Encounter",
+      "category": "matches",
+      "categoryLabel": "Match Action",
+      "year": "2022",
+      "image": "/assets/images/matches/nalanda_win_2022.jpg",
+      "imageUrl": "/assets/images/matches/nalanda_win_2022.jpg",
+      "caption": "Nalanda players erupt in celebration as they defeat Ananda by 9 wickets to lift the trophy for the first time in 69 years.",
+      "location": "SSC Grounds",
+      "displayOrder": 4,
+      "isFeatured": true,
+      "isActive": true
+    },
+    {
+      "_id": "gal_1",
+      "id": "gal_1",
+      "title": "Maroons Cheering Squad in Full Voice",
+      "category": "atmosphere",
+      "categoryLabel": "Crowd & Atmosphere",
+      "year": "2020",
+      "image": "/assets/images/gallery/crowd_atmosphere_1.jpg",
+      "imageUrl": "/assets/images/gallery/crowd_atmosphere_1.jpg",
+      "caption": "Die-hard Maroon supporters waving flags and cheering every boundary from the SSC grandstands.",
+      "location": "Sinhalese Sports Club (SSC) Grounds",
+      "displayOrder": 5,
+      "isFeatured": true,
+      "isActive": true
+    },
+    {
+      "_id": "gal_2",
+      "id": "gal_2",
+      "title": "SSC Packed Spectator Enclosure",
+      "category": "atmosphere",
+      "categoryLabel": "Crowd & Atmosphere",
+      "year": "2020",
+      "image": "/assets/images/gallery/crowd_atmosphere_2.jpg",
+      "imageUrl": "/assets/images/gallery/crowd_atmosphere_2.jpg",
+      "caption": "A sea of maroon caps and shirts as thousands gather for the annual March cricket festival.",
+      "location": "Maitland Place, Colombo",
+      "displayOrder": 6,
+      "isFeatured": true,
+      "isActive": true
+    },
+    {
+      "_id": "gal_12",
+      "id": "gal_12",
+      "title": "Trophy Presentation & Honors Gala",
+      "category": "ceremonies",
+      "categoryLabel": "Ceremonies",
+      "year": "2020",
+      "image": "/assets/images/gallery/award_ceremony_2020.jpg",
+      "imageUrl": "/assets/images/gallery/award_ceremony_2020.jpg",
+      "caption": "Principals and past stalwarts handing over the coveted trophies to outstanding match performers.",
+      "location": "SSC Presentation Stage",
+      "displayOrder": 7,
+      "isFeatured": true,
+      "isActive": true
+    },
+    {
+      "_id": "gal_7",
+      "id": "gal_7",
+      "title": "Annual Joint College Vehicle Parade",
+      "category": "atmosphere",
+      "categoryLabel": "Crowd & Atmosphere",
+      "year": "2017",
+      "image": "/assets/images/gallery/joint_parade_2017.jpg",
+      "imageUrl": "/assets/images/gallery/joint_parade_2017.jpg",
+      "caption": "Vintage convertibles and festooned trucks carrying brass bands through Colombo before the match.",
+      "location": "Colombo City Streets",
+      "displayOrder": 8,
+      "isFeatured": true,
+      "isActive": true
+    },
+    {
+      "_id": "gal_8",
+      "id": "gal_8",
+      "title": "Official Coin Toss at the Pitch",
+      "category": "ceremonies",
+      "categoryLabel": "Ceremonies",
+      "year": "2017",
+      "image": "/assets/images/gallery/toss_ceremony_2017.jpg",
+      "imageUrl": "/assets/images/gallery/toss_ceremony_2017.jpg",
+      "caption": "Captains and match officials inspect the pitch ahead of the toss ceremony.",
+      "location": "SSC Pitch",
+      "displayOrder": 9,
+      "isFeatured": true,
+      "isActive": true
+    },
+    {
+      "_id": "gal_9",
+      "id": "gal_9",
+      "title": "High Octane Boundary Drive at SSC",
+      "category": "matches",
+      "categoryLabel": "Match Action",
+      "year": "2014",
+      "image": "/assets/images/gallery/bigmatch_action_2014.jpg",
+      "imageUrl": "/assets/images/gallery/bigmatch_action_2014.jpg",
+      "caption": "Classic square cut piercing the point boundary during the 85th Battle of the Maroons.",
+      "location": "SSC Grounds",
+      "displayOrder": 10,
+      "isFeatured": true,
+      "isActive": true
+    },
+    {
+      "_id": "gal_11",
+      "id": "gal_11",
+      "title": "Arjuna Ranatunga - 1996 World Cup Champion",
+      "category": "legends",
+      "categoryLabel": "Legends & Heritage",
+      "year": "Archival",
+      "image": "/assets/images/history/legend_arjuna_ranatunga.jpg",
+      "imageUrl": "/assets/images/history/legend_arjuna_ranatunga.jpg",
+      "caption": "Anandian hero Arjuna Ranatunga, the mastermind who captained Sri Lanka to cricket immortality in Lahore.",
+      "location": "ICC Archives",
+      "displayOrder": 11,
+      "isFeatured": true,
+      "isActive": true
+    },
+    {
+      "_id": "gal_10",
+      "id": "gal_10",
+      "title": "Bandula Warnapura - First Test Captain",
+      "category": "legends",
+      "categoryLabel": "Legends & Heritage",
+      "year": "Archival",
+      "image": "/assets/images/history/legend_bandula_warnapura.jpg",
+      "imageUrl": "/assets/images/history/legend_bandula_warnapura.jpg",
+      "caption": "Nalanda legend Bandula Warnapura who led Sri Lanka in their historic inaugural Test in 1982.",
+      "location": "Sri Lanka Cricket Archives",
+      "displayOrder": 12,
+      "isFeatured": true,
+      "isActive": true
+    }
+  ],
+  "tickets": [
+    {
+      "id": "grandstand",
+      "code": "grandstand",
+      "name": "Grandstand Upper Deck",
+      "price": 2500,
+      "description": "Panoramic elevated view of the SSC pitch, shaded seating.",
+      "availableCount": 500,
+      "totalCapacity": 500,
+      "maxPerOrder": 10,
+      "soldCount": 0,
+      "reservedCount": 0,
+      "isActive": true
+    },
+    {
+      "id": "members",
+      "code": "members",
+      "name": "Members Pavilion Enclosure",
+      "price": 8000,
+      "description": "Premium clubhouse enclosure with private refreshments and lounge access.",
+      "availableCount": 200,
+      "totalCapacity": 200,
+      "maxPerOrder": 6,
+      "soldCount": 0,
+      "reservedCount": 0,
+      "isActive": true
+    },
+    {
+      "id": "marquee",
+      "code": "marquee",
+      "name": "Old Boys Maroons Marquee",
+      "price": 6000,
+      "description": "Dedicated alumni marquee with commemorative badge and hospitality.",
+      "availableCount": 300,
+      "totalCapacity": 300,
+      "maxPerOrder": 8,
+      "soldCount": 0,
+      "reservedCount": 0,
+      "isActive": true,
+      "bookingUrl": ""
+    },
+    {
+      "id": "papare",
+      "code": "papare",
+      "name": "Party Tent & Papare Enclosure",
+      "price": 6000,
+      "description": "Direct access to the papare band, dancing terraces, and festival area.",
+      "availableCount": 1000,
+      "totalCapacity": 1000,
+      "maxPerOrder": 10,
+      "soldCount": 0,
+      "reservedCount": 0,
+      "isActive": true
+    }
+  ],
+  "inquiries": [],
+  "orders": []
+}

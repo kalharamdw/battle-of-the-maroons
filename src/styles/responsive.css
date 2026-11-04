@@ -1,0 +1,1142 @@
+/* ==========================================================================
+   BATTLE OF THE MAROONS — RESPONSIVE BREAKPOINTS & MOBILE OPTIMIZATIONS
+   Seamless fluid experience from 320px ultra-compact phones to 4K displays
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Mobile Table Hint & Scroll Indicator Utility
+   -------------------------------------------------------------------------- */
+.mobile-table-hint {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 12px;
+  background: rgba(212, 175, 55, 0.08);
+  border-bottom: 1px solid var(--border-subtle);
+  border-radius: 8px 8px 0 0;
+  text-align: center;
+}
+
+.mobile-table-hint span.hint-icon {
+  animation: pulseGold 2s infinite;
+}
+
+/* --------------------------------------------------------------------------
+   1. Laptop & Medium Desktops (max-width: 1280px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1280px) {
+  .nav-countdown-pill .nav-countdown-label {
+    display: none;
+  }
+
+  .nav-menu-desktop {
+    gap: 8px;
+  }
+
+  .nav-link {
+    font-size: 0.7rem;
+    padding: 6px 1px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Screen widths below 1140px: Clean switch to mobile drawer
+   -------------------------------------------------------------------------- */
+@media (max-width: 1140px) {
+
+  .nav-menu-desktop,
+  .nav-countdown-pill {
+    display: none !important;
+  }
+
+  .nav-toggle-btn {
+    display: flex !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Tablet Landscape & Below (max-width: 1024px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .rivalry-duel-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .rivalry-vs-badge {
+    margin: 10px auto;
+  }
+
+  .about-origins-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .news-featured-card {
+    grid-template-columns: 1fr;
+  }
+
+  .news-featured-img-wrap {
+    min-height: 240px;
+    max-height: 320px;
+  }
+
+  .community-highlights-grid,
+  .unified-community-strip {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .matchday-cards-wrapper,
+  .unified-formats-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .footer-top-grid {
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Tablet Portrait & Below (max-width: 900px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  :root {
+    --nav-height: 74px;
+    --gutter: 20px;
+  }
+
+  .cherished-jump-bar .container {
+    justify-content: flex-start !important;
+    padding: 0 16px;
+    gap: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .page-hero {
+    padding: calc(var(--nav-height) + 36px) 0 44px;
+  }
+
+  .page-section {
+    padding: 56px 0;
+  }
+
+  .footer-top-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. Standard Mobile Devices (max-width: 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 70px;
+    --gutter: 16px;
+  }
+
+  /* Navigation Bar Compact Layout — Guaranteed Left Brand & Right Match Ticket visibility */
+  .nav-container {
+    padding: 0 10px;
+    gap: 8px;
+    justify-content: space-between;
+  }
+
+  .nav-brand-group {
+    flex-shrink: 1;
+    min-width: 0;
+    gap: 8px;
+    max-width: calc(100% - 130px);
+  }
+
+  .nav-brand-emblem-img {
+    height: 38px;
+    max-width: 34px;
+  }
+
+  .nav-logo-text {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .nav-logo-title {
+    font-size: clamp(0.72rem, 2.8vw, 0.88rem);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-logo-sub {
+    font-size: 0.52rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0.85;
+  }
+
+  .nav-actions {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-nav-ticket span.btn-label-full {
+    display: none;
+  }
+
+  .btn-nav-ticket {
+    padding: 7px 11px;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .nav-toggle-btn {
+    width: 38px;
+    height: 38px;
+    padding: 8px;
+    flex-shrink: 0;
+  }
+
+  /* Mobile Drawer Full Screen Adaptation */
+  .mobile-nav-drawer {
+    width: 100%;
+    max-width: 380px;
+    padding: 20px 16px;
+  }
+
+  .mobile-nav-link {
+    padding: 8px 10px;
+  }
+
+  /* Mobile Background Video & Media Layer: Immersive Full-Bleed Coverage */
+  .cinematic-scene {
+    min-height: auto !important;
+    position: relative;
+    overflow: hidden;
+    display: block !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* Scene 01 (Hero Opening) fills initial mobile viewport */
+  #scene-01.cinematic-scene {
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  /* Compact edge blending vignettes on mobile to remove 300px dark dead zones */
+  .cinematic-scene::before {
+    height: 35px !important;
+  }
+
+  .cinematic-scene::after {
+    height: 35px !important;
+  }
+
+  .scene-media-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    background: #050103;
+    pointer-events: none;
+    z-index: 1;
+    display: block !important;
+  }
+
+  .scene-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover !important;
+    object-position: center center;
+    z-index: 1;
+    filter: brightness(0.92) contrast(1.08);
+    transform: none;
+    opacity: 1;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scene-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    max-height: none !important;
+    object-fit: cover !important;
+    object-position: center center;
+    z-index: 2;
+  }
+
+  /* School Duel Spotlight Mobile */
+  .hero-schools-duel-spotlight {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .hero-school-pillar {
+    padding: 6px 14px;
+  }
+
+  .pillar-school-title {
+    font-size: 0.8rem;
+  }
+
+  .pillar-crest-halo {
+    width: 26px;
+    height: 26px;
+  }
+
+  .duel-vs-text {
+    padding: 4px 10px;
+    font-size: 0.72rem;
+  }
+
+  /* Scenes Scroll Container Spacing: Tight, cohesive flow between scenes */
+  #scene-01 .scene-content {
+    padding: 0 !important;
+    min-height: 0 !important;
+  }
+
+  .scene-content {
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+    padding-left: var(--gutter) !important;
+    padding-right: var(--gutter) !important;
+    min-height: auto !important;
+  }
+
+  .scene-badge-group {
+    margin-bottom: 10px !important;
+    padding: 4px 14px !important;
+  }
+
+  .scene-title {
+    font-size: clamp(1.35rem, 5.2vw, 1.85rem) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 4px !important;
+  }
+
+  .scene-subheading {
+    font-size: clamp(0.7rem, 2.5vw, 0.82rem) !important;
+    line-height: 1.35 !important;
+    margin-bottom: 8px !important;
+  }
+
+  .stepped-captions-box {
+    margin: 8px 0 12px !important;
+  }
+
+  .stepped-caption {
+    font-size: 0.78rem !important;
+    line-height: 1.4 !important;
+    padding: 3px 8px !important;
+  }
+
+  /* Scene 01 CTAs on mobile: Keep side-by-side or fluid without blowing up height */
+  #scene-01 .scene-01-ctas {
+    flex-direction: row !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  #scene-01 .btn-primary-cinematic,
+  #scene-01 .btn-secondary-cinematic {
+    width: auto !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+    justify-content: center;
+    padding: 8px 12px !important;
+    min-height: 38px !important;
+    font-size: 0.72rem !important;
+  }
+
+  /* Interactive Elements */
+  #scene-01 .hero-sound-toggle {
+    top: calc(var(--nav-height) + 10px) !important;
+    right: 12px !important;
+    bottom: auto !important;
+    padding: 5px 11px !important;
+    font-size: 0.7rem !important;
+    z-index: 17 !important;
+  }
+
+  .hero-scroll-indicator {
+    display: none;
+  }
+
+  /* --------------------------------------------------------------------------
+     SCENE 02 — THE RIVALRY (MOBILE VIEW: EMBLEMS SHOWCASE & ATMOSPHERIC DUAL AURA)
+     Fixes mobile portrait distortion of 16:9 side-by-side waving flags video;
+     Presents authentic school emblems prominently side-by-side with VS centerpiece.
+     -------------------------------------------------------------------------- */
+  #scene-02 .scene-media-layer video.scene-video,
+  #scene-02 .scene-media-layer img.scene-poster {
+    display: none !important;
+  }
+
+  #scene-02 .scene-media-layer {
+    background:
+      radial-gradient(circle at 15% 45%, rgba(212, 175, 55, 0.18) 0%, transparent 48%),
+      radial-gradient(circle at 85% 45%, rgba(200, 220, 255, 0.18) 0%, transparent 48%),
+      radial-gradient(ellipse at 50% 25%, rgba(128, 0, 32, 0.5) 0%, rgba(16, 5, 10, 0.96) 68%),
+      #070204 !important;
+  }
+
+  #scene-02 .scene-overlay {
+    background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.65) 100%) !important;
+  }
+
+  #scene-02 .scene-content {
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+    min-height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
+  #scene-02 .scene-title {
+    font-size: clamp(1.35rem, 5.2vw, 1.85rem) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 4px !important;
+  }
+
+  #scene-02 .scene-subheading {
+    font-size: clamp(0.68rem, 2.3vw, 0.78rem) !important;
+    margin-bottom: 6px !important;
+    letter-spacing: 0.04em !important;
+  }
+
+  #scene-02 .stepped-captions-box {
+    margin: 6px 0 12px !important;
+  }
+
+  #scene-02 .stepped-caption {
+    font-size: clamp(0.72rem, 2.2vw, 0.82rem) !important;
+    line-height: 1.35 !important;
+    padding: 3px 8px !important;
+  }
+
+  #scene-02 .rivalry-duel-grid {
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 440px !important;
+    margin: 10px auto 0 !important;
+    padding: 0 4px !important;
+  }
+
+  #scene-02 .school-card-duel {
+    padding: 14px 6px 12px !important;
+    border-radius: 14px !important;
+    background: rgba(16, 7, 12, 0.9) !important;
+    border: 1px solid var(--border-light) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65) !important;
+  }
+
+  #scene-02 .school-card-duel.ananda {
+    border-top: 4px solid var(--color-gold) !important;
+  }
+
+  #scene-02 .school-card-duel.nalanda {
+    border-top: 4px solid var(--color-silver) !important;
+  }
+
+  #scene-02 .school-crest-wrap {
+    width: clamp(66px, 19vw, 84px) !important;
+    height: clamp(74px, 21vw, 94px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-bottom: 8px !important;
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 5px 6px !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.75), 0 0 14px rgba(255, 255, 255, 0.25) !important;
+    transition: transform 0.3s ease !important;
+  }
+
+  #scene-02 .school-card-duel.ananda .school-crest-wrap {
+    border: 2.5px solid rgba(212, 175, 55, 0.8) !important;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.45)) !important;
+  }
+
+  #scene-02 .school-card-duel.nalanda .school-crest-wrap {
+    border: 2.5px solid rgba(200, 220, 245, 0.8) !important;
+    filter: drop-shadow(0 0 10px rgba(200, 220, 245, 0.45)) !important;
+  }
+
+  #scene-02 .school-crest-img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  #scene-02 .school-duel-name {
+    font-size: clamp(0.85rem, 3.1vw, 1.05rem) !important;
+    font-weight: 800 !important;
+    margin-bottom: 2px !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.01em !important;
+  }
+
+  #scene-02 .school-duel-motto {
+    font-size: 0.6rem !important;
+    margin-bottom: 0 !important;
+    letter-spacing: 0.02em !important;
+    color: var(--color-wool-muted) !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+    display: block !important;
+  }
+
+  /* Focus solely on the emblems on mobile — hide the bulky stats block */
+  #scene-02 .school-duel-stats {
+    display: none !important;
+  }
+
+  #scene-02 .rivalry-vs-badge {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 5px !important;
+    margin: 0 !important;
+    z-index: 2;
+  }
+
+  #scene-02 .vs-circle {
+    width: clamp(36px, 10vw, 44px) !important;
+    height: clamp(36px, 10vw, 44px) !important;
+    border-radius: 50% !important;
+    background: var(--color-crimson) !important;
+    border: 2px solid var(--color-gold) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: clamp(0.76rem, 2.4vw, 0.88rem) !important;
+    font-weight: 900 !important;
+    color: var(--color-wool) !important;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5) !important;
+  }
+
+  #scene-02 .vs-brotherhood-label {
+    font-size: 0.55rem !important;
+    letter-spacing: 0.05em !important;
+    white-space: nowrap !important;
+    color: var(--color-gold) !important;
+    text-transform: uppercase !important;
+    font-weight: 700 !important;
+  }
+
+  /* Stats & Cards Grids: Compact 2x2 grid for mobile to eradicate vertical space bloat */
+  .numbers-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 480px !important;
+    margin: 12px auto 0 !important;
+  }
+
+  .number-stat-card {
+    padding: 14px 10px !important;
+    border-radius: 12px !important;
+  }
+
+  .stat-counter-large {
+    font-size: 2.2rem !important;
+    line-height: 1 !important;
+    margin-bottom: 4px !important;
+  }
+
+  .stat-title {
+    font-size: 0.8rem !important;
+    margin-bottom: 2px !important;
+    line-height: 1.2 !important;
+  }
+
+  .stat-desc {
+    font-size: 0.64rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .enclosure-selector-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .ticket-widget-box {
+    padding: 18px 12px;
+  }
+
+  .ticket-summary-box {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+    padding: 16px 14px !important;
+  }
+
+  .ticket-summary-box > div:first-child {
+    text-align: center;
+  }
+
+  .ticket-summary-box > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .ticket-summary-box .btn-primary-cinematic,
+  .ticket-summary-box .btn-outline-gold {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .ticket-partner-card {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 16px 14px !important;
+    gap: 12px !important;
+  }
+
+  .ticket-partner-card .btn-third-party-book {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .checkout-modal-card {
+    padding: 22px 14px !important;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .commemorative-pass-card {
+    padding: 20px 14px !important;
+  }
+
+  /* Match Day & Community Unified Container Spacing */
+  .scene-04-unified-megasection {
+    gap: 12px !important;
+    margin-top: 10px !important;
+  }
+
+  .match-community-unified-wrapper {
+    gap: 16px !important;
+  }
+
+  .unified-formats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .match-format-box {
+    padding: 16px 14px !important;
+  }
+
+  .unified-community-strip {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .countdown-section-card {
+    padding: 18px 12px !important;
+  }
+
+  .page-section {
+    padding: 32px 0 !important;
+  }
+
+  /* Scorecard & History Tables */
+  .mobile-table-hint {
+    display: flex;
+  }
+
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+  }
+
+  .scorecard-table {
+    min-width: 680px;
+    font-size: 0.86rem;
+  }
+
+  .scorecard-table th,
+  .scorecard-table td {
+    padding: 10px 10px;
+    white-space: nowrap;
+  }
+
+  /* Cherished Moments Responsive Adjustments */
+  .cherished-entry-card {
+    padding: 20px 14px;
+    margin-bottom: 30px;
+    border-radius: 14px;
+  }
+
+  .cherished-header h2 {
+    font-size: clamp(1.4rem, 4.5vw, 1.85rem);
+    margin: 8px 0;
+  }
+
+  .cherished-sub {
+    font-size: 0.84rem;
+  }
+
+  .cherished-img-frame img {
+    max-height: 380px;
+  }
+
+  .cherished-img-frame.aspect-tall {
+    height: 220px;
+  }
+
+  .cherished-sub-card {
+    padding: 14px 10px;
+  }
+
+  .cherished-caption {
+    font-size: 0.82rem;
+    margin-top: 10px;
+  }
+
+  .roster-meta-grid {
+    padding: 14px 12px;
+    font-size: 0.82rem;
+  }
+
+  /* Contact Page Grid */
+  .committee-officer-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .alumni-networks-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .souvenirs-notice-box {
+    padding: 20px 16px;
+    margin: 28px 0;
+  }
+
+  /* Match Centre Tabs */
+  .match-tabs-bar {
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
+    padding: 0 10px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .match-card-header {
+    padding: 18px 14px;
+  }
+
+  .match-header-info h3 {
+    font-size: 1.3rem;
+  }
+
+  /* Teams Page */
+  .team-view-tabs {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .team-tab-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 18px;
+  }
+
+  .hof-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  /* News Articles */
+  .news-articles-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .news-card-body {
+    padding: 18px 14px;
+  }
+
+  /* Footer */
+  .site-footer {
+    padding: 36px 0 20px !important;
+  }
+
+  .footer-top-grid {
+    grid-template-columns: 1fr;
+    gap: 22px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .footer-bottom-bar {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    padding-top: 18px !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6. Compact Smartphone (max-width: 480px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  :root {
+    --nav-height: 66px;
+    --gutter: 14px;
+  }
+
+  .nav-container {
+    padding: 0 10px;
+  }
+
+  .nav-brand-emblem-img {
+    height: 35px;
+    max-width: 30px;
+  }
+
+  .nav-logo-title {
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-logo-sub {
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+  }
+
+  .btn-nav-ticket {
+    padding: 7px 11px;
+    font-size: 0.72rem;
+  }
+
+  .nav-toggle-btn {
+    width: 38px;
+    height: 38px;
+    padding: 8px;
+  }
+
+  .mobile-nav-drawer {
+    max-width: 100%;
+  }
+
+  /* Scene 01 Headline & Contrast Chips */
+  .scene-01-main-title {
+    font-size: clamp(1.75rem, 7.5vw, 2.5rem);
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .hero-schools-contrast-bar {
+    gap: 6px;
+    margin: 8px 0 10px;
+  }
+
+  .school-highlight-chip {
+    padding: 5px 12px;
+    gap: 7px;
+  }
+
+  .chip-name {
+    font-size: 0.76rem;
+  }
+
+  .chip-color-tag {
+    font-size: 0.62rem;
+    padding: 1px 5px;
+  }
+
+  .hero-vs-badge {
+    width: 26px;
+    height: 26px;
+  }
+
+  .vs-glow-text {
+    font-size: 0.65rem;
+  }
+
+  /* Scene 02 Rivalry Cards (Mobile Ultra-Compact Emblems) */
+  #scene-02 .school-card-duel {
+    padding: 12px 4px 10px !important;
+  }
+
+  #scene-02 .school-crest-wrap {
+    width: 64px !important;
+    height: 72px !important;
+    margin-bottom: 6px !important;
+  }
+
+  #scene-02 .school-duel-name {
+    font-size: 0.8rem !important;
+  }
+
+  #scene-02 .school-duel-motto {
+    font-size: 0.54rem !important;
+  }
+
+  #scene-02 .vs-circle {
+    width: 34px !important;
+    height: 34px !important;
+    font-size: 0.74rem !important;
+  }
+
+  #scene-02 .vs-brotherhood-label {
+    font-size: 0.5rem !important;
+  }
+
+  /* Scene 08 Countdown & Ambient School Emblems */
+  .ambient-school-emblem {
+    top: 24%;
+    gap: 0;
+  }
+
+  .ambient-school-emblem.zone-ananda {
+    left: 18%;
+  }
+
+  .ambient-school-emblem.zone-nalanda {
+    left: 82%;
+  }
+
+  .ambient-crest-svg {
+    width: 140px;
+    opacity: 0.16;
+  }
+
+  .ambient-emblem-caption {
+    display: none;
+  }
+
+  .countdown-showcase-card {
+    padding: 16px 12px 14px;
+    border-radius: 14px;
+  }
+
+  .countdown-series-title {
+    font-size: 1.1rem;
+  }
+
+  .countdown-digits-grid {
+    gap: 6px;
+    margin: 12px 0 10px;
+  }
+
+  .countdown-unit-box {
+    padding: 10px 4px 8px;
+    border-radius: 10px;
+  }
+
+  .countdown-value {
+    font-size: 1.55rem;
+  }
+
+  .countdown-label {
+    font-size: 0.54rem;
+    letter-spacing: 0.1em;
+  }
+
+  .countdown-meta-strip {
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .countdown-meta-chip {
+    padding: 4px 10px;
+    font-size: 0.68rem;
+  }
+
+  .next-chapter-action-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .next-chapter-action-group a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .next-chapter-credo-strip {
+    gap: 6px;
+    margin: 10px 0 6px;
+  }
+
+  .credo-pill {
+    padding: 4px 10px;
+    font-size: 0.65rem;
+  }
+
+  .credo-divider {
+    display: none;
+  }
+
+  /* Gallery Grid */
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .gallery-card {
+    height: 230px;
+  }
+
+  /* Lightbox Modal */
+  .lightbox-content-box {
+    padding: 10px;
+    max-width: 95vw;
+  }
+
+  .lightbox-close-btn {
+    top: -44px;
+    right: 0;
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+
+  /* Section Headers */
+  .section-header-block h2 {
+    font-size: 1.65rem;
+  }
+
+  .section-header-block p {
+    font-size: 0.88rem;
+  }
+
+  /* Sponsors Cards */
+  .sponsors-logos-grid {
+    gap: 12px;
+  }
+
+  .sponsor-logo-card {
+    padding: 10px 10px 8px;
+    height: auto;
+    min-height: 84px;
+    min-width: 110px;
+    max-width: 140px;
+  }
+
+  .sponsor-logo-wrap {
+    height: 40px;
+  }
+
+  .sponsor-logo-img {
+    max-height: 34px;
+    max-width: 90px;
+  }
+
+  .sponsor-card-bottom {
+    padding-top: 4px;
+    margin-top: 2px;
+  }
+
+  .sponsor-card-name {
+    font-size: 0.7rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7. Ultra-Compact Smartphones (max-width: 360px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 360px) {
+  :root {
+    --nav-height: 62px;
+    --gutter: 10px;
+  }
+
+  .nav-brand-group {
+    gap: 6px;
+  }
+
+  .nav-brand-emblem-img {
+    height: 32px;
+    max-width: 28px;
+  }
+
+  .nav-logo-title {
+    font-size: 0.78rem;
+  }
+
+  .nav-logo-sub {
+    font-size: 0.54rem;
+  }
+
+  .btn-nav-ticket {
+    padding: 6px 9px;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-toggle-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .scene-01-main-title {
+    font-size: 1.65rem;
+  }
+
+  .countdown-digits-grid {
+    gap: 4px;
+  }
+
+  .countdown-unit-box {
+    padding: 8px 2px;
+  }
+
+  .countdown-value {
+    font-size: 1.25rem;
+  }
+
+  .countdown-label {
+    font-size: 0.5rem;
+  }
+}

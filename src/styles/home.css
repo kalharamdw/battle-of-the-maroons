@@ -1,0 +1,355 @@
+/* ==========================================================================
+   BATTLE OF THE MAROONS — CINEMATIC HOMEPAGE & SCENES CONTAINER
+   Sixes Cricket Style Cinematic Scroll & Dynamic Video Transitions
+   ========================================================================== */
+
+.cinematic-scroll-container {
+  position: relative;
+  width: 100%;
+  background: var(--color-pitch);
+}
+
+/* Base Scene Layout (Full Viewport) */
+.cinematic-scene {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--color-pitch);
+  border: none;
+  outline: none;
+}
+
+/* Seamless Edge Blending Vignettes to eradicate visible container seams */
+.cinematic-scene::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(180deg, #050103 0%, rgba(5, 1, 3, 0.75) 45%, rgba(5, 1, 3, 0) 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.cinematic-scene::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: linear-gradient(0deg, #050103 0%, rgba(5, 1, 3, 0.8) 50%, rgba(5, 1, 3, 0) 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+#scene-01::before {
+  display: none;
+  /* Merges naturally with header navigation */
+}
+
+/* Background Media Container */
+.scene-media-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  background: #050103;
+}
+
+.scene-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  filter: brightness(0.92) contrast(1.08);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scene-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 2;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Active Video Playback State */
+.scene-video.loaded {
+  opacity: 1 !important;
+  display: block !important;
+}
+
+.scene-video:not(.loaded) {
+  opacity: 0;
+}
+
+/* When video is loaded and active, fade out poster underneath completely */
+.scene-media-layer.video-active .scene-poster,
+.scene-media-layer:has(.scene-video.loaded) .scene-poster {
+  opacity: 0 !important;
+}
+
+/* Gradient Atmospheric Overlay - Pure Seamless Depth */
+.scene-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(180deg, #050103 0%, rgba(5, 1, 3, 0.6) 12%, rgba(14, 7, 10, 0.35) 45%, rgba(10, 4, 7, 0.55) 70%, rgba(5, 1, 3, 0.85) 90%, #050103 100%),
+    radial-gradient(ellipse 90% 70% at 50% 50%, rgba(107, 20, 36, 0.45) 0%, rgba(8, 3, 5, 0.75) 60%, #050103 100%);
+  pointer-events: none;
+}
+
+/* Specialized Hero Scene 01: Maximum Video Visibility & Cinematic Clarity */
+#scene-01 .scene-overlay {
+  background:
+    linear-gradient(180deg, rgba(4, 2, 3, 0.65) 0%, rgba(4, 2, 3, 0.12) 28%, rgba(4, 2, 3, 0.08) 50%, rgba(4, 2, 3, 0.35) 75%, #040203 100%),
+    radial-gradient(ellipse 95% 75% at 50% 50%, transparent 45%, rgba(4, 2, 3, 0.55) 100%) !important;
+  opacity: 0.45 !important;
+}
+
+#scene-01 .scene-video {
+  filter: contrast(1.06) brightness(1.03);
+}
+
+/* Scene Foreground Content */
+.scene-content {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: var(--container-max);
+  padding: calc(var(--nav-height) + 16px) var(--gutter) 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+
+/* High Contrast Scrim Card for Hero Scene */
+.scene-text-scrim {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 980px;
+  position: relative;
+  z-index: 6;
+}
+
+.hero-contrast-scrim {
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-radius: 0;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 16px;
+}
+
+/* Scene Number & Eyebrow */
+.scene-badge-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 6px 18px;
+  background: rgba(14, 7, 10, 0.85);
+  border: 1px solid var(--border-gold);
+  border-radius: 100px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.scene-index-num {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  letter-spacing: 0.1em;
+}
+
+.scene-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-wool);
+}
+
+/* Stepped Captions Sequence (Sixes Style with High Contrast Illumination) */
+.stepped-captions-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0 10px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.stepped-caption-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 22px;
+  border-radius: 100px;
+  background: rgba(10, 4, 7, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stepped-caption-item:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.85);
+}
+
+.stepped-caption-item.item-gold {
+  border-color: rgba(212, 175, 55, 0.6);
+  background: rgba(25, 12, 16, 0.85);
+}
+
+.stepped-caption-item.item-gold .caption-text {
+  color: #ffd700;
+  text-shadow: 0 0 16px rgba(255, 215, 0, 0.7), 0 2px 6px rgba(0, 0, 0, 0.95);
+}
+
+.stepped-caption-item.item-silver {
+  border-color: rgba(220, 220, 240, 0.6);
+  background: rgba(18, 12, 22, 0.85);
+}
+
+.stepped-caption-item.item-silver .caption-text {
+  color: #ffffff;
+  text-shadow: 0 0 16px rgba(220, 220, 255, 0.8), 0 2px 6px rgba(0, 0, 0, 0.95);
+}
+
+.stepped-caption-item.item-maroon {
+  border-color: rgba(230, 57, 70, 0.6);
+  background: rgba(30, 8, 14, 0.85);
+}
+
+.stepped-caption-item.item-maroon .caption-text {
+  color: #ff99aa;
+  text-shadow: 0 0 16px rgba(230, 57, 70, 0.8), 0 2px 6px rgba(0, 0, 0, 0.95);
+}
+
+.caption-bullet {
+  font-size: 1rem;
+}
+
+.caption-text {
+  font-family: var(--font-mono);
+  font-size: clamp(0.95rem, 1.8vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.stepped-caption {
+  font-family: var(--font-mono);
+  font-size: clamp(0.9rem, 1.6vw, 1.25rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-wool);
+  opacity: 0.95;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.stepped-caption.highlight {
+  color: var(--color-gold);
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+}
+
+/* Hero Scroll Down Indicator */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--color-wool-muted);
+  cursor: pointer;
+}
+
+.scroll-pill {
+  width: 22px;
+  height: 38px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.scroll-pip {
+  width: 4px;
+  height: 8px;
+  background: var(--color-gold);
+  border-radius: 2px;
+  margin-top: 6px;
+  animation: scrollDownBob 2s infinite ease-in-out;
+}
+
+.scroll-text {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-wool-muted);
+}
+
+/* Sound Toggle Control (Hero Scene) */
+.hero-sound-toggle {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(14, 7, 10, 0.7);
+  border: 1px solid var(--border-light);
+  border-radius: 100px;
+  color: var(--color-wool);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all var(--transition-fast);
+}
+
+.hero-sound-toggle:hover {
+  background: rgba(140, 29, 46, 0.8);
+  border-color: var(--color-crimson);
+}

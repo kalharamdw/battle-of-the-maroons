@@ -1,0 +1,682 @@
+/* ==========================================================================
+   BATTLE OF THE MAROONS — NAVIGATION & MASTHEAD STYLES
+   Sixes Cricket Luxury Masthead + Sri Lankan Cricket Heritage
+   ========================================================================== */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  transition: background-color var(--transition-smooth), border-color var(--transition-smooth), backdrop-filter var(--transition-smooth), transform var(--transition-smooth);
+  background: linear-gradient(180deg, rgba(6, 2, 4, 0.85) 0%, rgba(6, 2, 4, 0) 100%);
+  border-bottom: 1px solid transparent;
+}
+
+.site-header.scrolled {
+  background: rgba(14, 7, 10, 0.92);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 2vw, 32px);
+  gap: clamp(10px, 1.5vw, 24px);
+}
+
+/* Brand Logo & Flags */
+.nav-brand-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.nav-brand-emblem-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), filter 0.28s ease;
+}
+
+.nav-brand-emblem-img {
+  height: 48px;
+  width: auto;
+  max-width: 42px;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.6));
+  transition: transform 0.28s ease;
+}
+
+.nav-brand-group:hover .nav-brand-emblem-wrap {
+  transform: scale(1.06);
+  filter: drop-shadow(0 4px 16px rgba(212, 175, 55, 0.45));
+}
+
+.nav-logo-text {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+}
+
+.nav-logo-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--color-wool);
+  text-transform: uppercase;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.nav-logo-sub {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Desktop Nav Links */
+.nav-menu-desktop {
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1.1vw, 18px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 1;
+  flex-wrap: nowrap;
+}
+
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-wool-muted);
+  position: relative;
+  padding: 6px 2px;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  transition: color var(--transition-fast);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--color-wool);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--color-gold);
+  transition: width var(--transition-smooth);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Nav Actions (Countdown Mini-Widget & CTA) */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+/* Top Nav Compact Countdown Bar */
+.nav-countdown-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  background: rgba(34, 5, 11, 0.7);
+  border: 1px solid var(--border-maroon);
+  border-radius: 100px;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav-countdown-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  animation: pulseGold 2s infinite;
+}
+
+.nav-countdown-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+}
+
+.nav-countdown-timer {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-wool);
+  letter-spacing: 0.08em;
+}
+
+/* Premium Tickets CTA Button (Sixes Style) */
+.btn-nav-ticket {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-crimson);
+  color: var(--color-wool);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 15px rgba(140, 29, 46, 0.4);
+  transition: all var(--transition-fast);
+}
+
+.btn-nav-ticket:hover {
+  background: var(--color-crimson-bright);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(184, 34, 60, 0.55);
+}
+
+/* Hamburger Toggle Button */
+.nav-toggle-btn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-light);
+  color: var(--color-wool);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+}
+
+.nav-toggle-bar {
+  width: 22px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.nav-toggle-btn.active .nav-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.nav-toggle-btn.active .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle-btn.active .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile Drawer Overlay */
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  max-width: 440px;
+  height: 100vh;
+  height: 100dvh;
+  background: radial-gradient(circle at 100% 0%, rgba(139, 21, 56, 0.35) 0%, transparent 60%),
+              radial-gradient(circle at 0% 100%, rgba(212, 175, 55, 0.16) 0%, transparent 50%),
+              rgba(11, 4, 8, 0.985);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border-left: 1px solid rgba(212, 175, 55, 0.25);
+  box-shadow: -15px 0 50px rgba(0, 0, 0, 0.9);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 18px 24px;
+  transition: right 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 175, 55, 0.4) transparent;
+}
+
+.mobile-nav-drawer.open {
+  right: 0;
+}
+
+/* Drawer Header */
+.mobile-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.drawer-schools-showcase {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 1;
+  min-width: 0;
+}
+
+.drawer-school-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.25s ease;
+  flex: 1;
+  min-width: 0;
+}
+
+.drawer-school-chip.ananda {
+  border-color: rgba(212, 175, 55, 0.4);
+  background: linear-gradient(135deg, rgba(139, 21, 56, 0.3) 0%, rgba(20, 6, 12, 0.6) 100%);
+  box-shadow: 0 2px 10px rgba(139, 21, 56, 0.25);
+}
+
+.drawer-school-chip.nalanda {
+  border-color: rgba(220, 230, 245, 0.4);
+  background: linear-gradient(135deg, rgba(80, 20, 40, 0.3) 0%, rgba(18, 12, 22, 0.6) 100%);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.chip-flag-box {
+  width: 24px;
+  height: 16px;
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  flex-shrink: 0;
+}
+
+.chip-flag-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.chip-crest-circle {
+  width: 20px;
+  height: 22px;
+  border-radius: 4px;
+  background: #ffffff !important;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.chip-crest-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.chip-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.chip-name {
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chip-colors {
+  font-family: var(--font-mono);
+  font-size: 0.54rem;
+  color: var(--color-gold);
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.drawer-school-chip.nalanda .chip-colors {
+  color: #dce6f5;
+}
+
+.drawer-vs-pill {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 900;
+  color: #ffd700;
+  background: rgba(20, 7, 12, 0.9);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  padding: 2px 6px;
+  border-radius: 50px;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.mobile-nav-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: var(--color-wool);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.mobile-nav-close:hover {
+  background: rgba(139, 21, 56, 0.45);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  transform: rotate(90deg);
+}
+
+/* Encounter Meta Sub-Bar */
+.drawer-encounter-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+}
+
+.drawer-meta-edition {
+  font-weight: 700;
+}
+
+.drawer-meta-dot {
+  opacity: 0.5;
+}
+
+.drawer-meta-sub {
+  color: rgba(245, 240, 235, 0.7);
+}
+
+/* Drawer Links List */
+.mobile-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid transparent;
+  color: rgba(245, 240, 235, 0.9);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-nav-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(212, 175, 55, 0.25);
+  color: var(--color-gold);
+  transform: translateX(4px);
+}
+
+.mobile-nav-link.active {
+  background: linear-gradient(90deg, rgba(139, 21, 56, 0.35) 0%, rgba(212, 175, 55, 0.1) 100%);
+  border-color: rgba(212, 175, 55, 0.4);
+  color: var(--color-gold);
+}
+
+.nav-link-num {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  opacity: 0.75;
+  width: 22px;
+  flex-shrink: 0;
+}
+
+.nav-link-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.nav-link-title {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  flex: 1;
+  color: inherit;
+}
+
+.nav-link-arrow {
+  font-size: 1.15rem;
+  line-height: 1;
+  color: rgba(212, 175, 55, 0.4);
+  transition: transform 0.2s ease, color 0.2s ease;
+  margin-left: 8px;
+}
+
+.mobile-nav-link:hover .nav-link-arrow,
+.mobile-nav-link.active .nav-link-arrow {
+  color: var(--color-gold);
+  transform: translateX(3px);
+}
+
+.drawer-chip-badge {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.drawer-chip-badge.live {
+  background: rgba(230, 57, 70, 0.2);
+  border: 1px solid rgba(230, 57, 70, 0.5);
+  color: #ff6b7a;
+}
+
+.drawer-chip-badge.gold {
+  background: rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  color: var(--color-gold);
+}
+
+.drawer-highlight-ticket {
+  background: rgba(139, 21, 56, 0.15);
+  border-color: rgba(212, 175, 55, 0.25);
+}
+
+.mobile-nav-actions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.drawer-reserve-btn {
+  width: 100%;
+  justify-content: center;
+  padding: 12px 20px;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+}
+
+.drawer-footer-note {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: rgba(245, 240, 235, 0.5);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Backdrop Dimmer */
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-smooth);
+}
+
+.nav-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 480px) {
+  .drawer-schools-showcase {
+    gap: 4px;
+  }
+  .drawer-school-chip {
+    padding: 3px 6px;
+    gap: 5px;
+  }
+  .chip-flag-box {
+    width: 20px;
+    height: 14px;
+  }
+  .chip-crest-circle {
+    width: 18px;
+    height: 20px;
+  }
+  .chip-name {
+    font-size: 0.68rem;
+  }
+  .chip-colors {
+    display: none;
+  }
+  .drawer-vs-pill {
+    padding: 1px 5px;
+    font-size: 0.55rem;
+  }
+  .nav-link-title {
+    font-size: 0.88rem;
+  }
+  .drawer-encounter-meta {
+    font-size: 0.6rem;
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .drawer-schools-showcase {
+    gap: 3px;
+  }
+  .drawer-school-chip {
+    padding: 2px 4px;
+    gap: 3px;
+  }
+  .chip-flag-box {
+    width: 18px;
+    height: 12px;
+  }
+  .chip-crest-circle {
+    width: 16px;
+    height: 18px;
+  }
+  .chip-name {
+    font-size: 0.62rem;
+  }
+  .mobile-nav-close {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* ==========================================================================
+   ADMINISTRATIVE CONSOLE ISOLATION
+   Hides public website masthead, fixed nav and global footer on /admin
+   to avoid overlapping borders and interference with the admin control bar.
+   ========================================================================== */
+body.is-admin-route #header-mount,
+body.is-admin-route #site-header,
+body.is-admin-route #footer-mount {
+  display: none !important;
+}
+
+body.is-admin-route {
+  background-color: #0e0508 !important;
+}
+

@@ -1,0 +1,415 @@
+/* ==========================================================================
+   BATTLE OF THE MAROONS — ANIMATIONS, KEYFRAMES & INTERACTIVE HOVER SUITE
+   ========================================================================== */
+
+/* Smooth Native Scroll Behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* --------------------------------------------------------------------------
+   Core Glows & Pulses
+   -------------------------------------------------------------------------- */
+@keyframes pulseGold {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.6);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(212, 175, 55, 0);
+    transform: scale(1.08);
+  }
+}
+
+@keyframes pulseCrimson {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(163, 29, 54, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(163, 29, 54, 0);
+  }
+}
+
+@keyframes scrollDownBob {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.2;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stadiumGlow {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes shimmerEffect {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Dual-School Illuminated Glowing Text Utilities
+   -------------------------------------------------------------------------- */
+.gold-glow {
+  color: #ffd700 !important;
+  text-shadow: 0 0 18px rgba(255, 215, 0, 0.75), 0 2px 6px rgba(0, 0, 0, 0.95);
+}
+
+.silver-glow {
+  color: #ffffff !important;
+  text-shadow: 0 0 18px rgba(220, 220, 255, 0.8), 0 2px 6px rgba(0, 0, 0, 0.95);
+}
+
+.crimson-glow {
+  color: #ff8597 !important;
+  text-shadow: 0 0 20px rgba(230, 57, 70, 0.8), 0 2px 6px rgba(0, 0, 0, 0.95);
+}
+
+/* --------------------------------------------------------------------------
+   Interactive Hover Classes Across Whole Site
+   -------------------------------------------------------------------------- */
+
+/* Cards hover elevation & illumination */
+.hover-lift {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(212, 175, 55, 0.25);
+  border-color: rgba(212, 175, 55, 0.6) !important;
+}
+
+/* News Cards Hover Supercharge */
+.news-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.4s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: rgba(212, 175, 55, 0.6);
+  background: rgba(28, 12, 18, 0.92);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.25);
+}
+
+.news-card:hover .news-card-title {
+  color: #ffd700;
+  text-shadow: 0 0 14px rgba(212, 175, 55, 0.4);
+}
+
+.news-card:hover .news-read-more-link span {
+  transform: translateX(6px);
+  transition: transform 0.3s ease;
+}
+
+/* Gallery Card Hover Shimmer */
+.gallery-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--color-gold);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+/* Ticket Enclosure Options Hover */
+.enclosure-card-option {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.enclosure-card-option:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-gold) !important;
+  background: rgba(140, 29, 46, 0.35) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 175, 55, 0.25);
+}
+
+/* Buttons Shimmer & Pulse */
+.btn-primary-cinematic,
+.btn-secondary-cinematic,
+.btn-ticket-tier,
+.btn-submit-contact {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Navigation items magnetic hover underline */
+.nav-link {
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.nav-link:hover {
+  color: #ffd700 !important;
+  text-shadow: 0 0 12px rgba(212, 175, 55, 0.6);
+}
+
+/* Table row interactive highlighting in Match Centre & History */
+.innings-table tbody tr {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.innings-table tbody tr:hover {
+  background-color: rgba(212, 175, 55, 0.1) !important;
+  transform: scale(1.005);
+}
+
+/* Footer Link Hover Accent */
+.footer-link {
+  transition: color 0.25s ease, transform 0.25s ease;
+  display: inline-block;
+}
+
+.footer-link:hover {
+  color: #ffd700 !important;
+  transform: translateX(4px);
+}
+
+/* Hero Scroll Indicator Hover */
+.hero-scroll-indicator {
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: rgba(10, 4, 7, 0.7);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
+  transition: all 0.3s ease;
+}
+
+.hero-scroll-indicator:hover {
+  border-color: var(--color-gold);
+  background: rgba(25, 10, 16, 0.9);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 20px rgba(212, 175, 55, 0.4);
+  transform: translateY(-3px);
+}
+
+.hero-scroll-indicator:hover .scroll-text {
+  color: #ffd700;
+}
+
+/* --------------------------------------------------------------------------
+   CINEMATIC PAGE ROUTE TRANSITIONS & VIEW TRANSITIONS API
+   -------------------------------------------------------------------------- */
+
+/* Top Cinematic Route Transition Progress Beam */
+.page-progress-beam {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #6b1424 0%, #b8223c 40%, #ffd700 80%, #ffffff 100%);
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.9), 0 0 8px rgba(184, 34, 60, 0.9);
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.page-progress-beam.animating {
+  opacity: 1;
+  animation: pageBeamProgress 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.page-progress-beam.fade-out {
+  opacity: 0;
+}
+
+@keyframes pageBeamProgress {
+  0% {
+    width: 0%;
+  }
+  60% {
+    width: 78%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* Page Content Transition Classes */
+.page-transition-wrapper {
+  animation: pageTransitionIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: opacity, transform;
+}
+
+.page-transition-exit {
+  animation: pageTransitionOut 0.12s ease-out both;
+  will-change: opacity, transform;
+}
+
+@keyframes pageTransitionIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(3px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes pageTransitionOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+/* Native View Transitions API support (Chrome 111+, Edge 111+, Safari 18+) */
+@supports (view-transition-name: root) {
+  ::view-transition-old(root) {
+    animation: 160ms cubic-bezier(0.4, 0, 1, 1) both pageTransitionOut;
+  }
+
+  ::view-transition-new(root) {
+    animation: 320ms cubic-bezier(0.16, 1, 0.3, 1) both pageTransitionIn;
+  }
+}
+
+/* Fade in animation utility */
+.animate-fade-in {
+  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   UNIVERSAL SITE-WIDE SCROLL REVEAL SUITE (EVERY TAB & PAGE)
+   ========================================================================== */
+#global-scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #8c1d2e 0%, #d4af37 65%, #ffd700 100%);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.8), 0 0 5px rgba(255, 215, 0, 0.9);
+  z-index: 99999;
+  pointer-events: none;
+  transition: width 0.08s ease-out;
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(3px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.scroll-reveal.scroll-reveal-left {
+  transform: translateX(-36px);
+}
+
+.scroll-reveal.scroll-reveal-right {
+  transform: translateX(36px);
+}
+
+.scroll-reveal.scroll-reveal-scale {
+  transform: scale(0.93) translateY(20px);
+}
+
+.scroll-reveal.is-revealed {
+  opacity: 1 !important;
+  transform: translateY(0) translateX(0) scale(1) !important;
+  filter: blur(0px) !important;
+}
+
+/* Card and item subtle gold bloom upon reveal */
+.news-card.scroll-reveal.is-revealed,
+.gallery-card.scroll-reveal.is-revealed,
+.sponsor-card.scroll-reveal.is-revealed,
+.team-card.scroll-reveal.is-revealed,
+.player-card.scroll-reveal.is-revealed,
+.enclosure-card-option.scroll-reveal.is-revealed,
+.match-card.scroll-reveal.is-revealed,
+.timeline-milestone-item.scroll-reveal.is-revealed,
+.about-highlight-card.scroll-reveal.is-revealed,
+.cherished-entry-card.scroll-reveal.is-revealed,
+.cherished-sub-card.scroll-reveal.is-revealed,
+.hof-card.scroll-reveal.is-revealed,
+.match-format-box.scroll-reveal.is-revealed,
+.community-mini-card.scroll-reveal.is-revealed,
+.number-stat-card.scroll-reveal.is-revealed {
+  animation: revealGoldAura 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes revealGoldAura {
+  0% {
+    border-color: rgba(212, 175, 55, 0.85);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.35);
+  }
+  100% {
+    border-color: var(--border-light);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Stagger Delays for Containers */
+.scroll-stagger > *:nth-child(1) { transition-delay: 0.04s; }
+.scroll-stagger > *:nth-child(2) { transition-delay: 0.10s; }
+.scroll-stagger > *:nth-child(3) { transition-delay: 0.16s; }
+.scroll-stagger > *:nth-child(4) { transition-delay: 0.22s; }
+.scroll-stagger > *:nth-child(5) { transition-delay: 0.28s; }
+.scroll-stagger > *:nth-child(6) { transition-delay: 0.34s; }
+.scroll-stagger > *:nth-child(7) { transition-delay: 0.40s; }
+.scroll-stagger > *:nth-child(8) { transition-delay: 0.46s; }
+.scroll-stagger > *:nth-child(9) { transition-delay: 0.52s; }
+.scroll-stagger > *:nth-child(10) { transition-delay: 0.58s; }
+.scroll-stagger > *:nth-child(11) { transition-delay: 0.64s; }
+.scroll-stagger > *:nth-child(12) { transition-delay: 0.70s; }
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

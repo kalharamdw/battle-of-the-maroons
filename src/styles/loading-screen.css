@@ -1,0 +1,203 @@
+/* ==========================================================================
+   BATTLE OF THE MAROONS — CINEMATIC VIDEO LOADING SCREEN
+   Fullscreen MP4 video experience with glassmorphism controls
+   ========================================================================== */
+
+#bom-loading-screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999999;
+  background: #000000;
+  color: var(--color-white, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s ease;
+}
+
+#bom-loading-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.video-loader-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000000;
+}
+
+/* Fullscreen Background Video */
+.loader-video-player {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Cinematic Vignette Overlay */
+.loader-video-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at center, transparent 40%, rgba(0, 0, 0, 0.4) 80%, rgba(0, 0, 0, 0.8) 100%),
+              linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+/* Top Subtle Watermark */
+.loader-watermark {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.watermark-pill {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.65);
+  background: rgba(15, 6, 9, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+/* Bottom/Top Corner Controls */
+.loader-controls {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 20;
+}
+
+.loader-control-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  background: rgba(18, 7, 12, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #ffffff;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+
+.loader-control-btn:hover {
+  background: rgba(84, 12, 26, 0.9);
+  border-color: var(--color-gold, #ffd700);
+  color: var(--color-gold, #ffd700);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(84, 12, 26, 0.6);
+}
+
+.loader-skip-btn {
+  border-color: rgba(212, 175, 55, 0.4);
+  background: rgba(30, 8, 14, 0.85);
+  color: var(--color-gold, #ffd700);
+}
+
+.loader-skip-btn .skip-arrow {
+  transition: transform 0.2s ease;
+}
+
+.loader-skip-btn:hover .skip-arrow {
+  transform: translateX(3px);
+}
+
+/* Buffering Spinner */
+.loader-buffering-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+.loader-spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid rgba(212, 175, 55, 0.2);
+  border-top-color: var(--color-gold, #ffd700);
+  border-radius: 50%;
+  animation: loaderSpin 0.9s linear infinite;
+}
+
+@keyframes loaderSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile Adjustments — Show Full Video Without Left/Right Cropping */
+@media (max-width: 768px) {
+  .loader-video-player {
+    object-fit: contain !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    max-height: 100dvh !important;
+  }
+
+  .video-loader-container {
+    background: #000000;
+  }
+
+  .loader-video-vignette {
+    background: radial-gradient(circle at center, transparent 65%, rgba(0, 0, 0, 0.7) 100%);
+  }
+}
+
+@media (max-width: 640px) {
+  .loader-watermark {
+    top: 16px;
+    left: 16px;
+  }
+  .watermark-pill {
+    font-size: 0.62rem;
+    padding: 4px 10px;
+  }
+  .loader-controls {
+    bottom: 20px;
+    right: 16px;
+    left: 16px;
+    justify-content: flex-end;
+  }
+  .loader-control-btn {
+    padding: 7px 14px;
+    font-size: 0.72rem;
+  }
+}
