@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Gate Pass Scanner — Battle of the Maroons Official</title>
+  <link rel="icon" type="image/png" href="/assets/images/branding/bom_logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="/assets/js/html5-qrcode.min.js"></script>
+  <style>
+    :root {
+      --maroon: #540c1a;
+      --maroon-dark: #2a050d;
+      --gold: #d4af37;
+      --gold-bright: #ffd700;
+      --bg: #090205;
+      --surface: #14060c;
+      --surface-card: #1c0912;
+      --border: rgba(212, 175, 55, 0.25);
+      --text: #ffffff;
+      --text-muted: #b8a6ad;
+      --success: #10b981;
+      --success-dark: #064e3b;
+      --danger: #ef4444;
+      --danger-dark: #7f1d1d;
+      --warning: #f59e0b;
+      --font-heading: 'Cinzel', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Header Masthead */
+    .gate-header {
+      background: linear-gradient(180deg, rgba(84, 12, 26, 0.95) 0%, rgba(20, 6, 12, 0.95) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 42px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+    }
+
+    .brand-title {
+      font-family: var(--font-heading);
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
+
+    .brand-sub {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--success);
+      color: var(--success);
+      border-radius: 50px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 8px var(--success);
+      animation: pulse 1.6s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* Gate Selector Toolbar */
+    .gate-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .gate-select-wrap {
+      flex: 1;
+      position: relative;
+    }
+
+    .gate-select {
+      width: 100%;
+      padding: 8px 12px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--gold-bright);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      outline: none;
+    }
+
+    .counter-chip {
+      padding: 6px 10px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .counter-val {
+      color: var(--gold-bright);
+      font-weight: 800;
+    }
+
+    /* Main Container */
+    .main-body {
+      flex: 1;
+      padding: 14px;
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Camera Viewfinder Box */
+    .scanner-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      position: relative;
+    }
+
+    .scanner-view-wrap {
+      position: relative;
+      width: 100%;
+      height: 320px;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #reader {
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    #reader video {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+    }
+
+    /* Viewfinder Overlay Reticle */
+    .viewfinder-reticle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 220px;
+      height: 220px;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .reticle-corner {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border: 3px solid var(--gold);
+    }
+    .reticle-tl { top: 0; left: 0; border-right: none; border-bottom: none; border-top-left-radius: 8px; }
+    .reticle-tr { top: 0; right: 0; border-left: none; border-bottom: none; border-top-right-radius: 8px; }
+    .reticle-bl { bottom: 0; left: 0; border-right: none; border-top: none; border-bottom-left-radius: 8px; }
+    .reticle-br { bottom: 0; right: 0; border-left: none; border-top: none; border-bottom-right-radius: 8px; }
+
+    .laser-line {
+      position: absolute;
+      left: 4px;
+      right: 4px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #ff2a5f, var(--gold-bright), #ff2a5f, transparent);
+      box-shadow: 0 0 12px #ff2a5f;
+      animation: laserScan 2s infinite ease-in-out;
+    }
+
+    @keyframes laserScan {
+      0%, 100% { top: 10px; }
+      50% { top: 200px; }
+    }
+
+    .scanner-toolbar {
+      position: absolute;
+      bottom: 12px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      z-index: 10;
+    }
+
+    .tool-btn {
+      background: rgba(14, 5, 9, 0.85);
+      border: 1px solid var(--border);
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+
+    .tool-btn.active {
+      background: var(--gold);
+      color: #000;
+      border-color: #fff;
+    }
+
+    /* Manual Search Box */
+    .manual-box {
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+
+    .manual-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .manual-form {
+      display: flex;
+      gap: 8px;
+    }
+
+    .manual-input {
+      flex: 1;
+      padding: 10px 14px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      outline: none;
+    }
+
+    .manual-input:focus {
+      border-color: var(--gold-bright);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    }
+
+    .manual-btn {
+      padding: 10px 18px;
+      background: linear-gradient(135deg, var(--maroon) 0%, #87142b 100%);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .manual-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(135, 20, 43, 0.5);
+    }
+
+    /* Pass Verification Result Modal / Card */
+    .result-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(10px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .result-overlay.active {
+      display: flex;
+      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.92); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .result-sheet {
+      width: 100%;
+      max-width: 440px;
+      background: var(--surface);
+      border-radius: 20px;
+      border: 2px solid;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .result-sheet.status-success {
+      border-color: var(--success);
+    }
+    .result-sheet.status-danger {
+      border-color: var(--danger);
+    }
+    .result-sheet.status-warning {
+      border-color: var(--warning);
+    }
+
+    .result-banner {
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #ffffff;
+    }
+
+    .status-success .result-banner {
+      background: linear-gradient(135deg, var(--success-dark) 0%, #047857 100%);
+    }
+    .status-danger .result-banner {
+      background: linear-gradient(135deg, var(--danger-dark) 0%, #b91c1c 100%);
+    }
+    .status-warning .result-banner {
+      background: linear-gradient(135deg, #78350f 0%, var(--warning) 100%);
+    }
+
+    .banner-icon {
+      font-size: 2rem;
+      line-height: 1;
+    }
+
+    .banner-title {
+      font-family: var(--font-heading);
+      font-size: 1.15rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
+
+    .banner-sub {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      opacity: 0.9;
+      margin-top: 2px;
+    }
+
+    .result-content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .admission-highlight {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .admit-qty {
+      font-size: 1.7rem;
+      font-weight: 900;
+      font-family: var(--font-heading);
+      color: var(--gold-bright);
+      line-height: 1.1;
+    }
+
+    .admit-category {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: #fff;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .detail-cell {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    .detail-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .detail-val {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .alert-box {
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      font-family: var(--font-mono);
+    }
+
+    .status-danger .alert-box {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--danger);
+      color: #fca5a5;
+    }
+
+    .status-warning .alert-box {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid var(--warning);
+      color: #fde68a;
+    }
+
+    .action-btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .btn-admit {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+      border: 2px solid #34d399;
+      border-radius: 12px;
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-dismiss {
+      width: 100%;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* History Feed */
+    .history-card {
+      background: var(--surface);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .history-head {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--gold);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .history-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .history-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      border-left: 3px solid var(--success);
+      font-size: 0.75rem;
+    }
+
+    .history-item.rejected {
+      border-left-color: var(--danger);
+    }
+
+    .hist-name {
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .hist-meta {
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      font-size: 0.68rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Masthead -->
+  <header class="gate-header">
+    <div class="header-top">
+      <div class="brand-group">
+        <img src="/assets/images/branding/bom_logo.png" alt="BOM Official Logo" class="brand-logo" />
+        <div>
+          <h1 class="brand-title">BATTLE OF THE MAROONS</h1>
+          <p class="brand-sub">Gate Pass Scanner • Committee Portal</p>
+        </div>
+      </div>
+      <div class="live-badge">
+        <span class="live-dot"></span>
+        <span>GATE LIVE</span>
+      </div>
+    </div>
+
+    <!-- Toolbar: Gate Selection & Live Admission Counter -->
+    <div class="gate-controls">
+      <div class="gate-select-wrap">
+        <select class="gate-select" id="gate-selector">
+          <option value="Gate 1 — Grandstand Upper Deck">Gate 1 — Grandstand Deck</option>
+          <option value="Gate 2 — Old Boys Maroons Marquee">Gate 2 — Maroons Marquee</option>
+          <option value="Gate 3 — Members Pavilion">Gate 3 — Members Pavilion</option>
+          <option value="Gate 4 — Party Tent & Papare">Gate 4 — Papare Enclosure</option>
+          <option value="VIP Enclosure Gate">VIP Enclosure Gate</option>
+        </select>
+      </div>
+      <div class="counter-chip">
+        Admitted: <span class="counter-val" id="admitted-counter">0</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main View -->
+  <main class="main-body">
+
+    <!-- Viewfinder Screen -->
+    <div class="scanner-card">
+      <div class="scanner-view-wrap">
+        <div id="reader"></div>
+
+        <!-- Visual Reticle -->
+        <div class="viewfinder-reticle">
+          <div class="reticle-corner reticle-tl"></div>
+          <div class="reticle-corner reticle-tr"></div>
+          <div class="reticle-corner reticle-bl"></div>
+          <div class="reticle-corner reticle-br"></div>
+          <div class="laser-line"></div>
+        </div>
+
+        <!-- Camera Toolbar -->
+        <div class="scanner-toolbar">
+          <button type="button" class="tool-btn" id="btn-toggle-camera">
+            📷 Flip Camera
+          </button>
+          <button type="button" class="tool-btn" id="btn-sound-toggle">
+            🔊 Sound: ON
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manual Code Fallback -->
+    <div class="manual-box">
+      <div class="manual-label">
+        <span>Manual Reference Entry</span>
+        <span>Enter 5 digits or BOM-97-XXXXX</span>
+      </div>
+      <form class="manual-form" id="manual-form">
+        <input 
+          type="text" 
+          class="manual-input" 
+          id="manual-input" 
+          placeholder="e.g. 92366 or BOM-97-92366" 
+          autocomplete="off" 
+          autocorrect="off" 
+          autocapitalize="characters" 
+        />
+        <button type="submit" class="manual-btn" id="btn-verify-manual">Verify</button>
+      </form>
+    </div>
+
+    <!-- Recent Gate Scans Activity Log -->
+    <div class="history-card">
+      <div class="history-head">
+        <span>Gate Scan Activity Log</span>
+        <span id="session-count">0 Scanned</span>
+      </div>
+      <ul class="history-list" id="history-list">
+        <li style="text-align: center; color: var(--text-muted); font-size: 0.75rem; padding: 14px 0;">
+          Ready to scan. Point camera at spectator's ticket QR code.
+        </li>
+      </ul>
+    </div>
+
+  </main>
+
+  <!-- Pass Verification Modal -->
+  <div class="result-overlay" id="result-overlay">
+    <div class="result-sheet" id="result-sheet">
+      
+      <div class="result-banner">
+        <div class="banner-icon" id="res-icon">✓</div>
+        <div>
+          <h2 class="banner-title" id="res-title">ADMISSION APPROVED</h2>
+          <p class="banner-sub" id="res-sub">VERIFIED TOURNAMENT PASS</p>
+        </div>
+      </div>
+
+      <div class="result-content">
+        <div class="admission-highlight">
+          <div class="admit-qty" id="res-qty">1 PERSON(S)</div>
+          <div class="admit-category" id="res-category">Old Boys Maroons Marquee</div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="detail-cell">
+            <div class="detail-label">Passholder</div>
+            <div class="detail-val" id="res-name">-</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Reference</div>
+            <div class="detail-val" id="res-ref" style="font-family: var(--font-mono); color: var(--gold);">-</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">Format</div>
+            <div class="detail-val" id="res-format">3-Day Encounter</div>
+          </div>
+          <div class="detail-cell">
+            <div class="detail-label">School</div>
+            <div class="detail-val" id="res-school">-</div>
+          </div>
+        </div>
+
+        <div class="alert-box" id="res-alert" style="display: none;"></div>
+
+        <div class="action-btn-group">
+          <button type="button" class="btn-admit" id="btn-admit-action">
+            ✓ CONFIRM ADMISSION & ENTER
+          </button>
+          <button type="button" class="btn-dismiss" id="btn-dismiss-action">
+            Dismiss & Scan Next
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Audio Synthesizer (Zero External Dependencies)
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function playChime(type) {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        if (type === 'success') {
+          // Cheerful two-tone admission chime
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+          osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.12); // A5
+          gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.35);
+
+          if (navigator.vibrate) navigator.vibrate([80]);
+        } else {
+          // Warning buzzer
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+          osc.frequency.linearRampToValueAtTime(110, audioCtx.currentTime + 0.3);
+          gain.gain.setValueAtTime(0.35, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.35);
+
+          if (navigator.vibrate) navigator.vibrate([120, 80, 120]);
+        }
+      } catch (e) {}
+    }
+
+    // App State
+    let html5QrCode = null;
+    let currentCameraIndex = 0;
+    let availableCameras = [];
+    let isVerifying = false;
+    let currentScannedOrder = null;
+    let admittedCount = 0;
+    let sessionScans = [];
+
+    // DOM Elements
+    const resultOverlay = document.getElementById('result-overlay');
+    const resultSheet = document.getElementById('result-sheet');
+    const resIcon = document.getElementById('res-icon');
+    const resTitle = document.getElementById('res-title');
+    const resSub = document.getElementById('res-sub');
+    const resQty = document.getElementById('res-qty');
+    const resCategory = document.getElementById('res-category');
+    const resName = document.getElementById('res-name');
+    const resRef = document.getElementById('res-ref');
+    const resFormat = document.getElementById('res-format');
+    const resSchool = document.getElementById('res-school');
+    const resAlert = document.getElementById('res-alert');
+    const btnAdmitAction = document.getElementById('btn-admit-action');
+    const btnDismissAction = document.getElementById('btn-dismiss-action');
+    const admittedCounter = document.getElementById('admitted-counter');
+    const sessionCount = document.getElementById('session-count');
+    const historyList = document.getElementById('history-list');
+    const gateSelector = document.getElementById('gate-selector');
+    const manualForm = document.getElementById('manual-form');
+    const manualInput = document.getElementById('manual-input');
+    const btnToggleCamera = document.getElementById('btn-toggle-camera');
+    const btnSoundToggle = document.getElementById('btn-sound-toggle');
+
+    // Load initial stats from backend
+    async function loadStats() {
+      try {
+        const res = await fetch('/api/gate/stats');
+        const data = await res.json();
+        if (data.success) {
+          admittedCount = data.totalAdmittedPersons || 0;
+          admittedCounter.textContent = admittedCount;
+        }
+      } catch (e) {}
+    }
+
+    // Sound toggle
+    btnSoundToggle.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      btnSoundToggle.textContent = soundEnabled ? '🔊 Sound: ON' : '🔇 Sound: OFF';
+    });
+
+    // Camera initialization
+    async function initCamera() {
+      try {
+        if (!window.Html5Qrcode) {
+          console.warn('Html5Qrcode library loading...');
+          setTimeout(initCamera, 500);
+          return;
+        }
+
+        html5QrCode = new Html5Qrcode("reader");
+        const devices = await Html5Qrcode.getCameras();
+
+        if (devices && devices.length) {
+          availableCameras = devices;
+          // Prefer environment/back camera
+          const backCam = devices.find(d => d.label.toLowerCase().includes('back') || d.label.toLowerCase().includes('rear') || d.label.toLowerCase().includes('environment'));
+          const selectedId = backCam ? backCam.id : devices[0].id;
+          currentCameraIndex = devices.findIndex(d => d.id === selectedId);
+          startScanner(selectedId);
+        } else {
+          showManualOnly('No camera found on this device. Use manual code entry below.');
+        }
+      } catch (err) {
+        console.warn('Camera access error:', err);
+        showManualOnly('Camera permission denied or camera unavailable. Use manual code entry below.');
+      }
+    }
+
+    function startScanner(cameraId) {
+      if (!html5QrCode) return;
+      html5QrCode.start(
+        cameraId,
+        {
+          fps: 15,
+          qrbox: { width: 230, height: 230 },
+          aspectRatio: 1.0
+        },
+        onScanSuccess,
+        () => {} // silent frame handler
+      ).catch(e => {
+        console.warn('Scanner start warning:', e);
+      });
+    }
+
+    btnToggleCamera.addEventListener('click', async () => {
+      if (availableCameras.length <= 1 || !html5QrCode) return;
+      try {
+        await html5QrCode.stop();
+        currentCameraIndex = (currentCameraIndex + 1) % availableCameras.length;
+        startScanner(availableCameras[currentCameraIndex].id);
+      } catch (e) {}
+    });
+
+    function showManualOnly(msg) {
+      document.querySelector('.scanner-view-wrap').innerHTML = `
+        <div style="padding: 24px; text-align: center; color: var(--gold); font-size: 0.85rem; font-family: var(--font-mono);">
+          <div style="font-size: 2.2rem; margin-bottom: 8px;">📷</div>
+          <p>${msg}</p>
+        </div>
+      `;
+    }
+
+    // Handle scanned QR Code
+    async function onScanSuccess(decodedText) {
+      if (isVerifying) return;
+      verifyTicketCode(decodedText);
+    }
+
+    // Handle manual submission
+    manualForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = manualInput.value.trim();
+      if (!val) return;
+      verifyTicketCode(val);
+      manualInput.value = '';
+    });
+
+    // Verification Logic
+    async function verifyTicketCode(code) {
+      isVerifying = true;
+      const currentGate = gateSelector.value;
+
+      try {
+        const res = await fetch('/api/gate/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            code: code,
+            gateName: currentGate,
+            steward: 'Committee Member'
+          })
+        });
+
+        const data = await res.json();
+        showResult(data);
+      } catch (err) {
+        showResult({
+          valid: false,
+          status: 'NETWORK_ERROR',
+          statusClass: 'status-danger',
+          title: 'CONNECTION ERROR',
+          message: 'Unable to reach backend database. Please retry in a few seconds.'
+        });
+      }
+    }
+
+    function showResult(res) {
+      currentScannedOrder = res.order || null;
+      resultSheet.className = 'result-sheet ' + (res.statusClass || 'status-danger');
+
+      resTitle.textContent = res.title || 'PASS INSPECTION';
+      resSub.textContent = res.valid ? 'GATE ENTRY AUTHORIZED' : 'CHECK FAILED';
+      resIcon.textContent = res.valid ? '✓' : (res.status === 'ALREADY_ADMITTED' ? '⚠️' : '✕');
+
+      if (res.order) {
+        resQty.textContent = `${res.order.quantity || 1} PERSON(S)`;
+        resCategory.textContent = res.order.categoryName || 'General Admission';
+        resName.textContent = res.order.buyerName || '-';
+        resRef.textContent = res.order.orderRef || '-';
+        resFormat.textContent = res.order.matchFormat || '3-Day Encounter';
+        resSchool.textContent = res.order.schoolAffiliation || 'Neutral';
+      } else {
+        resQty.textContent = '0 PASSES';
+        resCategory.textContent = 'Unregistered / Invalid';
+        resName.textContent = 'Unknown Attendee';
+        resRef.textContent = res.scannedCode || 'N/A';
+        resFormat.textContent = '-';
+        resSchool.textContent = '-';
+      }
+
+      if (res.message) {
+        resAlert.textContent = res.message;
+        resAlert.style.display = 'block';
+      } else {
+        resAlert.style.display = 'none';
+      }
+
+      // Configure button state
+      if (res.valid) {
+        playChime('success');
+        btnAdmitAction.style.display = 'flex';
+        btnAdmitAction.textContent = `✓ ADMIT ${res.order.quantity || 1} PERSON(S) TO ENCLOSURE`;
+      } else {
+        playChime('error');
+        btnAdmitAction.style.display = 'none';
+      }
+
+      resultOverlay.classList.add('active');
+
+      // Record in local history feed
+      logHistory(res);
+    }
+
+    // Action: Confirm Admission
+    btnAdmitAction.addEventListener('click', async () => {
+      if (!currentScannedOrder) {
+        closeResult();
+        return;
+      }
+
+      const orderRef = currentScannedOrder.orderRef;
+      const currentGate = gateSelector.value;
+      const qty = parseInt(currentScannedOrder.quantity, 10) || 1;
+
+      try {
+        await fetch('/api/gate/check-in', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            orderRef: orderRef,
+            gateName: currentGate,
+            steward: 'Committee Steward'
+          })
+        });
+
+        admittedCount += qty;
+        admittedCounter.textContent = admittedCount;
+      } catch (e) {}
+
+      closeResult();
+    });
+
+    btnDismissAction.addEventListener('click', closeResult);
+    resultOverlay.addEventListener('click', (e) => {
+      if (e.target === resultOverlay) closeResult();
+    });
+
+    function closeResult() {
+      resultOverlay.classList.remove('active');
+      setTimeout(() => {
+        isVerifying = false;
+      }, 400);
+    }
+
+    function logHistory(res) {
+      const time = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const name = res.order ? res.order.buyerName : (res.scannedCode || 'Invalid Pass');
+      const ref = res.order ? res.order.orderRef : 'REJECTED';
+      const statusClass = res.valid ? 'admitted' : 'rejected';
+
+      sessionScans.unshift({ name, ref, time, valid: res.valid });
+      sessionCount.textContent = `${sessionScans.length} Scanned`;
+
+      historyList.innerHTML = sessionScans.slice(0, 10).map(item => `
+        <li class="history-item ${item.valid ? '' : 'rejected'}">
+          <div>
+            <div class="hist-name">${item.name}</div>
+            <div class="hist-meta">${item.ref}</div>
+          </div>
+          <div class="hist-meta" style="font-weight: 700; color: ${item.valid ? 'var(--success)' : 'var(--danger)'};">
+            ${item.valid ? '✓ ADMITTED' : '✕ REJECTED'} • ${item.time}
+          </div>
+        </li>
+      `).join('');
+    }
+
+    // Start on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      loadStats();
+      initCamera();
+    });
+  </script>
+</body>
+</html>

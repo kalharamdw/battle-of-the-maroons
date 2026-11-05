@@ -17,3 +17,4 @@ services:
         value: admin
       - key: ADMIN_INITIAL_PASSWORD
         value: Maroons@2027
+

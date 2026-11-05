@@ -93,6 +93,23 @@ const TicketOrderSchema = new mongoose.Schema({
     type: String,
     default: ""
   },
+  isAdmitted: {
+    type: Boolean,
+    default: false,
+    index: true
+  },
+  admittedAt: {
+    type: Date,
+    default: null
+  },
+  admittedGate: {
+    type: String,
+    default: ""
+  },
+  admittedBy: {
+    type: String,
+    default: ""
+  },
   ipAddress: {
     type: String,
     default: ""

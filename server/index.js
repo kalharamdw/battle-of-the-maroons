@@ -10,6 +10,7 @@ import { connectDB, startAutoReconnect } from './config/db.js';
 import publicRoutes from './routes/public.js';
 import ticketRoutes from './routes/tickets.js';
 import adminRoutes from './routes/admin.js';
+import gateRoutes from './routes/gate.js';
 import { localStore } from './config/localStore.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -45,6 +46,13 @@ app.use('/uploads', express.static(uploadDir));
 app.use('/api', publicRoutes);
 app.use('/api/tickets', ticketRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/gate', gateRoutes);
+
+// Dedicated Committee Gate Scanner Portal (Parallel tool for stewards)
+app.get(['/scanner', '/gate-scanner', '/gate'], (req, res) => {
+  const scannerFile = path.resolve(rootDir, 'public/scanner.html');
+  res.sendFile(scannerFile);
+});
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
