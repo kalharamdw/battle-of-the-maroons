@@ -7,6 +7,11 @@
  */
 
 import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
+import path from 'path';
+
+dotenv.config();
+dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
 let transporter = null;
 
@@ -225,7 +230,7 @@ function buildTicketEmailHtml(order, qrCid) {
 
         <!-- Official Gate QR Code Presentation -->
         <div class="qr-container">
-          <img src="${qrCid ? `cid:${qrCid}` : (order.qrCodeData || '')}" alt="Gate Entry QR Code" class="qr-img" />
+          <img src="${qrCid ? `cid:${qrCid}` : `https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=2&color=0-0-0&data=${encodeURIComponent(order.orderRef)}`}" alt="Gate Entry QR Code" class="qr-img" />
           <div class="ref-code">${order.orderRef}</div>
         </div>
 
