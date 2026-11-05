@@ -50,8 +50,12 @@ app.use('/api/gate', gateRoutes);
 
 // Dedicated Committee Gate Scanner Portal (Parallel tool for stewards)
 app.get(['/scanner', '/gate-scanner', '/gate'], (req, res) => {
-  const scannerFile = path.resolve(rootDir, 'public/scanner.html');
-  res.sendFile(scannerFile);
+  const distScanner = path.resolve(rootDir, 'dist/scanner.html');
+  const publicScanner = path.resolve(rootDir, 'public/scanner.html');
+  if (fs.existsSync(distScanner)) {
+    return res.sendFile(distScanner);
+  }
+  res.sendFile(publicScanner);
 });
 
 // Health check endpoint
@@ -65,13 +69,17 @@ app.get('/api/health', (req, res) => {
 
 // Production Static Serving
 const distDir = path.resolve(rootDir, 'dist');
+const publicDir = path.resolve(rootDir, 'public');
+
+app.use(express.static(publicDir));
+
 if (process.env.NODE_ENV === 'production' || fs.existsSync(distDir)) {
   app.use(express.static(distDir));
 
   // Catch-all SPA route handler (Express 5 compatible)
   app.use((req, res, next) => {
     if (req.method !== 'GET') return next();
-    if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
+    if (req.path.startsWith('/api') || req.path.startsWith('/uploads') || req.path.startsWith('/scanner') || req.path.startsWith('/gate')) {
       return next();
     }
     res.sendFile(path.resolve(distDir, 'index.html'));
