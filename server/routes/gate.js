@@ -18,32 +18,40 @@ function extractOrderRef(rawInput) {
   let str = String(rawInput).trim();
 
   // 1. Try parsing JSON QR code payload
-  if (str.startsWith('{') && str.endsWith('}')) {
+  if ((str.startsWith('{') && str.endsWith('}')) || (str.includes('{') && str.includes('}'))) {
     try {
-      const parsed = JSON.parse(str);
+      const cleanJson = str.substring(str.indexOf('{'), str.lastIndexOf('}') + 1);
+      const parsed = JSON.parse(cleanJson);
       if (parsed.ref) return String(parsed.ref).trim().toUpperCase();
       if (parsed.orderRef) return String(parsed.orderRef).trim().toUpperCase();
       if (parsed.orderNumber) return String(parsed.orderNumber).trim().toUpperCase();
     } catch (e) {}
   }
 
-  // 2. Check if input is a receipt URL
+  // 1b. Direct regex for JSON ref fields in case JSON was partially formatted
+  const jsonRefMatch = str.match(/"(?:ref|orderRef|orderNumber)"\s*:\s*"([^"]+)"/i);
+  if (jsonRefMatch && jsonRefMatch[1]) {
+    return jsonRefMatch[1].trim().toUpperCase();
+  }
+
+  // 2. Check if input is a receipt URL or has query param ref=
   if (str.includes('ref=')) {
     try {
-      const match = str.match(/ref=([^&]+)/);
+      const match = str.match(/ref=([^&/#]+)/i);
       if (match && match[1]) return decodeURIComponent(match[1]).trim().toUpperCase();
     } catch (e) {}
   }
 
-  // 3. Check for standard BOM prefix
-  const bomMatch = str.match(/BOM-97-\d+/i);
+  // 3. Check for standard BOM prefix anywhere in string (e.g. BOM-97-92366 or BOM-97-VIP)
+  const bomMatch = str.match(/BOM-97-[A-Z0-9_-]+/i);
   if (bomMatch) {
     return bomMatch[0].toUpperCase();
   }
 
   // 4. Raw digits only (e.g. user typed just "92366")
-  if (/^\d{4,6}$/.test(str)) {
-    return `BOM-97-${str}`;
+  const digitMatch = str.match(/^\s*(\d{4,6})\s*$/);
+  if (digitMatch) {
+    return `BOM-97-${digitMatch[1]}`;
   }
 
   return str.toUpperCase();
@@ -310,3 +318,4 @@ function formatTime(isoStr) {
 }
 
 export default router;
+

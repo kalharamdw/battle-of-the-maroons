@@ -21,6 +21,7 @@ scratch_download_manifest.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+cloudflared.exe
 
 # Editor & OS files
 .vscode/
