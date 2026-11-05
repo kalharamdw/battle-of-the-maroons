@@ -28,6 +28,13 @@ export function createTicketWidget() {
   let isSubmitting = false;
   let errorMessage = '';
 
+  // Form input retention
+  let formBuyerName = '';
+  let formBuyerEmail = '';
+  let formBuyerEmailConfirm = '';
+  let formBuyerPhone = '';
+  let formSchoolAffiliation = 'neutral';
+
   // Active verified pass state (when displaying confirmed QR pass)
   let verifiedPass = null;
 
@@ -243,25 +250,68 @@ export function createTicketWidget() {
       <!-- Step 4: Buyer Details -->
       <div class="ticket-form-step">
         <label class="ticket-step-title">4. Passholder & Delivery Details</label>
+
+        <!-- Mandatory Email Delivery Warning Callout -->
+        <div style="background: linear-gradient(135deg, rgba(84, 12, 26, 0.5) 0%, rgba(212, 175, 55, 0.14) 100%); border: 1.5px solid var(--color-gold); border-radius: 10px; padding: 14px 18px; margin-bottom: 18px; display: flex; align-items: flex-start; gap: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.35);">
+          <span style="font-size: 1.5rem; line-height: 1; flex-shrink: 0;">✉️</span>
+          <div>
+            <div style="font-family: var(--font-display); font-size: 0.95rem; font-weight: 800; color: var(--color-gold-bright); letter-spacing: 0.5px; margin-bottom: 4px;">
+              IMPORTANT: YOUR OFFICIAL QR E-TICKET WILL BE DELIVERED DIRECTLY TO YOUR EMAIL
+            </div>
+            <p style="font-size: 0.83rem; color: #f5e6ea; margin: 0; line-height: 1.5;">
+              Your scannable gate entry pass and QR code will be dispatched to your email address upon confirmation. <strong>Please double-check your email address twice</strong> to make sure there are zero typing mistakes. You are required to type it twice below to confirm both match.
+            </p>
+          </div>
+        </div>
+
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
           <div class="form-group">
             <label class="form-label" for="ticket-name">Full Name *</label>
-            <input type="text" class="form-input" id="ticket-name" placeholder="e.g. Sahan Perera" required />
+            <input type="text" class="form-input" id="ticket-name" placeholder="e.g. Sahan Perera" value="${formBuyerName}" required />
           </div>
-          <div class="form-group">
-            <label class="form-label" for="ticket-email">Email Address *</label>
-            <input type="email" class="form-input" id="ticket-email" placeholder="sahan@example.com" required />
-          </div>
+
           <div class="form-group">
             <label class="form-label" for="ticket-phone">Mobile Phone (Sri Lanka)</label>
-            <input type="tel" class="form-input" id="ticket-phone" placeholder="077 123 4567" />
+            <input type="tel" class="form-input" id="ticket-phone" placeholder="077 123 4567" value="${formBuyerPhone}" />
           </div>
+
           <div class="form-group">
-            <label class="form-label" for="ticket-school">Affiliation</label>
+            <label class="form-label" for="ticket-email">
+              Email Address * <span style="font-size: 0.72rem; color: var(--color-gold); font-family: var(--font-mono);">(For QR Pass Delivery)</span>
+            </label>
+            <input 
+              type="email" 
+              class="form-input" 
+              id="ticket-email" 
+              placeholder="sahan@example.com" 
+              value="${formBuyerEmail}" 
+              autocomplete="email" 
+              required 
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="ticket-email-confirm">
+              Confirm Email Address * <span style="font-size: 0.72rem; color: var(--color-gold); font-family: var(--font-mono);">(Type it once more)</span>
+            </label>
+            <input 
+              type="email" 
+              class="form-input" 
+              id="ticket-email-confirm" 
+              placeholder="Re-type your email address" 
+              value="${formBuyerEmailConfirm}" 
+              autocomplete="off" 
+              required 
+            />
+            <div id="email-match-indicator" style="font-size: 0.73rem; font-family: var(--font-mono); margin-top: 5px; display: none;"></div>
+          </div>
+
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label class="form-label" for="ticket-school">College Affiliation</label>
             <select class="form-select" id="ticket-school">
-              <option value="ananda">Ananda College (Old Boy / Student / Supporter)</option>
-              <option value="nalanda">Nalanda College (Old Boy / Student / Supporter)</option>
-              <option value="neutral">Cricket Enthusiast / General Public</option>
+              <option value="ananda" ${formSchoolAffiliation === 'ananda' ? 'selected' : ''}>Ananda College (Old Boy / Student / Supporter)</option>
+              <option value="nalanda" ${formSchoolAffiliation === 'nalanda' ? 'selected' : ''}>Nalanda College (Old Boy / Student / Supporter)</option>
+              <option value="neutral" ${formSchoolAffiliation === 'neutral' ? 'selected' : ''}>Cricket Enthusiast / General Public</option>
             </select>
           </div>
         </div>
@@ -327,6 +377,14 @@ export function createTicketWidget() {
           97
         </div>
 
+        <!-- Official E-Ticket Email Dispatched Confirmation Notice -->
+        <div style="background: rgba(16, 185, 129, 0.18); border: 1.5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-bottom: 22px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          <span style="font-size: 1.5rem; line-height: 1; flex-shrink: 0;">✉️</span>
+          <div style="font-size: 0.85rem; color: #d1fae5; line-height: 1.5;">
+            <strong style="color: #6ee7b7;">Official E-Ticket Sent to Your Email!</strong> A digital copy of this pass and high-contrast QR code has been dispatched directly to <strong>${pass.buyerEmail || 'your email'}</strong>. Please check your inbox (and spam folder if not found).
+          </div>
+        </div>
+
         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; border-bottom: 1px dashed rgba(212,175,55,0.4); padding-bottom: 20px; margin-bottom: 20px;">
           <div>
             <div style="display: flex; align-items: center; gap: 10px;">
@@ -359,6 +417,11 @@ export function createTicketWidget() {
             <div style="margin-bottom: 12px;">
               <span style="font-size: 0.75rem; color: var(--color-wool-subtle); font-family: var(--font-mono); display: block;">PASSHOLDER</span>
               <span style="font-size: 1.1rem; font-weight: 700; color: var(--color-wool);">${pass.buyerName}</span>
+            </div>
+
+            <div style="margin-bottom: 12px;">
+              <span style="font-size: 0.75rem; color: var(--color-wool-subtle); font-family: var(--font-mono); display: block;">CONFIRMED EMAIL</span>
+              <span style="font-size: 0.95rem; font-weight: 600; color: #6ee7b7; font-family: var(--font-mono);">${pass.buyerEmail || 'N/A'}</span>
             </div>
 
             <div style="margin-bottom: 12px;">
@@ -396,10 +459,19 @@ export function createTicketWidget() {
 
         <!-- Action Bar -->
         <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: flex-end; gap: 12px; flex-wrap: wrap;">
+          <a 
+            href="https://api.whatsapp.com/send?text=${encodeURIComponent(`Official Battle of the Maroons Pass (${pass.orderRef}) for ${pass.buyerName}. Enclosure: ${pass.categoryName}. Quantity: ${pass.quantity}. View pass online: ${window.location.origin}/#/ticketing?ref=${pass.orderRef}`)}" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="btn-outline-gold" 
+            style="padding: 10px 18px; font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid #25d366; border-radius: 6px; color: #4ade80; background: rgba(37,211,102,0.15); font-family: var(--font-mono); font-weight: 700;"
+          >
+            💬 Save / Share to WhatsApp
+          </a>
           <button type="button" class="btn-primary-cinematic" id="btn-print-pass" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px;">
             ${Icons.print()} Print / Save Pass
           </button>
-          <a href="${pass.qrCodeData || `https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=4&color=54-12-26&data=${encodeURIComponent(pass.orderRef)}`}" download="${pass.orderRef}-qrcode.png" class="btn-outline-gold" style="padding: 10px 20px; font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--color-gold); border-radius: 6px; color: var(--color-gold); font-family: var(--font-mono);">
+          <a href="${pass.qrCodeData || `https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=4&color=0-0-0&data=${encodeURIComponent(pass.orderRef)}`}" download="${pass.orderRef}-qrcode.png" class="btn-outline-gold" style="padding: 10px 20px; font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--color-gold); border-radius: 6px; color: var(--color-gold); font-family: var(--font-mono);">
             ${Icons.download()} Download QR
           </a>
         </div>
@@ -528,9 +600,24 @@ export function createTicketWidget() {
       });
     }
 
+    function saveFormValues() {
+      const nameEl = widget.querySelector('#ticket-name');
+      const emailEl = widget.querySelector('#ticket-email');
+      const emailConfEl = widget.querySelector('#ticket-email-confirm');
+      const phoneEl = widget.querySelector('#ticket-phone');
+      const schoolEl = widget.querySelector('#ticket-school');
+
+      if (nameEl) formBuyerName = nameEl.value;
+      if (emailEl) formBuyerEmail = emailEl.value;
+      if (emailConfEl) formBuyerEmailConfirm = emailConfEl.value;
+      if (phoneEl) formBuyerPhone = phoneEl.value;
+      if (schoolEl) formSchoolAffiliation = schoolEl.value;
+    }
+
     // Format selection
     widget.querySelectorAll('[data-format]').forEach(btn => {
       btn.addEventListener('click', () => {
+        saveFormValues();
         selectedFormat = btn.getAttribute('data-format');
         render();
       });
@@ -539,6 +626,7 @@ export function createTicketWidget() {
     // Enclosure selection
     widget.querySelectorAll('[data-enclosure]').forEach(btn => {
       btn.addEventListener('click', () => {
+        saveFormValues();
         selectedCategoryId = btn.getAttribute('data-enclosure');
         render();
       });
@@ -550,6 +638,7 @@ export function createTicketWidget() {
     if (minusBtn) {
       minusBtn.addEventListener('click', () => {
         if (quantity > 1) {
+          saveFormValues();
           quantity--;
           render();
         }
@@ -558,9 +647,49 @@ export function createTicketWidget() {
     if (plusBtn) {
       plusBtn.addEventListener('click', () => {
         if (quantity < 10) {
+          saveFormValues();
           quantity++;
           render();
         }
+      });
+    }
+
+    // Live Email Matching Indicator & Input Listeners
+    const emailInput = widget.querySelector('#ticket-email');
+    const emailConfirmInput = widget.querySelector('#ticket-email-confirm');
+    const matchIndicator = widget.querySelector('#email-match-indicator');
+
+    function checkEmailMatch() {
+      if (!emailInput || !emailConfirmInput || !matchIndicator) return;
+      const v1 = emailInput.value.trim().toLowerCase();
+      const v2 = emailConfirmInput.value.trim().toLowerCase();
+      if (!v2) {
+        matchIndicator.style.display = 'none';
+        emailConfirmInput.style.borderColor = '';
+        return;
+      }
+      matchIndicator.style.display = 'block';
+      if (v1 === v2) {
+        matchIndicator.style.color = '#34d399';
+        matchIndicator.innerHTML = '✓ Both email addresses match!';
+        emailConfirmInput.style.borderColor = '#10b981';
+      } else {
+        matchIndicator.style.color = '#fca5a5';
+        matchIndicator.innerHTML = '⚠️ Email addresses do not match yet. Please double-check.';
+        emailConfirmInput.style.borderColor = '#ef4444';
+      }
+    }
+
+    if (emailInput) {
+      emailInput.addEventListener('input', () => {
+        formBuyerEmail = emailInput.value;
+        checkEmailMatch();
+      });
+    }
+    if (emailConfirmInput) {
+      emailConfirmInput.addEventListener('input', () => {
+        formBuyerEmailConfirm = emailConfirmInput.value;
+        checkEmailMatch();
       });
     }
 
@@ -576,26 +705,55 @@ export function createTicketWidget() {
     const submitBtn = widget.querySelector('#btn-ticket-submit');
     if (submitBtn) {
       submitBtn.addEventListener('click', async () => {
+        saveFormValues();
+        errorMessage = '';
+
         const nameInput = widget.querySelector('#ticket-name');
         const emailInput = widget.querySelector('#ticket-email');
+        const emailConfirmInput = widget.querySelector('#ticket-email-confirm');
         const phoneInput = widget.querySelector('#ticket-phone');
         const schoolInput = widget.querySelector('#ticket-school');
 
-        errorMessage = '';
-
-        if (!nameInput || !nameInput.value.trim()) {
-          nameInput.focus();
-          nameInput.style.borderColor = 'var(--color-crimson)';
+        if (!formBuyerName || !formBuyerName.trim()) {
+          if (nameInput) {
+            nameInput.focus();
+            nameInput.style.borderColor = 'var(--color-crimson)';
+          }
           errorMessage = 'Please enter the primary passholder full name.';
           render();
           return;
         }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailInput || !emailRegex.test(emailInput.value.trim())) {
-          emailInput.focus();
-          emailInput.style.borderColor = 'var(--color-crimson)';
-          errorMessage = 'Please enter a valid email address to receive pass confirmation.';
+        const cleanEmail = (formBuyerEmail || '').trim().toLowerCase();
+        const cleanConfirmEmail = (formBuyerEmailConfirm || '').trim().toLowerCase();
+
+        if (!cleanEmail || !emailRegex.test(cleanEmail)) {
+          if (emailInput) {
+            emailInput.focus();
+            emailInput.style.borderColor = 'var(--color-crimson)';
+          }
+          errorMessage = 'Please enter a valid email address. Your official QR pass will be delivered to this address.';
+          render();
+          return;
+        }
+
+        if (!cleanConfirmEmail) {
+          if (emailConfirmInput) {
+            emailConfirmInput.focus();
+            emailConfirmInput.style.borderColor = 'var(--color-crimson)';
+          }
+          errorMessage = 'Please re-type your email address in the confirmation field to verify both entries.';
+          render();
+          return;
+        }
+
+        if (cleanEmail !== cleanConfirmEmail) {
+          if (emailConfirmInput) {
+            emailConfirmInput.focus();
+            emailConfirmInput.style.borderColor = 'var(--color-crimson)';
+          }
+          errorMessage = 'The two email addresses do not match! Your official QR gate pass is dispatched to this email, so please double-check and make sure both entries are identical.';
           render();
           return;
         }
@@ -605,10 +763,10 @@ export function createTicketWidget() {
 
         try {
           const payload = {
-            buyerName: nameInput.value.trim(),
-            buyerEmail: emailInput.value.trim(),
-            buyerPhone: phoneInput ? phoneInput.value.trim() : '',
-            schoolAffiliation: schoolInput ? schoolInput.value : 'neutral',
+            buyerName: formBuyerName.trim(),
+            buyerEmail: cleanEmail,
+            buyerPhone: formBuyerPhone ? formBuyerPhone.trim() : '',
+            schoolAffiliation: formSchoolAffiliation || 'neutral',
             matchFormat: selectedFormat,
             categoryCode: selectedCategory.code || selectedCategory.id,
             categoryId: selectedCategory._id || selectedCategory.id,

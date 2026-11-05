@@ -6,6 +6,7 @@ import { TicketOrder } from '../models/TicketOrder.js';
 import { orderLimiter } from '../middleware/rateLimiters.js';
 import { isDbConnected } from '../config/db.js';
 import { localStore } from '../config/localStore.js';
+import { sendTicketConfirmationEmail } from '../services/emailService.js';
 
 const router = express.Router();
 
@@ -160,6 +161,11 @@ router.post('/order', orderLimiter, async (req, res) => {
     localStore.addOrder(plainOrder);
     memoryOrders.set(orderRef, plainOrder);
 
+    // Send official e-ticket confirmation email with embedded QR code
+    sendTicketConfirmationEmail(plainOrder).catch(err => {
+      console.warn('⚠️ Background email dispatch error for order:', orderRef, err.message);
+    });
+
     // 6. PayHere Gateway parameters
     const merchantId = process.env.PAYHERE_MERCHANT_ID || '1220000'; // Default PayHere Sandbox Merchant ID
     const merchantSecret = process.env.PAYHERE_MERCHANT_SECRET || 'portal_secret_demo';
@@ -302,6 +308,9 @@ router.post('/payhere-notify', async (req, res) => {
       }
 
       console.log(`✅ Order ${order_id} VERIFIED successfully. QR Code generated & tickets quantity deducted.`);
+      sendTicketConfirmationEmail(order.toObject ? order.toObject() : order).catch(err => {
+        console.warn('⚠️ Background IPN email dispatch error for order:', order_id, err.message);
+      });
       return res.status(200).send('Payment Verified');
     }
 
@@ -436,10 +445,15 @@ router.post('/verify-sandbox', async (req, res) => {
       }
     }
 
+    const verifiedOrder = order.toObject ? order.toObject() : (updatedLocal || order);
+    sendTicketConfirmationEmail(verifiedOrder).catch(err => {
+      console.warn('⚠️ Background sandbox email dispatch error for order:', orderRef, err.message);
+    });
+
     res.json({
       success: true,
       message: 'Sandbox order successfully verified with genuine QR code issuance.',
-      order: order.toObject ? order.toObject() : (updatedLocal || order)
+      order: verifiedOrder
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });

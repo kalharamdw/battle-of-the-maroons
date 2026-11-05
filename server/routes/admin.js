@@ -17,6 +17,7 @@ import { loginLimiter } from '../middleware/rateLimiters.js';
 import { uploadImage } from '../middleware/upload.js';
 import { isDbConnected } from '../config/db.js';
 import { localStore } from '../config/localStore.js';
+import { sendTicketConfirmationEmail } from '../services/emailService.js';
 import QRCode from 'qrcode';
 
 const router = express.Router();
@@ -630,7 +631,12 @@ router.patch('/orders/:id/status', verifyAdminToken, async (req, res) => {
       order.status = status;
       if (verificationNotes) order.verificationNotes = verificationNotes;
       if (qrCodeData) order.qrCodeData = qrCodeData;
-      if (status === 'VERIFIED') order.verifiedAt = new Date();
+      if (status === 'VERIFIED') {
+        order.verifiedAt = new Date();
+        sendTicketConfirmationEmail(order.toObject ? order.toObject() : order).catch(err => {
+          console.warn('Admin verified email dispatch error:', err.message);
+        });
+      }
       await order.save();
 
       if (status === 'VERIFIED' && order.categoryId) {
