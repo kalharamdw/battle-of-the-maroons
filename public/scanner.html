@@ -129,24 +129,25 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      padding: 4px 8px;
-      background: rgba(212, 175, 55, 0.15);
-      border: 1px solid var(--gold);
-      color: var(--gold-bright);
+      padding: 5px 9px;
+      background: rgba(16, 185, 129, 0.25);
+      border: 1px solid #34d399;
+      color: #34d399;
       border-radius: 50px;
       font-family: var(--font-mono);
       font-size: 0.66rem;
       font-weight: 800;
       cursor: pointer;
       user-select: none;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
       transition: all 0.2s ease;
     }
 
-    .rush-toggle-btn.active {
-      background: rgba(16, 185, 129, 0.25);
-      border-color: #34d399;
-      color: #34d399;
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    .rush-toggle-btn.manual {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--text-muted);
+      box-shadow: none;
     }
 
     .live-badge {
@@ -279,14 +280,46 @@
       display: block;
     }
 
+    /* Start Camera Tap Overlay */
+    .camera-prompt-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(9, 2, 5, 0.95);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .camera-prompt-btn {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, var(--maroon) 0%, #87142b 100%);
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      color: #fff;
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
     /* Viewfinder Overlay Reticle */
     .viewfinder-reticle {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: clamp(180px, 76%, 260px);
-      height: clamp(180px, 76%, 260px);
+      width: clamp(190px, 82%, 280px);
+      height: clamp(190px, 82%, 280px);
       pointer-events: none;
       z-index: 5;
       transition: all 0.2s ease;
@@ -295,13 +328,13 @@
     .viewfinder-reticle.scanned {
       border: 3px solid var(--success);
       box-shadow: 0 0 25px rgba(16, 185, 129, 0.9);
-      transform: translate(-50%, -50%) scale(1.04);
+      transform: translate(-50%, -50%) scale(1.03);
     }
 
     .reticle-corner {
       position: absolute;
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border: 3px solid var(--gold);
       transition: border-color 0.2s ease;
     }
@@ -310,31 +343,31 @@
       border-color: var(--success);
     }
 
-    .reticle-tl { top: 0; left: 0; border-right: none; border-bottom: none; border-top-left-radius: 8px; }
-    .reticle-tr { top: 0; right: 0; border-left: none; border-bottom: none; border-top-right-radius: 8px; }
-    .reticle-bl { bottom: 0; left: 0; border-right: none; border-top: none; border-bottom-left-radius: 8px; }
-    .reticle-br { bottom: 0; right: 0; border-left: none; border-top: none; border-bottom-right-radius: 8px; }
+    .reticle-tl { top: 0; left: 0; border-right: none; border-bottom: none; border-top-left-radius: 10px; }
+    .reticle-tr { top: 0; right: 0; border-left: none; border-bottom: none; border-top-right-radius: 10px; }
+    .reticle-bl { bottom: 0; left: 0; border-right: none; border-top: none; border-bottom-left-radius: 10px; }
+    .reticle-br { bottom: 0; right: 0; border-left: none; border-top: none; border-bottom-right-radius: 10px; }
 
     .laser-line {
       position: absolute;
-      left: 6px;
-      right: 6px;
+      left: 8px;
+      right: 8px;
       height: 2px;
       background: linear-gradient(90deg, transparent, #ff2a5f, var(--gold-bright), #ff2a5f, transparent);
       box-shadow: 0 0 10px #ff2a5f;
-      animation: laserScan 1.6s infinite ease-in-out;
+      animation: laserScan 1.4s infinite ease-in-out;
     }
 
     @keyframes laserScan {
-      0%, 100% { top: 10px; opacity: 0.95; }
-      50% { top: calc(100% - 14px); opacity: 0.95; }
+      0%, 100% { top: 12px; opacity: 0.95; }
+      50% { top: calc(100% - 16px); opacity: 0.95; }
     }
 
     /* RUSH-HOUR FAST ADMISSION POP-UP (In-Viewfinder Flash) */
     .fast-admit-banner {
       position: absolute;
       inset: 0;
-      background: rgba(6, 78, 59, 0.94);
+      background: rgba(6, 78, 59, 0.95);
       backdrop-filter: blur(8px);
       z-index: 30;
       display: none;
@@ -343,7 +376,7 @@
       justify-content: center;
       padding: 20px;
       text-align: center;
-      animation: fastFadeIn 0.18s ease-out forwards;
+      animation: fastFadeIn 0.15s ease-out forwards;
     }
 
     @keyframes fastFadeIn {
@@ -381,7 +414,7 @@
 
     .fast-qty {
       font-family: var(--font-mono);
-      font-size: 1.6rem;
+      font-size: 1.7rem;
       font-weight: 900;
       color: var(--gold-bright);
       margin: 4px 0;
@@ -397,7 +430,7 @@
 
     .fast-buyer {
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       color: #a7f3d0;
       opacity: 0.9;
     }
@@ -415,7 +448,7 @@
       width: 100%;
       height: 100%;
       background: var(--gold-bright);
-      animation: countdown 1.1s linear forwards;
+      animation: countdown 0.85s linear forwards;
     }
 
     @keyframes countdown {
@@ -894,7 +927,7 @@
         </div>
       </div>
       <div class="header-badges">
-        <button type="button" class="rush-toggle-btn active" id="btn-rush-mode" title="Toggle Rush-Hour Fast Auto-Admission">
+        <button type="button" class="rush-toggle-btn" id="btn-rush-mode" title="Toggle Rush-Hour Fast Auto-Admission">
           ⚡ AUTO-ADMIT: ON
         </button>
         <div class="live-badge">
@@ -929,6 +962,18 @@
       <div class="scanner-view-wrap">
         <div id="reader"></div>
 
+        <!-- Camera Start Overlay (for iOS Safari tap-to-start requirement) -->
+        <div class="camera-prompt-overlay" id="camera-prompt-overlay" style="display: none;">
+          <div style="font-size: 2.4rem; margin-bottom: 8px;">📷</div>
+          <div style="font-size: 0.95rem; font-weight: 800; color: var(--gold); margin-bottom: 4px;">Camera Ready</div>
+          <p style="font-size: 0.72rem; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 12px;">
+            Tap below to activate back camera for scanning
+          </p>
+          <button type="button" class="camera-prompt-btn" id="btn-start-camera-prompt">
+            ⚡ Start Camera Scanner
+          </button>
+        </div>
+
         <!-- Visual Reticle with Dynamic Corner Guidance -->
         <div class="viewfinder-reticle">
           <div class="reticle-corner reticle-tl"></div>
@@ -938,7 +983,7 @@
           <div class="laser-line"></div>
         </div>
 
-        <!-- RUSH-HOUR FAST ADMIT BANNER (Appears for 1.1s then auto-resets) -->
+        <!-- RUSH-HOUR FAST ADMIT BANNER (Appears for 0.85s then auto-resets) -->
         <div class="fast-admit-banner" id="fast-admit-banner">
           <div class="fast-badge-icon">✓</div>
           <div class="fast-title">ENTRY APPROVED</div>
@@ -969,7 +1014,7 @@
     </div>
 
     <p class="scanner-tip">
-      ⚡ Rush Auto-Admit Active • Camera scans 25 FPS with Continuous Autofocus
+      ⚡ Ultra-Fast Rush Scanning Active • Zero clicks needed for approved passes
     </p>
 
     <!-- Hidden Native File / Photo Input for Instant Snapshot Decoding -->
@@ -1010,7 +1055,7 @@
 
   </main>
 
-  <!-- Pass Verification Modal (Used for Errors, Duplicate Alerts, or Manual Review) -->
+  <!-- Pass Verification Modal (Used for Duplicate Warnings, Fraud Alerts, or Manual Review) -->
   <div class="result-overlay" id="result-overlay">
     <div class="result-sheet" id="result-sheet">
       
@@ -1079,7 +1124,7 @@
         gain.connect(audioCtx.destination);
 
         if (type === 'success') {
-          // Cheerful, high-pitched two-tone turnstile entry chime
+          // Cheerful turnstile entry chime
           osc.type = 'sine';
           osc.frequency.setValueAtTime(659.25, audioCtx.currentTime); // E5
           osc.frequency.exponentialRampToValueAtTime(1046.50, audioCtx.currentTime + 0.10); // C6
@@ -1118,6 +1163,7 @@
     let lastScannedText = '';
     let lastScanTimestamp = 0;
     let fastBannerTimer = null;
+    let cameraRunning = false;
 
     // DOM Elements
     const resultOverlay = document.getElementById('result-overlay');
@@ -1151,12 +1197,20 @@
     const fastQty = document.getElementById('fast-qty');
     const fastCategory = document.getElementById('fast-category');
     const fastBuyer = document.getElementById('fast-buyer');
+    const cameraPromptOverlay = document.getElementById('camera-prompt-overlay');
+    const btnStartCameraPrompt = document.getElementById('btn-start-camera-prompt');
 
     // Toggle Rush Mode
     btnRushMode.addEventListener('click', () => {
       autoAdmitEnabled = !autoAdmitEnabled;
-      btnRushMode.classList.toggle('active', autoAdmitEnabled);
+      btnRushMode.classList.toggle('manual', !autoAdmitEnabled);
       btnRushMode.textContent = autoAdmitEnabled ? '⚡ AUTO-ADMIT: ON' : '🖐️ MANUAL ADMIT';
+    });
+
+    // Tap-to-start prompt
+    btnStartCameraPrompt.addEventListener('click', () => {
+      cameraPromptOverlay.style.display = 'none';
+      startCameraEngine();
     });
 
     // Load initial stats from backend
@@ -1202,25 +1256,27 @@
       fileSelector.value = '';
     });
 
-    // High-performance 25 FPS camera configuration
+    // High-performance 25 FPS camera configuration with full-view scanning
     function getScannerConfig() {
       return {
         fps: 25,
         qrbox: (viewfinderWidth, viewfinderHeight) => {
-          const minEdge = Math.min(viewfinderWidth, viewfinderHeight);
-          const size = Math.max(160, Math.floor(minEdge * 0.85));
-          return { width: size, height: size };
+          // 92% of smallest edge gives maximum possible scanning coverage
+          const edge = Math.floor(Math.min(viewfinderWidth, viewfinderHeight) * 0.92);
+          return { width: edge, height: edge };
         },
         aspectRatio: 1.0,
         disableFlip: false
       };
     }
 
-    // Camera initialization
-    async function initCamera() {
+    // Camera Engine Startup Cascade
+    async function startCameraEngine() {
+      if (cameraRunning) return;
+
       try {
         if (!window.Html5Qrcode) {
-          setTimeout(initCamera, 300);
+          setTimeout(startCameraEngine, 300);
           return;
         }
 
@@ -1235,43 +1291,79 @@
           });
         }
 
-        // Method 1: Start with { facingMode: { ideal: "environment" } } directly.
+        let started = false;
+
+        // STEP 1: Direct Rear Camera using { facingMode: "environment" }
+        // Note: html5-qrcode strictly requires plain string: { facingMode: "environment" }
         try {
           await html5QrCode.start(
-            { facingMode: { ideal: currentFacingMode } },
+            { facingMode: currentFacingMode },
             getScannerConfig(),
             onScanSuccess,
             () => {} // silent frame handler
           );
+          started = true;
+          cameraRunning = true;
+          cameraPromptOverlay.style.display = 'none';
+        } catch (err1) {
+          console.warn('Step 1 facingMode environment failed:', err1);
+        }
+
+        // STEP 2: Fallback to { facingMode: "user" } if rear is overconstrained (e.g. laptop webcam)
+        if (!started) {
+          try {
+            await html5QrCode.start(
+              { facingMode: 'user' },
+              getScannerConfig(),
+              onScanSuccess,
+              () => {}
+            );
+            started = true;
+            cameraRunning = true;
+            cameraPromptOverlay.style.display = 'none';
+          } catch (err2) {
+            console.warn('Step 2 facingMode user failed:', err2);
+          }
+        }
+
+        // STEP 3: Fallback to Device Enumeration if facingMode is unsupported
+        if (!started) {
+          try {
+            const devices = await Html5Qrcode.getCameras();
+            if (devices && devices.length > 0) {
+              availableCameras = devices;
+              const backCam = devices.find(d => /back|rear|environment|wide/i.test(d.label)) || devices[devices.length - 1];
+              const selectedId = backCam ? backCam.id : devices[0].id;
+              currentCameraIndex = devices.findIndex(d => d.id === selectedId);
+
+              await html5QrCode.start(
+                selectedId,
+                getScannerConfig(),
+                onScanSuccess,
+                () => {}
+              );
+              started = true;
+              cameraRunning = true;
+              cameraPromptOverlay.style.display = 'none';
+            }
+          } catch (err3) {
+            console.warn('Step 3 device enumeration failed:', err3);
+          }
+        }
+
+        if (started) {
           checkTorchCapability();
           Html5Qrcode.getCameras().then(devices => {
             if (devices && devices.length) availableCameras = devices;
           }).catch(() => {});
-          return;
-        } catch (camModeErr) {
-          console.warn('FacingMode start error, trying device enumeration:', camModeErr);
+        } else {
+          // If iOS Safari requires user tap gesture to unlock camera autoplay
+          cameraPromptOverlay.style.display = 'flex';
         }
 
-        // Method 2: Fallback to device ID list
-        const devices = await Html5Qrcode.getCameras();
-        if (devices && devices.length) {
-          availableCameras = devices;
-          const backCam = devices.find(d => /back|rear|environment|wide/i.test(d.label)) || devices[devices.length - 1];
-          const selectedId = backCam ? backCam.id : devices[0].id;
-          currentCameraIndex = devices.findIndex(d => d.id === selectedId);
-          await html5QrCode.start(
-            selectedId,
-            getScannerConfig(),
-            onScanSuccess,
-            () => {}
-          );
-          checkTorchCapability();
-        } else {
-          showManualOnly('Camera permission not granted. Use the "Snap / File" button or manual reference entry below.');
-        }
       } catch (err) {
-        console.warn('Camera access error:', err);
-        showManualOnly('Camera unavailable or permission denied. You can snap a photo with "Snap / File" or enter reference code below.');
+        console.warn('Camera startup caught error:', err);
+        cameraPromptOverlay.style.display = 'flex';
       }
     }
 
@@ -1306,6 +1398,7 @@
       try {
         if (html5QrCode.isScanning) {
           await html5QrCode.stop();
+          cameraRunning = false;
         }
         currentFacingMode = (currentFacingMode === 'environment') ? 'user' : 'environment';
 
@@ -1319,12 +1412,13 @@
           );
         } else {
           await html5QrCode.start(
-            { facingMode: { ideal: currentFacingMode } },
+            { facingMode: currentFacingMode },
             getScannerConfig(),
             onScanSuccess,
             () => {}
           );
         }
+        cameraRunning = true;
         checkTorchCapability();
       } catch (e) {
         console.warn('Camera flip error:', e);
@@ -1338,15 +1432,15 @@
           <div style="padding: 24px; text-align: center; color: var(--gold); font-size: 0.82rem; font-family: var(--font-mono); max-width: 90%;">
             <div style="font-size: 2.2rem; margin-bottom: 8px;">📷</div>
             <p style="line-height: 1.4;">${msg}</p>
-            <button type="button" onclick="document.getElementById('file-selector').click()" style="margin-top: 14px; padding: 8px 16px; background: var(--maroon); border: 1px solid var(--gold); border-radius: 8px; color: #fff; font-family: var(--font-mono); font-size: 0.78rem; cursor: pointer;">
-              📸 Snap Photo / Choose from Gallery
+            <button type="button" onclick="startCameraEngine()" style="margin-top: 14px; padding: 8px 16px; background: var(--maroon); border: 1px solid var(--gold); border-radius: 8px; color: #fff; font-family: var(--font-mono); font-size: 0.78rem; cursor: pointer;">
+              🔄 Retry Camera Activation
             </button>
           </div>
         `;
       }
     }
 
-    // Handle scanned QR Code (Lightning Fast Dispatch)
+    // Instant QR Code Dispatch
     async function onScanSuccess(decodedText) {
       if (isVerifying) return;
       if (resultOverlay.classList.contains('active')) return;
@@ -1392,13 +1486,13 @@
             code: code,
             gateName: currentGate,
             steward: 'Committee Steward',
-            autoAdmit: autoAdmitEnabled // In rush mode, auto-admits on backend in ONE call!
+            autoAdmit: autoAdmitEnabled
           })
         });
 
         const data = await res.json();
 
-        // 1. If Auto-Admitted successfully: Trigger rapid 1-second auto-flash banner
+        // 1. If Auto-Admitted successfully: Trigger rapid 0.85-second auto-flash banner
         if (data.valid && data.autoAdmitted) {
           triggerFastAdmitSuccess(data);
           return;
@@ -1417,7 +1511,7 @@
       }
     }
 
-    // RAPID RUSH-HOUR ENTRY SUCCESS (Plays chime, increments count, and auto-resets in 1.1s)
+    // RAPID RUSH-HOUR ENTRY SUCCESS (Plays chime, increments count, and auto-resets in 0.85s)
     function triggerFastAdmitSuccess(res) {
       playChime('success');
       const order = res.order;
@@ -1441,7 +1535,7 @@
       fastBannerTimer = setTimeout(() => {
         fastAdmitBanner.classList.remove('active');
         isVerifying = false;
-      }, 1100);
+      }, 850);
     }
 
     // Show Detailed Modal (For Duplicate Warnings, Fake passes, or Manual Mode)
@@ -1554,10 +1648,10 @@
       `).join('');
     }
 
-    // Start on page load
+    // Start camera engine on load
     window.addEventListener('DOMContentLoaded', () => {
       loadStats();
-      initCamera();
+      startCameraEngine();
     });
   </script>
 </body>
