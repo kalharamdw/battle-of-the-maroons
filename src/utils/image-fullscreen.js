@@ -179,3 +179,4 @@ function isEligibleContentImage(img) {
   // Only match images in main content or modal bodies
   return Boolean(img.closest('#main-content, #app, .history-match-modal, .article-reader-modal'));
 }
+

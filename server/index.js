@@ -2,9 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
-import { connectDB } from './config/db.js';
+import { connectDB, startAutoReconnect } from './config/db.js';
 
 import publicRoutes from './routes/public.js';
 import ticketRoutes from './routes/tickets.js';
@@ -55,11 +56,16 @@ app.get('/api/health', (req, res) => {
 });
 
 // Production Static Serving
-if (process.env.NODE_ENV === 'production') {
-  const distDir = path.resolve(rootDir, 'dist');
+const distDir = path.resolve(rootDir, 'dist');
+if (process.env.NODE_ENV === 'production' || fs.existsSync(distDir)) {
   app.use(express.static(distDir));
 
-  app.get('*', (req, res) => {
+  // Catch-all SPA route handler (Express 5 compatible)
+  app.use((req, res, next) => {
+    if (req.method !== 'GET') return next();
+    if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
+      return next();
+    }
     res.sendFile(path.resolve(distDir, 'index.html'));
   });
 }
@@ -68,6 +74,7 @@ if (process.env.NODE_ENV === 'production') {
 async function startServer() {
   localStore.getStore();
   await connectDB();
+  startAutoReconnect();
 
   app.listen(PORT, () => {
     console.log(`

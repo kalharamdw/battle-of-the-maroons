@@ -43,8 +43,15 @@ export async function connectDB() {
       autoIndex: true
     });
 
-    console.log(`✅ MongoDB Atlas Connected: ${conn.connection.host} [DB: ${conn.connection.name}]`);
+    console.log(`\n✅ MongoDB Atlas Connected: ${conn.connection.host} [DB: ${conn.connection.name}]`);
+    hasLoggedStatus = true;
     isConnecting = false;
+
+    // Trigger immediate background sync of localStore data to MongoDB
+    import('../services/syncService.js').then(s => s.syncLocalStoreToMongo()).catch(e => {
+      console.warn('Sync service trigger note:', e.message);
+    });
+
     return true;
   } catch (error) {
     // Try fallback to local MongoDB service if installed
@@ -53,7 +60,10 @@ export async function connectDB() {
         serverSelectionTimeoutMS: 1500
       });
       console.log(`✅ Connected to Local MongoDB Service on localhost:27017!`);
+      hasLoggedStatus = true;
       isConnecting = false;
+
+      import('../services/syncService.js').then(s => s.syncLocalStoreToMongo()).catch(() => {});
       return true;
     } catch (localErr) {
       // Both cloud and local MongoDB unreachable
@@ -61,11 +71,16 @@ export async function connectDB() {
 
     if (!hasLoggedStatus) {
       console.log('\n=============================================================');
-      console.log('📦 RUNNING IN HIGH-PERFORMANCE LOCAL DATABASE MODE');
-      console.log('ℹ️  All ticket orders, categories, inquiries, matches & stats');
-      console.log('    are stored permanently in: server/data/store.json');
-      console.log('💡 The website and admin panel are 100% functional without MongoDB.');
-      console.log('👉 To connect MongoDB Atlas later: whitelist 0.0.0.0/0 in Atlas Network Access');
+      console.log('⚠️  MONGODB ATLAS NOT YET CONNECTED');
+      console.log('Reason: Your current IP is not on the Atlas IP Whitelist.');
+      console.log('👉 Quick Fix (1 minute):');
+      console.log('   1. Go to: https://cloud.mongodb.com/');
+      console.log('   2. Click "Network Access" in the left sidebar.');
+      console.log('   3. Click "Add IP Address" -> Select "ALLOW ACCESS FROM ANYWHERE" (0.0.0.0/0).');
+      console.log('   4. Click "Confirm".');
+      console.log('ℹ️  In the meantime, the server is running in resilient local mode:');
+      console.log('   All orders, categories & quotas are stored safely in: server/data/store.json');
+      console.log('   The moment 0.0.0.0/0 is added, the server will auto-connect & sync all data!');
       console.log('=============================================================\n');
       hasLoggedStatus = true;
     }
@@ -75,15 +90,18 @@ export async function connectDB() {
   }
 }
 
-// Gentle background probe every 2 minutes without spamming console
+// Active background auto-reconnect probe every 15 seconds
 export function startAutoReconnect() {
   setInterval(async () => {
     if (!isDbConnected() && process.env.USE_LOCAL_DB !== 'true') {
       try {
-        await connectDB();
+        const connected = await connectDB();
+        if (connected) {
+          console.log('🎉 Auto-reconnect succeeded! MongoDB Atlas is now online & in sync.');
+        }
       } catch (e) {}
     }
-  }, 120000);
+  }, 15000);
 }
 
 export function isDbConnected() {
