@@ -343,10 +343,10 @@ export function createTicketWidget() {
     return `
       <div style="margin-bottom: 24px; padding: 24px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-light); border-radius: 12px;">
         <h3 style="font-family: var(--font-display); font-size: 1.25rem; color: var(--color-gold); margin-bottom: 8px;">
-          Inspect Your Verified Digital Pass
+          Find & Retrieve Your Verified Digital Pass
         </h3>
         <p style="font-size: 0.85rem; color: var(--color-wool-muted); margin-bottom: 16px;">
-          Enter your unique order reference code (e.g. <code style="color: var(--color-gold-bright); font-family: var(--font-mono);">BOM-97-XXXXX</code>) to retrieve your official QR-coded admission pass.
+          Enter your <strong>Mobile Phone Number</strong> (e.g. <code style="color: #6ee7b7; font-family: var(--font-mono);">077 123 4567</code>) or your <strong>Order Reference</strong> (<code style="color: var(--color-gold-bright); font-family: var(--font-mono);">BOM-97-XXXXX</code>) to retrieve your official pass and QR code anytime.
         </p>
 
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
@@ -354,12 +354,12 @@ export function createTicketWidget() {
             type="text" 
             id="lookup-ref-input" 
             class="form-input" 
-            placeholder="e.g. BOM-97-59281" 
+            placeholder="e.g. 077 123 4567 or BOM-97-59281" 
             style="flex: 1; min-width: 220px; font-family: var(--font-mono); text-transform: uppercase;" 
             value="${verifiedPass ? verifiedPass.orderRef : ''}"
           />
           <button type="button" class="btn-primary-cinematic" id="btn-lookup-submit" style="padding: 12px 24px;">
-            Lookup Pass
+            Retrieve Pass & QR
           </button>
         </div>
       </div>
@@ -370,6 +370,27 @@ export function createTicketWidget() {
 
   function renderPassTicket(pass) {
     const isVerified = pass.status === 'VERIFIED';
+
+    let buyerPhoneFormatted = String(pass.buyerPhone || '').replace(/[^0-9]/g, '');
+    if (buyerPhoneFormatted.startsWith('0')) buyerPhoneFormatted = '94' + buyerPhoneFormatted.substring(1);
+    else if (buyerPhoneFormatted.length === 9) buyerPhoneFormatted = '94' + buyerPhoneFormatted;
+
+    const passUrl = `${window.location.origin}/#/ticketing?ref=${pass.orderRef}`;
+    const whatsappMsg = encodeURIComponent(
+      `🏏 *97th BATTLE OF THE MAROONS — OFFICIAL GATE PASS*\n\n` +
+      `👤 *Passholder:* ${pass.buyerName}\n` +
+      `🎟️ *Reference Code:* ${pass.orderRef}\n` +
+      `🏟️ *Ground Enclosure:* ${pass.categoryName}\n` +
+      `👥 *Pass Quantity:* ${pass.quantity} Person(s)\n` +
+      `📍 *Venue:* SSC Grounds, Colombo\n\n` +
+      `⚡ *Click to Open Scannable QR Pass:*\n${passUrl}\n\n` +
+      `_Keep this link open on your phone or screenshot the QR code at the turnstile gate._`
+    );
+
+    const directWhatsAppUrl = buyerPhoneFormatted.length >= 10
+      ? `https://api.whatsapp.com/send?phone=${buyerPhoneFormatted}&text=${whatsappMsg}`
+      : `https://api.whatsapp.com/send?text=${whatsappMsg}`;
+
     return `
       <div class="commemorative-pass-card" style="margin-top: 24px; background: linear-gradient(135deg, rgba(84, 12, 26, 0.95), rgba(26, 4, 8, 0.98)); border: 2px solid var(--color-gold); border-radius: 16px; padding: 32px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); position: relative; overflow: hidden;">
         <!-- Watermark ornament -->
@@ -377,11 +398,41 @@ export function createTicketWidget() {
           97
         </div>
 
-        <!-- Official E-Ticket Email Dispatched Confirmation Notice -->
-        <div style="background: rgba(16, 185, 129, 0.18); border: 1.5px solid #10b981; border-radius: 10px; padding: 14px 18px; margin-bottom: 22px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-          <span style="font-size: 1.5rem; line-height: 1; flex-shrink: 0;">✉️</span>
-          <div style="font-size: 0.85rem; color: #d1fae5; line-height: 1.5;">
-            <strong style="color: #6ee7b7;">Official E-Ticket Sent to Your Email!</strong> A digital copy of this pass and high-contrast QR code has been dispatched directly to <strong>${pass.buyerEmail || 'your email'}</strong>. Please check your inbox (and spam folder if not found).
+        <!-- Instant Phone Save & WhatsApp Delivery (Zero Email Setup Needed) -->
+        <div style="background: linear-gradient(135deg, rgba(37, 211, 102, 0.18) 0%, rgba(16, 185, 129, 0.1) 100%); border: 1.5px solid #25d366; border-radius: 12px; padding: 18px 22px; margin-bottom: 22px; box-shadow: 0 4px 18px rgba(0,0,0,0.35);">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span style="font-size: 1.3rem;">📲</span>
+                <span style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 800; color: #4ade80;">
+                  Keep Your Pass On Your Phone
+                </span>
+                <span style="background: rgba(37,211,102,0.25); color: #86efac; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 800; padding: 2px 8px; border-radius: 50px;">
+                  1-CLICK BACKUP
+                </span>
+              </div>
+              <p style="font-size: 0.82rem; color: #dcfce7; margin: 0; line-height: 1.4; max-width: 620px;">
+                Click <strong>"Send to My WhatsApp"</strong> to receive this official pass &amp; QR link in your WhatsApp chat immediately. You can also re-open this pass anytime on this website by typing your mobile number <strong>${pass.buyerPhone || ''}</strong>!
+              </p>
+            </div>
+
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <a 
+                href="${directWhatsAppUrl}" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                style="padding: 11px 20px; background: #25d366; border: none; border-radius: 8px; color: #0b2912; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 3px 12px rgba(37,211,102,0.4);"
+              >
+                💬 Send to My WhatsApp
+              </a>
+              <button 
+                type="button" 
+                id="btn-print-pass-top" 
+                style="padding: 11px 18px; background: rgba(255,255,255,0.08); border: 1.5px solid var(--color-gold); border-radius: 8px; color: var(--color-gold); font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;"
+              >
+                📥 Save / Print Pass
+              </button>
+            </div>
           </div>
         </div>
 
@@ -693,13 +744,12 @@ export function createTicketWidget() {
       });
     }
 
-    // Print pass button
-    const printBtn = widget.querySelector('#btn-print-pass');
-    if (printBtn) {
-      printBtn.addEventListener('click', () => {
+    // Print pass button (both top and bottom buttons)
+    widget.querySelectorAll('#btn-print-pass, #btn-print-pass-top').forEach(btn => {
+      btn.addEventListener('click', () => {
         window.print();
       });
-    }
+    });
 
     // Submit booking button
     const submitBtn = widget.querySelector('#btn-ticket-submit');

@@ -1291,7 +1291,11 @@
       "payhereStatusCode": null,
       "verificationNotes": "Pass automatically confirmed and QR code generated.",
       "createdAt": "2026-11-05T11:41:42.020Z",
-      "updatedAt": "2026-11-05T11:41:42.020Z"
+      "updatedAt": "2026-11-05T11:43:13.567Z",
+      "isAdmitted": true,
+      "admittedAt": "2026-11-05T11:43:13.567Z",
+      "admittedGate": "Gate 1 — Grandstand Upper Deck",
+      "admittedBy": "Committee Steward"
     }
   ]
 }

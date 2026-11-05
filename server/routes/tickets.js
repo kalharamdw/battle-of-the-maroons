@@ -548,25 +548,50 @@ router.get('/order/:orderRef', async (req, res) => {
   res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
   res.set('Pragma', 'no-cache');
   try {
+    const rawInput = String(req.params.orderRef || '').trim();
+    const cleanDigits = rawInput.replace(/[^0-9]/g, '');
+
     let order = null;
     if (isDbConnected()) {
       try {
-        order = await TicketOrder.findOne({ orderRef: req.params.orderRef })
+        const queryConditions = [
+          { orderRef: rawInput.toUpperCase() },
+          { orderRef: `BOM-97-${rawInput.toUpperCase()}` },
+          { orderNumber: rawInput.toUpperCase() },
+          { buyerEmail: rawInput.toLowerCase() }
+        ];
+
+        if (cleanDigits.length >= 7) {
+          queryConditions.push({ buyerPhone: { $regex: cleanDigits.slice(-7) } });
+        }
+
+        order = await TicketOrder.findOne({ $or: queryConditions })
+          .sort({ createdAt: -1 })
           .select('-ipAddress -__v');
       } catch (e) {}
     }
 
-    if (!order && memoryOrders.has(req.params.orderRef)) {
-      order = memoryOrders.get(req.params.orderRef);
+    if (!order && memoryOrders.has(rawInput.toUpperCase())) {
+      order = memoryOrders.get(rawInput.toUpperCase());
     }
 
     if (!order) {
       const all = localStore.getOrders();
-      order = all.find(o => o.orderRef === req.params.orderRef || o.orderNumber === req.params.orderRef || String(o._id) === String(req.params.orderRef));
+      order = all.find(o => {
+        if (!o) return false;
+        if (o.orderRef && (o.orderRef === rawInput.toUpperCase() || o.orderRef === `BOM-97-${rawInput.toUpperCase()}`)) return true;
+        if (o.orderNumber && o.orderNumber === rawInput.toUpperCase()) return true;
+        if (o.buyerEmail && o.buyerEmail.toLowerCase() === rawInput.toLowerCase()) return true;
+        if (cleanDigits.length >= 7 && o.buyerPhone) {
+          const oDigits = String(o.buyerPhone).replace(/[^0-9]/g, '');
+          if (oDigits.includes(cleanDigits.slice(-7)) || cleanDigits.includes(oDigits.slice(-7))) return true;
+        }
+        return false;
+      });
     }
 
     if (!order) {
-      return res.status(404).json({ success: false, message: 'Ticket pass order reference not found.' });
+      return res.status(404).json({ success: false, message: 'Ticket pass not found. Please check your reference code or mobile phone number.' });
     }
 
     // Auto-verify and generate QR if not yet present

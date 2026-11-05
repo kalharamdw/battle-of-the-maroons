@@ -906,6 +906,34 @@ export function renderAdminDashboardPage(container, onLogout) {
                               ${Icons.check()} Approve / Issue QR
                             </button>
                           ` : ''}
+                          <a 
+                            href="${(() => {
+                              let phone = String(order.buyerPhone || '').replace(/[^0-9]/g, '');
+                              if (phone.startsWith('0')) phone = '94' + phone.substring(1);
+                              else if (phone.length === 9) phone = '94' + phone;
+                              const passUrl = `${window.location.origin}/#/ticketing?ref=${order.orderRef}`;
+                              const msg = encodeURIComponent(
+                                `🏏 *97th BATTLE OF THE MAROONS — OFFICIAL GATE PASS*\n\n` +
+                                `Dear ${order.buyerName},\n` +
+                                `Here is your official confirmed digital gate pass for the 97th Battle of the Maroons encounter.\n\n` +
+                                `🎟️ *Reference Code:* ${order.orderRef}\n` +
+                                `🏟️ *Ground Enclosure:* ${order.categoryName}\n` +
+                                `👥 *Admission Passes:* ${order.quantity} Person(s)\n` +
+                                `📍 *Venue:* SSC Colombo\n\n` +
+                                `⚡ *Open & View Your Scannable QR Code:*\n${passUrl}\n\n` +
+                                `_Please have your QR code ready on your phone when arriving at the SSC turnstile gates._`
+                              );
+                              return phone.length >= 10
+                                ? `https://api.whatsapp.com/send?phone=${phone}&text=${msg}`
+                                : `https://api.whatsapp.com/send?text=${msg}`;
+                            })()}"
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            title="Send Pass & QR directly to Buyer on WhatsApp"
+                            style="padding: 6px 12px; background: rgba(37,211,102,0.18); border: 1.5px solid rgba(37,211,102,0.5); border-radius: 6px; color: #4ade80; font-family: var(--font-mono); font-size: 0.75rem; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; font-weight: 700; transition: all 0.2s;"
+                          >
+                            💬 WhatsApp Pass
+                          </a>
                           <button 
                             type="button" 
                             class="btn-inspect-order" 
