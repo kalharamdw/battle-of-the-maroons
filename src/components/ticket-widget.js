@@ -380,15 +380,7 @@ export function createTicketWidget() {
           <!-- Right: Digital QR Code -->
           <div style="text-align: center; background: rgba(0,0,0,0.3); border: 1px solid var(--border-gold); border-radius: 12px; padding: 18px;">
             ${(() => {
-              const qrSrc = pass.qrCodeData || `https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=4&color=54-12-26&data=${encodeURIComponent(JSON.stringify({
-                ref: pass.orderRef,
-                buyer: pass.buyerName,
-                enclosure: pass.categoryName,
-                qty: pass.quantity,
-                format: pass.matchFormat,
-                event: "97th Battle of the Maroons",
-                verified: true
-              }))}`;
+              const qrSrc = pass.qrCodeData || `https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=4&color=0-0-0&data=${encodeURIComponent(pass.orderRef)}`;
               return `
                 <img src="${qrSrc}" alt="Admission QR Code" style="width: 160px; height: 160px; border-radius: 8px; background: white; padding: 6px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.4);" />
                 <div style="margin-top: 8px; font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-gold-bright); letter-spacing: 0.08em; font-weight: 700;">

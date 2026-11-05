@@ -118,17 +118,48 @@
       text-overflow: ellipsis;
     }
 
+    .header-badges {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .rush-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 8px;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold-bright);
+      border-radius: 50px;
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      font-weight: 800;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+
+    .rush-toggle-btn.active {
+      background: rgba(16, 185, 129, 0.25);
+      border-color: #34d399;
+      color: #34d399;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+    }
+
     .live-badge {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 4px 9px;
+      gap: 5px;
+      padding: 4px 8px;
       background: rgba(16, 185, 129, 0.15);
       border: 1px solid var(--success);
       color: var(--success);
       border-radius: 50px;
       font-family: var(--font-mono);
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 700;
       flex-shrink: 0;
       white-space: nowrap;
@@ -254,22 +285,23 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: clamp(170px, 72%, 240px);
-      height: clamp(170px, 72%, 240px);
+      width: clamp(180px, 76%, 260px);
+      height: clamp(180px, 76%, 260px);
       pointer-events: none;
       z-index: 5;
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
     }
 
     .viewfinder-reticle.scanned {
-      border: 2px solid var(--success);
-      box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+      border: 3px solid var(--success);
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.9);
+      transform: translate(-50%, -50%) scale(1.04);
     }
 
     .reticle-corner {
       position: absolute;
-      width: 24px;
-      height: 24px;
+      width: 26px;
+      height: 26px;
       border: 3px solid var(--gold);
       transition: border-color 0.2s ease;
     }
@@ -290,12 +322,105 @@
       height: 2px;
       background: linear-gradient(90deg, transparent, #ff2a5f, var(--gold-bright), #ff2a5f, transparent);
       box-shadow: 0 0 10px #ff2a5f;
-      animation: laserScan 2.2s infinite ease-in-out;
+      animation: laserScan 1.6s infinite ease-in-out;
     }
 
     @keyframes laserScan {
-      0%, 100% { top: 10px; opacity: 0.9; }
-      50% { top: calc(100% - 14px); opacity: 0.9; }
+      0%, 100% { top: 10px; opacity: 0.95; }
+      50% { top: calc(100% - 14px); opacity: 0.95; }
+    }
+
+    /* RUSH-HOUR FAST ADMISSION POP-UP (In-Viewfinder Flash) */
+    .fast-admit-banner {
+      position: absolute;
+      inset: 0;
+      background: rgba(6, 78, 59, 0.94);
+      backdrop-filter: blur(8px);
+      z-index: 30;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      text-align: center;
+      animation: fastFadeIn 0.18s ease-out forwards;
+    }
+
+    @keyframes fastFadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .fast-admit-banner.active {
+      display: flex;
+    }
+
+    .fast-badge-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #10b981;
+      color: #000;
+      font-size: 2.2rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.8);
+      margin-bottom: 10px;
+    }
+
+    .fast-title {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
+
+    .fast-qty {
+      font-family: var(--font-mono);
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--gold-bright);
+      margin: 4px 0;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .fast-category {
+      font-size: 0.95rem;
+      color: #d1fae5;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .fast-buyer {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: #a7f3d0;
+      opacity: 0.9;
+    }
+
+    .fast-countdown-bar {
+      width: 140px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+      margin-top: 14px;
+      overflow: hidden;
+    }
+
+    .fast-countdown-fill {
+      width: 100%;
+      height: 100%;
+      background: var(--gold-bright);
+      animation: countdown 1.1s linear forwards;
+    }
+
+    @keyframes countdown {
+      from { width: 100%; }
+      to { width: 0%; }
     }
 
     .scanner-toolbar {
@@ -414,7 +539,7 @@
       box-shadow: 0 4px 14px rgba(135, 20, 43, 0.5);
     }
 
-    /* Pass Verification Result Modal / Card */
+    /* Pass Verification Result Modal (For Rejections, Duplicates or Manual Mode) */
     .result-overlay {
       position: fixed;
       inset: 0;
@@ -431,7 +556,7 @@
 
     .result-overlay.active {
       display: flex;
-      animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: modalPop 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
     @keyframes modalPop {
@@ -553,7 +678,6 @@
       word-break: break-word;
     }
 
-    /* CRITICAL RESPONSIVE GRID FIX: minmax(0, 1fr) ensures cells never blow out width */
     .detail-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -769,9 +893,14 @@
           <p class="brand-sub">Gate Pass Scanner • Committee Portal</p>
         </div>
       </div>
-      <div class="live-badge">
-        <span class="live-dot"></span>
-        <span>GATE LIVE</span>
+      <div class="header-badges">
+        <button type="button" class="rush-toggle-btn active" id="btn-rush-mode" title="Toggle Rush-Hour Fast Auto-Admission">
+          ⚡ AUTO-ADMIT: ON
+        </button>
+        <div class="live-badge">
+          <span class="live-dot"></span>
+          <span>LIVE</span>
+        </div>
       </div>
     </div>
 
@@ -809,6 +938,18 @@
           <div class="laser-line"></div>
         </div>
 
+        <!-- RUSH-HOUR FAST ADMIT BANNER (Appears for 1.1s then auto-resets) -->
+        <div class="fast-admit-banner" id="fast-admit-banner">
+          <div class="fast-badge-icon">✓</div>
+          <div class="fast-title">ENTRY APPROVED</div>
+          <div class="fast-qty" id="fast-qty">4 PERSONS</div>
+          <div class="fast-category" id="fast-category">Party Tent & Papare</div>
+          <div class="fast-buyer" id="fast-buyer">OAISHDOIA • BOM-97-52649</div>
+          <div class="fast-countdown-bar">
+            <div class="fast-countdown-fill"></div>
+          </div>
+        </div>
+
         <!-- Camera Toolbar -->
         <div class="scanner-toolbar">
           <button type="button" class="tool-btn" id="btn-toggle-camera">
@@ -828,7 +969,7 @@
     </div>
 
     <p class="scanner-tip">
-      Point camera at spectator QR code • Auto-focus is active
+      ⚡ Rush Auto-Admit Active • Camera scans 25 FPS with Continuous Autofocus
     </p>
 
     <!-- Hidden Native File / Photo Input for Instant Snapshot Decoding -->
@@ -845,7 +986,7 @@
           type="text" 
           class="manual-input" 
           id="manual-input" 
-          placeholder="e.g. 92366 or BOM-97-92366" 
+          placeholder="e.g. 52649 or BOM-97-52649" 
           autocomplete="off" 
           autocorrect="off" 
           autocapitalize="characters" 
@@ -869,7 +1010,7 @@
 
   </main>
 
-  <!-- Pass Verification Modal -->
+  <!-- Pass Verification Modal (Used for Errors, Duplicate Alerts, or Manual Review) -->
   <div class="result-overlay" id="result-overlay">
     <div class="result-sheet" id="result-sheet">
       
@@ -922,7 +1063,7 @@
   </div>
 
   <script>
-    // Audio Synthesizer (Zero External Dependencies)
+    // Audio Synthesizer (Instant Local Sound Effects)
     let soundEnabled = true;
     let audioCtx = null;
 
@@ -938,27 +1079,27 @@
         gain.connect(audioCtx.destination);
 
         if (type === 'success') {
-          // Cheerful two-tone admission chime
+          // Cheerful, high-pitched two-tone turnstile entry chime
           osc.type = 'sine';
-          osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
-          osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.12); // A5
-          gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+          osc.frequency.setValueAtTime(659.25, audioCtx.currentTime); // E5
+          osc.frequency.exponentialRampToValueAtTime(1046.50, audioCtx.currentTime + 0.10); // C6
+          gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.32);
           osc.start();
-          osc.stop(audioCtx.currentTime + 0.35);
+          osc.stop(audioCtx.currentTime + 0.32);
 
-          if (navigator.vibrate) navigator.vibrate([70]);
+          if (navigator.vibrate) navigator.vibrate([60, 40, 60]);
         } else {
-          // Warning buzzer
+          // Harsh alarm buzzer for duplicate / fraudulent entry
           osc.type = 'sawtooth';
-          osc.frequency.setValueAtTime(180, audioCtx.currentTime);
-          osc.frequency.linearRampToValueAtTime(110, audioCtx.currentTime + 0.28);
-          gain.gain.setValueAtTime(0.35, audioCtx.currentTime);
+          osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+          osc.frequency.linearRampToValueAtTime(110, audioCtx.currentTime + 0.32);
+          gain.gain.setValueAtTime(0.45, audioCtx.currentTime);
           gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
           osc.start();
           osc.stop(audioCtx.currentTime + 0.35);
 
-          if (navigator.vibrate) navigator.vibrate([120, 80, 120]);
+          if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
         }
       } catch (e) {}
     }
@@ -973,8 +1114,10 @@
     let admittedCount = 0;
     let sessionScans = [];
     let torchOn = false;
+    let autoAdmitEnabled = true;
     let lastScannedText = '';
     let lastScanTimestamp = 0;
+    let fastBannerTimer = null;
 
     // DOM Elements
     const resultOverlay = document.getElementById('result-overlay');
@@ -1001,8 +1144,20 @@
     const btnPhotoPick = document.getElementById('btn-photo-pick');
     const btnTorch = document.getElementById('btn-torch');
     const btnSoundToggle = document.getElementById('btn-sound-toggle');
+    const btnRushMode = document.getElementById('btn-rush-mode');
     const fileSelector = document.getElementById('file-selector');
     const reticle = document.querySelector('.viewfinder-reticle');
+    const fastAdmitBanner = document.getElementById('fast-admit-banner');
+    const fastQty = document.getElementById('fast-qty');
+    const fastCategory = document.getElementById('fast-category');
+    const fastBuyer = document.getElementById('fast-buyer');
+
+    // Toggle Rush Mode
+    btnRushMode.addEventListener('click', () => {
+      autoAdmitEnabled = !autoAdmitEnabled;
+      btnRushMode.classList.toggle('active', autoAdmitEnabled);
+      btnRushMode.textContent = autoAdmitEnabled ? '⚡ AUTO-ADMIT: ON' : '🖐️ MANUAL ADMIT';
+    });
 
     // Load initial stats from backend
     async function loadStats() {
@@ -1041,28 +1196,23 @@
           status: 'PHOTO_NOT_FOUND',
           statusClass: 'status-warning',
           title: 'QR NOT DETECTED IN PHOTO',
-          message: 'Could not clearly recognize a QR code in the selected photo. Please make sure the code is sharp and not glare-obscured.'
+          message: 'Could not clearly recognize a QR code in the selected photo. Please ensure the QR is well-lit and in focus.'
         });
       }
       fileSelector.value = '';
     });
 
-    // Scanner configuration builder
+    // High-performance 25 FPS camera configuration
     function getScannerConfig() {
       return {
-        fps: 15,
+        fps: 25,
         qrbox: (viewfinderWidth, viewfinderHeight) => {
           const minEdge = Math.min(viewfinderWidth, viewfinderHeight);
-          const size = Math.max(160, Math.floor(minEdge * 0.78));
+          const size = Math.max(160, Math.floor(minEdge * 0.85));
           return { width: size, height: size };
         },
         aspectRatio: 1.0,
-        disableFlip: false,
-        videoConstraints: {
-          facingMode: { ideal: currentFacingMode },
-          width: { ideal: 1280 },
-          height: { ideal: 720 }
-        }
+        disableFlip: false
       };
     }
 
@@ -1070,12 +1220,11 @@
     async function initCamera() {
       try {
         if (!window.Html5Qrcode) {
-          setTimeout(initCamera, 400);
+          setTimeout(initCamera, 300);
           return;
         }
 
         if (!html5QrCode) {
-          // Hardware-accelerated BarcodeDetector and QR only format specification
           const formats = window.Html5QrcodeSupportedFormats ? [window.Html5QrcodeSupportedFormats.QR_CODE] : undefined;
           html5QrCode = new Html5Qrcode("reader", {
             formatsToSupport: formats,
@@ -1087,7 +1236,6 @@
         }
 
         // Method 1: Start with { facingMode: { ideal: "environment" } } directly.
-        // This is the most reliable way on iOS Safari and Android Chrome to get the rear camera
         try {
           await html5QrCode.start(
             { facingMode: { ideal: currentFacingMode } },
@@ -1096,7 +1244,6 @@
             () => {} // silent frame handler
           );
           checkTorchCapability();
-          // Populate camera list in background once permission granted
           Html5Qrcode.getCameras().then(devices => {
             if (devices && devices.length) availableCameras = devices;
           }).catch(() => {});
@@ -1128,7 +1275,7 @@
       }
     }
 
-    // Check Torch / Flashlight support
+    // Torch / Flashlight support
     async function checkTorchCapability() {
       try {
         if (!html5QrCode) return;
@@ -1199,14 +1346,15 @@
       }
     }
 
-    // Handle scanned QR Code
+    // Handle scanned QR Code (Lightning Fast Dispatch)
     async function onScanSuccess(decodedText) {
       if (isVerifying) return;
       if (resultOverlay.classList.contains('active')) return;
+      if (fastAdmitBanner.classList.contains('active')) return;
 
       const now = Date.now();
-      // Debounce duplicate reads of the exact same code within 1.8s
-      if (decodedText === lastScannedText && (now - lastScanTimestamp) < 1800) {
+      // Debounce duplicate reads of the exact same code within 1.2s
+      if (decodedText === lastScannedText && (now - lastScanTimestamp) < 1200) {
         return;
       }
 
@@ -1216,7 +1364,7 @@
       // Optical feedback flash
       if (reticle) {
         reticle.classList.add('scanned');
-        setTimeout(() => reticle.classList.remove('scanned'), 400);
+        setTimeout(() => reticle.classList.remove('scanned'), 350);
       }
 
       verifyTicketCode(decodedText);
@@ -1231,7 +1379,7 @@
       manualInput.value = '';
     });
 
-    // Verification Logic
+    // Verification Logic (with 1-Call Rush-Hour Auto-Admit)
     async function verifyTicketCode(code) {
       isVerifying = true;
       const currentGate = gateSelector.value;
@@ -1243,11 +1391,20 @@
           body: JSON.stringify({
             code: code,
             gateName: currentGate,
-            steward: 'Committee Member'
+            steward: 'Committee Steward',
+            autoAdmit: autoAdmitEnabled // In rush mode, auto-admits on backend in ONE call!
           })
         });
 
         const data = await res.json();
+
+        // 1. If Auto-Admitted successfully: Trigger rapid 1-second auto-flash banner
+        if (data.valid && data.autoAdmitted) {
+          triggerFastAdmitSuccess(data);
+          return;
+        }
+
+        // 2. Otherwise (Errors, Duplicate Passes, or Manual mode): Show detailed inspection modal
         showResult(data);
       } catch (err) {
         showResult({
@@ -1260,6 +1417,34 @@
       }
     }
 
+    // RAPID RUSH-HOUR ENTRY SUCCESS (Plays chime, increments count, and auto-resets in 1.1s)
+    function triggerFastAdmitSuccess(res) {
+      playChime('success');
+      const order = res.order;
+      const qty = parseInt(order.quantity, 10) || 1;
+
+      // Update Live Counter
+      admittedCount += qty;
+      admittedCounter.textContent = admittedCount;
+
+      // Fill in Fast Flash Banner
+      fastQty.textContent = `${qty} PERSON(S)`;
+      fastCategory.textContent = order.categoryName || 'General Admission';
+      fastBuyer.textContent = `${order.buyerName} • ${order.orderRef}`;
+
+      fastAdmitBanner.classList.add('active');
+
+      // Log in session history feed
+      logHistory(res);
+
+      if (fastBannerTimer) clearTimeout(fastBannerTimer);
+      fastBannerTimer = setTimeout(() => {
+        fastAdmitBanner.classList.remove('active');
+        isVerifying = false;
+      }, 1100);
+    }
+
+    // Show Detailed Modal (For Duplicate Warnings, Fake passes, or Manual Mode)
     function showResult(res) {
       currentScannedOrder = res.order || null;
       resultSheet.className = 'result-sheet ' + (res.statusClass || 'status-danger');
@@ -1307,7 +1492,7 @@
       logHistory(res);
     }
 
-    // Action: Confirm Admission
+    // Action: Manual Confirm Admission (When Auto-Admit is OFF)
     btnAdmitAction.addEventListener('click', async () => {
       if (!currentScannedOrder) {
         closeResult();
@@ -1345,7 +1530,7 @@
       resultOverlay.classList.remove('active');
       setTimeout(() => {
         isVerifying = false;
-      }, 350);
+      }, 300);
     }
 
     function logHistory(res) {

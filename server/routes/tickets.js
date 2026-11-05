@@ -109,23 +109,11 @@ router.post('/order', orderLimiter, async (req, res) => {
     const orderRef = `BOM-97-${randomSuffix}`;
     const totalAmount = category.price * qty;
 
-    // 5. Instantly generate official verifiable Gate QR Code
-    const qrPayload = JSON.stringify({
-      ref: orderRef,
-      buyer: buyerName.trim(),
-      enclosure: category.name,
-      qty: qty,
-      format: matchFormat,
-      event: "97th Battle of the Maroons",
-      venue: "SSC Colombo",
-      verified: true,
-      issuedAt: new Date().toISOString()
-    });
-
-    const qrCodeData = await QRCode.toDataURL(qrPayload, {
-      errorCorrectionLevel: 'H',
+    // 5. Instantly generate official verifiable Gate QR Code (Optimized for instant mobile turnstile scanning)
+    const qrCodeData = await QRCode.toDataURL(orderRef, {
+      errorCorrectionLevel: 'M',
       margin: 2,
-      color: { dark: '#540c1a', light: '#ffffff' }
+      color: { dark: '#000000', light: '#ffffff' }
     });
 
     // 6. Create Verified Order directly
@@ -265,26 +253,11 @@ router.post('/payhere-notify', async (req, res) => {
 
     // Status 2 = Success
     if (status_code === '2') {
-      // 1. Generate digital verifiable QR code
-      const qrPayload = JSON.stringify({
-        ref: order.orderRef,
-        buyer: order.buyerName,
-        enclosure: order.categoryName,
-        qty: order.quantity,
-        format: order.matchFormat,
-        event: "97th Battle of the Maroons",
-        venue: "SSC Colombo",
-        verified: true,
-        issuedAt: new Date().toISOString()
-      });
-
-      const qrCodeData = await QRCode.toDataURL(qrPayload, {
-        errorCorrectionLevel: 'H',
+      // 1. Generate digital verifiable QR code (Optimized for instant mobile turnstile scanning)
+      const qrCodeData = await QRCode.toDataURL(order.orderRef, {
+        errorCorrectionLevel: 'M',
         margin: 2,
-        color: {
-          dark: '#540c1a',
-          light: '#ffffff'
-        }
+        color: { dark: '#000000', light: '#ffffff' }
       });
 
       const updates = {
@@ -412,26 +385,11 @@ router.post('/verify-sandbox', async (req, res) => {
       return res.json({ success: true, message: 'Order is already verified', order });
     }
 
-    // Generate QR Code
-    const qrPayload = JSON.stringify({
-      ref: order.orderRef,
-      buyer: order.buyerName,
-      enclosure: order.categoryName,
-      qty: order.quantity,
-      format: order.matchFormat,
-      event: "97th Battle of the Maroons",
-      venue: "SSC Colombo",
-      verified: true,
-      issuedAt: new Date().toISOString()
-    });
-
-    const qrCodeData = await QRCode.toDataURL(qrPayload, {
-      errorCorrectionLevel: 'H',
+    // Generate High-Speed, High-Contrast QR Code for instant gate scanning
+    const qrCodeData = await QRCode.toDataURL(order.orderRef, {
+      errorCorrectionLevel: 'M',
       margin: 2,
-      color: {
-        dark: '#540c1a',
-        light: '#ffffff'
-      }
+      color: { dark: '#000000', light: '#ffffff' }
     });
 
     const updates = {
@@ -509,23 +467,11 @@ router.post('/track-third-party', async (req, res) => {
     const randomSuffix = Math.floor(10000 + Math.random() * 90000);
     const orderRef = `BOM-97-EXT-${randomSuffix}`;
 
-    const qrPayload = JSON.stringify({
-      ref: orderRef,
-      buyer: buyerName,
-      enclosure: categoryName,
-      qty: quantity,
-      format: matchFormat,
-      event: "97th Battle of the Maroons",
-      venue: "SSC Colombo",
-      verified: true,
-      partnerUrl: targetUrl,
-      issuedAt: new Date().toISOString()
-    });
-
-    const qrCodeData = await QRCode.toDataURL(qrPayload, {
-      errorCorrectionLevel: 'H',
+    // Generate High-Speed, High-Contrast QR Code for instant gate scanning
+    const qrCodeData = await QRCode.toDataURL(orderRef, {
+      errorCorrectionLevel: 'M',
       margin: 2,
-      color: { dark: '#540c1a', light: '#ffffff' }
+      color: { dark: '#000000', light: '#ffffff' }
     });
 
     const orderData = {
@@ -613,22 +559,10 @@ router.get('/order/:orderRef', async (req, res) => {
     const plain = order.toObject ? order.toObject() : { ...order };
     if (!plain.qrCodeData || plain.status !== 'VERIFIED') {
       try {
-        const qrPayload = JSON.stringify({
-          ref: plain.orderRef,
-          buyer: plain.buyerName,
-          enclosure: plain.categoryName,
-          qty: plain.quantity,
-          format: plain.matchFormat,
-          event: "97th Battle of the Maroons",
-          venue: "SSC Colombo",
-          verified: true,
-          issuedAt: plain.createdAt || new Date().toISOString()
-        });
-
-        plain.qrCodeData = await QRCode.toDataURL(qrPayload, {
-          errorCorrectionLevel: 'H',
+        plain.qrCodeData = await QRCode.toDataURL(plain.orderRef, {
+          errorCorrectionLevel: 'M',
           margin: 2,
-          color: { dark: '#540c1a', light: '#ffffff' }
+          color: { dark: '#000000', light: '#ffffff' }
         });
         plain.status = 'VERIFIED';
         plain.verifiedAt = plain.verifiedAt || new Date().toISOString();

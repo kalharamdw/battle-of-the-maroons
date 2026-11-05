@@ -59,11 +59,11 @@ function extractOrderRef(rawInput) {
 
 /**
  * POST /api/gate/verify
- * Instant QR Pass Verification
+ * Instant QR Pass Verification & Fast Rush-Hour Admission
  */
 router.post('/verify', async (req, res) => {
   res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
-  const { code, gateName = 'Main Gate', steward = 'Steward' } = req.body;
+  const { code, gateName = 'Main Gate', steward = 'Committee Steward', autoAdmit = false } = req.body;
 
   if (!code) {
     return res.status(400).json({
@@ -149,9 +149,51 @@ router.post('/verify', async (req, res) => {
   }
 
   // VALID PASS — APPROVED FOR ENTRY
+  if (autoAdmit) {
+    const now = new Date().toISOString();
+    const updates = {
+      isAdmitted: true,
+      admittedAt: now,
+      admittedGate: gateName,
+      admittedBy: steward
+    };
+
+    // 1. Immediately persist to localStore
+    localStore.updateOrder(orderRef, updates);
+
+    // 2. Immediately persist to MongoDB Atlas
+    if (isDbConnected()) {
+      try {
+        await TicketOrder.findOneAndUpdate(
+          { $or: [{ orderRef: orderRef }, { orderNumber: orderRef }] },
+          { $set: updates }
+        );
+      } catch (dbErr) {
+        console.warn('Auto-admit MongoDB update error:', dbErr.message);
+      }
+    }
+
+    order.isAdmitted = true;
+    order.admittedAt = now;
+    order.admittedGate = gateName;
+    order.admittedBy = steward;
+
+    return res.json({
+      success: true,
+      valid: true,
+      autoAdmitted: true,
+      status: 'VALID',
+      statusClass: 'status-success',
+      title: 'ADMISSION APPROVED & ADMITTED',
+      message: `✓ Verified and admitted at ${gateName}. Allow ${order.quantity || 1} Person(s) inside.`,
+      order: sanitizeOrder(order)
+    });
+  }
+
   return res.json({
     success: true,
     valid: true,
+    autoAdmitted: false,
     status: 'VALID',
     statusClass: 'status-success',
     title: 'ADMISSION APPROVED',

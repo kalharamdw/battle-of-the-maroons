@@ -461,21 +461,10 @@ router.get('/orders', verifyAdminToken, async (req, res) => {
       }
       if (!o.qrCodeData) {
         try {
-          const qrPayload = JSON.stringify({
-            ref: o.orderRef,
-            buyer: o.buyerName,
-            enclosure: o.categoryName,
-            qty: o.quantity,
-            format: o.matchFormat,
-            event: "97th Battle of the Maroons",
-            venue: "SSC Colombo",
-            verified: true,
-            issuedAt: o.createdAt || new Date().toISOString()
-          });
-          o.qrCodeData = await QRCode.toDataURL(qrPayload, {
-            errorCorrectionLevel: 'H',
+          o.qrCodeData = await QRCode.toDataURL(o.orderRef, {
+            errorCorrectionLevel: 'M',
             margin: 2,
-            color: { dark: '#540c1a', light: '#ffffff' }
+            color: { dark: '#000000', light: '#ffffff' }
           });
           updates.qrCodeData = o.qrCodeData;
           needsUpdate = true;
@@ -606,21 +595,10 @@ router.patch('/orders/:id/status', verifyAdminToken, async (req, res) => {
     const existing = all.find(o => o.orderRef === id || o.orderNumber === id || String(o._id) === id || String(o.id) === id);
     if (existing && !existing.qrCodeData) {
       try {
-        const qrPayload = JSON.stringify({
-          ref: existing.orderRef,
-          buyer: existing.buyerName,
-          enclosure: existing.categoryName,
-          qty: existing.quantity,
-          format: existing.matchFormat,
-          event: "97th Battle of the Maroons",
-          venue: "SSC Colombo",
-          verified: true,
-          issuedAt: new Date().toISOString()
-        });
-        qrCodeData = await QRCode.toDataURL(qrPayload, {
-          errorCorrectionLevel: 'H',
+        qrCodeData = await QRCode.toDataURL(existing.orderRef, {
+          errorCorrectionLevel: 'M',
           margin: 2,
-          color: { dark: '#540c1a', light: '#ffffff' }
+          color: { dark: '#000000', light: '#ffffff' }
         });
       } catch (e) {}
     }

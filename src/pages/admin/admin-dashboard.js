@@ -693,6 +693,12 @@ export function renderAdminDashboardPage(container, onLogout) {
      TAB 4: TICKET ORDERS & QR INSPECTION
      -------------------------------------------------------------------------- */
   function renderOrdersTab() {
+    const totalOrdersCount = orders.length;
+    const totalPassesIssued = orders.reduce((sum, o) => sum + (parseInt(o.quantity, 10) || 1), 0);
+    const admittedOrders = orders.filter(o => o.isAdmitted);
+    const totalPassesAdmitted = admittedOrders.reduce((sum, o) => sum + (parseInt(o.quantity, 10) || 1), 0);
+    const pendingPassesCount = Math.max(0, totalPassesIssued - totalPassesAdmitted);
+
     return `
       <div>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
@@ -701,7 +707,7 @@ export function renderAdminDashboardPage(container, onLogout) {
               Ticket Orders & Gate Pass Inspection
             </h2>
             <p style="font-size: 0.85rem; color: var(--color-wool-muted); margin: 4px 0 0;">
-              Verify passholder admittance, view issued QR codes, and inspect transaction references.
+              Verify passholder admittance, view issued QR codes, and inspect transaction references in real time.
             </p>
           </div>
 
@@ -716,6 +722,22 @@ export function renderAdminDashboardPage(container, onLogout) {
             <button type="button" id="btn-refresh-orders" style="padding: 8px 14px; background: rgba(255,255,255,0.08); border: 1px solid var(--border-light); border-radius: 6px; color: var(--color-wool); cursor: pointer; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px;">
               ${Icons.refresh()} Refresh
             </button>
+          </div>
+        </div>
+
+        <!-- Real-Time Gate Admission Metric Cards -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 20px;">
+          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-light); border-radius: 8px; padding: 14px 18px;">
+            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-wool-muted); text-transform: uppercase;">Total Passes Issued</div>
+            <div style="font-family: var(--font-mono); font-size: 1.5rem; font-weight: 800; color: var(--color-gold); margin-top: 4px;">${totalPassesIssued}</div>
+          </div>
+          <div style="background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3); border-radius: 8px; padding: 14px 18px;">
+            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: #6ee7b7; text-transform: uppercase;">Gate Admitted (Turnstiles)</div>
+            <div style="font-family: var(--font-mono); font-size: 1.5rem; font-weight: 800; color: #10b981; margin-top: 4px;">${totalPassesAdmitted} Admitted</div>
+          </div>
+          <div style="background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.3); border-radius: 8px; padding: 14px 18px;">
+            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: #fde68a; text-transform: uppercase;">Pending At Gates</div>
+            <div style="font-family: var(--font-mono); font-size: 1.5rem; font-weight: 800; color: #f59e0b; margin-top: 4px;">${pendingPassesCount} Remaining</div>
           </div>
         </div>
 
@@ -738,12 +760,14 @@ export function renderAdminDashboardPage(container, onLogout) {
                   <th style="padding: 14px 16px;">PASSES</th>
                   <th style="padding: 14px 16px;">TOTAL</th>
                   <th style="padding: 14px 16px;">STATUS</th>
+                  <th style="padding: 14px 16px;">GATE ENTRY</th>
                   <th style="padding: 14px 16px;">ACTIONS</th>
                 </tr>
               </thead>
               <tbody>
                 ${orders.map(order => {
                   const isVerified = order.status === 'VERIFIED';
+                  const isAdmitted = !!order.isAdmitted;
                   return `
                     <tr style="border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;">
                       <td style="padding: 14px 16px; font-family: var(--font-mono); font-weight: 700; color: var(--color-gold);">
@@ -767,6 +791,20 @@ export function renderAdminDashboardPage(container, onLogout) {
                         <span style="display: inline-block; padding: 3px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; ${isVerified ? 'background: rgba(34,187,85,0.2); color: #75f0a0; border: 1px solid rgba(34,187,85,0.4);' : 'background: rgba(245,158,11,0.2); color: #fbbf24; border: 1px solid rgba(245,158,11,0.4);'}">
                           ${order.status}
                         </span>
+                      </td>
+                      <td style="padding: 14px 16px;">
+                        ${isAdmitted ? `
+                          <span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; background: rgba(16,185,129,0.2); color: #34d399; border: 1px solid rgba(16,185,129,0.5);">
+                            ✓ SCANNED & ADMITTED
+                          </span>
+                          <div style="font-size: 0.68rem; color: var(--color-wool-muted); margin-top: 4px; font-family: var(--font-mono);">
+                            ${order.admittedAt ? new Date(order.admittedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : ''} • ${order.admittedGate || 'Main Gate'}
+                          </div>
+                        ` : `
+                          <span style="display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 4px; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600; background: rgba(255,255,255,0.05); color: var(--color-wool-muted); border: 1px solid rgba(255,255,255,0.12);">
+                            ⏳ NOT SCANNED
+                          </span>
+                        `}
                       </td>
                       <td style="padding: 14px 16px;">
                         <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
@@ -1556,6 +1594,12 @@ export function renderAdminDashboardPage(container, onLogout) {
               <div><strong>Quantity:</strong> ${order.quantity} passes</div>
               <div><strong>Amount:</strong> LKR ${(order.totalAmount || 0).toLocaleString()}</div>
               <div><strong>Status:</strong> <span style="color: ${order.status === 'VERIFIED' ? '#75f0a0' : '#fbbf24'}; font-weight: 700; font-family: var(--font-mono);">${order.status}</span></div>
+              <div style="margin-top: 6px; padding-top: 6px; border-top: 1px dashed rgba(255,255,255,0.1);">
+                <strong>Gate Admission:</strong> 
+                <span style="color: ${order.isAdmitted ? '#34d399' : '#fbbf24'}; font-weight: 700; font-family: var(--font-mono);">
+                  ${order.isAdmitted ? `✓ SCANNED & ADMITTED at ${new Date(order.admittedAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', second:'2-digit'})} (${order.admittedGate || 'Main Gate'})` : '⏳ NOT YET SCANNED AT GATE'}
+                </span>
+              </div>
             </div>
 
             <div style="text-align: center;">
