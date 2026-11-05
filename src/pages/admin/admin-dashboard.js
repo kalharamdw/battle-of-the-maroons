@@ -202,10 +202,13 @@ export function renderAdminDashboardPage(container, onLogout) {
             </div>
 
             <!-- Right: Admin Status & Action Buttons -->
-            <div class="cricket-control-content" style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <div class="cricket-control-content" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
               <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-wool-muted); background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border-light); display: inline-flex; align-items: center; gap: 6px;">
                 ${Icons.user('gold-accent', 14)} ${currentUser.username} (${currentUser.role || 'Admin'})
               </span>
+              <a href="/scanner" target="_blank" style="padding: 8px 14px; border-radius: 6px; background: rgba(16, 185, 129, 0.2); border: 1.5px solid #10b981; color: #6ee7b7; text-decoration: none; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 0 10px rgba(16,185,129,0.25); transition: all 0.2s;">
+                ⚡ Gate Scanner
+              </a>
               <a href="#/" target="_blank" style="padding: 8px 14px; border-radius: 6px; background: rgba(255,255,255,0.08); border: 1px solid var(--border-light); color: var(--color-wool); text-decoration: none; font-family: var(--font-mono); font-size: 0.8rem; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;">
                 ${Icons.eye('', 14)} View Live Website
               </a>
@@ -224,7 +227,7 @@ export function renderAdminDashboardPage(container, onLogout) {
               { id: 'overview', icon: Icons.chart('', 15), label: 'Overview' },
               { id: 'event', icon: Icons.clock('', 15), label: 'Event & Countdown' },
               { id: 'tickets', icon: Icons.ticket('', 15), label: 'Ticket Categories' },
-              { id: 'orders', icon: Icons.clipboard('', 15), label: 'Orders & QR Passes' },
+              { id: 'orders', icon: Icons.clipboard('', 15), label: 'Orders & Gate Entry' },
               { id: 'matches', icon: Icons.cricket('', 15), label: 'Match Centre' },
               { id: 'teams', icon: Icons.users('', 15), label: 'Teams & Squads' },
               { id: 'gallery', icon: Icons.camera('', 15), label: 'Photo Gallery' },
@@ -414,6 +417,9 @@ export function renderAdminDashboardPage(container, onLogout) {
             Quick Management Actions
           </h3>
           <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="/scanner" target="_blank" style="padding: 10px 18px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; background: rgba(16, 185, 129, 0.2); border: 1.5px solid #10b981; border-radius: 6px; color: #6ee7b7; font-family: var(--font-mono); font-weight: 700; transition: all 0.2s;">
+              ⚡ Launch Gate Scanner (/scanner)
+            </a>
             <button type="button" class="btn-primary-cinematic" id="shortcut-event" style="padding: 10px 18px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px;">
               ${Icons.clock()} Update Countdown Dates
             </button>
@@ -698,6 +704,7 @@ export function renderAdminDashboardPage(container, onLogout) {
     const admittedOrders = orders.filter(o => o.isAdmitted);
     const totalPassesAdmitted = admittedOrders.reduce((sum, o) => sum + (parseInt(o.quantity, 10) || 1), 0);
     const pendingPassesCount = Math.max(0, totalPassesIssued - totalPassesAdmitted);
+    const scannerUrl = `${window.location.origin}/scanner`;
 
     return `
       <div>
@@ -722,6 +729,86 @@ export function renderAdminDashboardPage(container, onLogout) {
             <button type="button" id="btn-refresh-orders" style="padding: 8px 14px; background: rgba(255,255,255,0.08); border: 1px solid var(--border-light); border-radius: 6px; color: var(--color-wool); cursor: pointer; font-size: 0.82rem; display: inline-flex; align-items: center; gap: 6px;">
               ${Icons.refresh()} Refresh
             </button>
+          </div>
+        </div>
+
+        <!-- Real-Time Gate Pass Scanner & Committee Sharing Hub -->
+        <div class="admin-scanner-share-card" style="background: linear-gradient(135deg, rgba(84, 12, 26, 0.5) 0%, rgba(20, 6, 12, 0.9) 60%, rgba(16, 185, 129, 0.15) 100%); border: 1.5px solid rgba(16, 185, 129, 0.45); border-radius: 12px; padding: 20px 24px; margin-bottom: 22px; box-shadow: 0 6px 24px rgba(0,0,0,0.4);">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;">
+            
+            <!-- Left: Info & Link -->
+            <div style="flex: 1; min-width: 290px;">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap;">
+                <span style="font-size: 1.4rem;">📱</span>
+                <h3 style="font-family: var(--font-display); font-size: 1.18rem; color: #6ee7b7; margin: 0; font-weight: 800; letter-spacing: 0.5px;">
+                  Official Mobile Gate Pass Scanner
+                </h3>
+                <span style="background: rgba(16, 185, 129, 0.25); color: #34d399; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 800; padding: 3px 10px; border-radius: 50px; border: 1px solid #10b981; display: inline-flex; align-items: center; gap: 6px;">
+                  <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #34d399;"></span>
+                  LIVE & READY TO SHARE
+                </span>
+              </div>
+              <p style="font-size: 0.84rem; color: var(--color-wool-muted); margin: 0 0 14px; line-height: 1.5; max-width: 680px;">
+                Share this live scanner with gate stewards, turnstile officers, and the organizing committee. It scans attendee tickets in &lt;50ms, auto-admits passes, and records live attendance into MongoDB. Works natively in Safari (iOS) and Chrome (Android).
+              </p>
+
+              <!-- Live URL Display with 1-Click Copy -->
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <div style="display: inline-flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.6); border: 1px solid rgba(212,175,55,0.35); border-radius: 8px; padding: 8px 14px; font-family: var(--font-mono); font-size: 0.82rem; color: #ffffff; max-width: 100%;">
+                  <span style="color: var(--color-gold); font-size: 0.72rem; font-weight: 800; text-transform: uppercase;">SCANNER URL:</span>
+                  <input 
+                    type="text" 
+                    id="admin-scanner-url-input" 
+                    readonly 
+                    value="${scannerUrl}" 
+                    style="background: transparent; border: none; color: #6ee7b7; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 600; outline: none; width: clamp(230px, 36vw, 440px);"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Action Buttons & On-Screen Steward QR -->
+            <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <button 
+                  type="button" 
+                  id="btn-copy-scanner-link" 
+                  data-url="${scannerUrl}"
+                  style="padding: 10px 18px; background: rgba(16, 185, 129, 0.25); border: 1.5px solid #10b981; border-radius: 8px; color: #6ee7b7; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s;"
+                >
+                  📋 Copy Scanner Link
+                </button>
+                <a 
+                  href="https://api.whatsapp.com/send?text=${encodeURIComponent('Official Battle of the Maroons Gate Scanner for Committee Stewards: ' + scannerUrl)}" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style="padding: 10px 18px; background: rgba(37, 211, 102, 0.2); border: 1.5px solid #25d366; border-radius: 8px; color: #4ade80; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s;"
+                >
+                  💬 Share via WhatsApp
+                </a>
+                <a 
+                  href="${scannerUrl}" 
+                  target="_blank" 
+                  style="padding: 10px 18px; background: linear-gradient(135deg, var(--color-gold) 0%, #b89327 100%); border: none; border-radius: 8px; color: #1c050a; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 2px 12px rgba(212,175,55,0.35);"
+                >
+                  ⚡ Open Scanner Tab
+                </a>
+              </div>
+
+              <!-- Quick QR for Stewards to scan directly off the Admin Panel screen -->
+              <div style="background: #ffffff; padding: 8px; border-radius: 10px; text-align: center; border: 2px solid var(--color-gold); box-shadow: 0 4px 16px rgba(0,0,0,0.6);">
+                <img 
+                  src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&margin=2&color=0-0-0&data=${encodeURIComponent(scannerUrl)}" 
+                  alt="QR Code to Open Scanner" 
+                  style="width: 105px; height: 105px; display: block; border-radius: 4px;"
+                />
+                <div style="font-family: var(--font-mono); font-size: 0.65rem; color: #1c050a; font-weight: 800; margin-top: 4px; text-transform: uppercase;">
+                  Scan To Open
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </div>
 
@@ -2449,6 +2536,49 @@ export function renderAdminDashboardPage(container, onLogout) {
       logoutBtn.addEventListener('click', () => {
         adminAuth.clearSession();
         if (typeof onLogout === 'function') onLogout();
+      });
+    }
+
+    // Copy Gate Scanner Link
+    const copyScannerBtn = container.querySelector('#btn-copy-scanner-link');
+    if (copyScannerBtn) {
+      copyScannerBtn.addEventListener('click', async () => {
+        const url = copyScannerBtn.getAttribute('data-url') || `${window.location.origin}/scanner`;
+        let copied = false;
+        try {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(url);
+            copied = true;
+          }
+        } catch (clipErr) {
+          console.warn('Clipboard writeText failed, using fallback:', clipErr);
+        }
+
+        if (!copied) {
+          const input = container.querySelector('#admin-scanner-url-input');
+          if (input) {
+            input.select();
+            input.setSelectionRange(0, 99999);
+            try {
+              document.execCommand('copy');
+              copied = true;
+            } catch (e) {}
+          }
+        }
+
+        if (copied) {
+          copyScannerBtn.innerHTML = '✓ Copied to Clipboard!';
+          copyScannerBtn.style.background = 'rgba(16, 185, 129, 0.45)';
+          copyScannerBtn.style.color = '#ffffff';
+          showToast('Gate Scanner link copied! Ready to share with stewards.', 'success');
+          setTimeout(() => {
+            copyScannerBtn.innerHTML = '📋 Copy Scanner Link';
+            copyScannerBtn.style.background = 'rgba(16, 185, 129, 0.25)';
+            copyScannerBtn.style.color = '#6ee7b7';
+          }, 3000);
+        } else {
+          showToast('Please copy link manually: ' + url, 'error');
+        }
       });
     }
 

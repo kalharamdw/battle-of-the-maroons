@@ -143,6 +143,14 @@ export default defineConfig({
       '/uploads': {
         target: 'http://localhost:5000',
         changeOrigin: true
+      },
+      '/scanner': {
+        target: 'http://localhost:5000',
+        changeOrigin: true
+      },
+      '/gate': {
+        target: 'http://localhost:5000',
+        changeOrigin: true
       }
     }
   },
