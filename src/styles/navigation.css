@@ -290,120 +290,66 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.drawer-schools-showcase {
+.drawer-brand-showcase {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 12px;
   flex: 1;
   min-width: 0;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
 }
 
-.drawer-school-chip {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 8px;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: all 0.25s ease;
-  flex: 1;
-  min-width: 0;
+.drawer-brand-showcase:hover {
+  opacity: 0.9;
 }
 
-.drawer-school-chip.ananda {
-  border-color: rgba(212, 175, 55, 0.4);
-  background: linear-gradient(135deg, rgba(139, 21, 56, 0.3) 0%, rgba(20, 6, 12, 0.6) 100%);
-  box-shadow: 0 2px 10px rgba(139, 21, 56, 0.25);
-}
-
-.drawer-school-chip.nalanda {
-  border-color: rgba(220, 230, 245, 0.4);
-  background: linear-gradient(135deg, rgba(80, 20, 40, 0.3) 0%, rgba(18, 12, 22, 0.6) 100%);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-}
-
-.chip-flag-box {
-  width: 24px;
-  height: 16px;
-  border-radius: 3px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
-  flex-shrink: 0;
-}
-
-.chip-flag-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.chip-crest-circle {
-  width: 20px;
-  height: 22px;
-  border-radius: 4px;
-  background: #ffffff !important;
-  padding: 2px;
+.drawer-brand-logo-wrap {
+  width: 44px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.6));
 }
 
-.chip-crest-img {
+.drawer-brand-logo-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  display: block;
 }
 
-.chip-text {
+.drawer-brand-text {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  overflow: hidden;
 }
 
-.chip-name {
-  font-family: var(--font-display);
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: #ffffff;
-  line-height: 1.1;
+.drawer-brand-title {
+  font-family: var(--font-heading);
+  font-size: 0.96rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--color-gold);
+  line-height: 1.15;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.chip-colors {
+.drawer-brand-sub {
   font-family: var(--font-mono);
-  font-size: 0.54rem;
-  color: var(--color-gold);
-  letter-spacing: 0.04em;
-  line-height: 1.1;
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  color: var(--color-wool-muted);
+  text-transform: uppercase;
+  margin-top: 3px;
   white-space: nowrap;
-}
-
-.drawer-school-chip.nalanda .chip-colors {
-  color: #dce6f5;
-}
-
-.drawer-vs-pill {
-  font-family: var(--font-display);
-  font-size: 0.6rem;
-  font-weight: 900;
-  color: #ffd700;
-  background: rgba(20, 7, 12, 0.9);
-  border: 1px solid rgba(212, 175, 55, 0.5);
-  padding: 2px 6px;
-  border-radius: 50px;
-  letter-spacing: 0.06em;
-  flex-shrink: 0;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mobile-nav-close {
@@ -606,30 +552,18 @@
 }
 
 @media (max-width: 480px) {
-  .drawer-schools-showcase {
-    gap: 4px;
+  .drawer-brand-showcase {
+    gap: 10px;
   }
-  .drawer-school-chip {
-    padding: 3px 6px;
-    gap: 5px;
+  .drawer-brand-logo-wrap {
+    width: 38px;
+    height: 44px;
   }
-  .chip-flag-box {
-    width: 20px;
-    height: 14px;
+  .drawer-brand-title {
+    font-size: 0.86rem;
   }
-  .chip-crest-circle {
-    width: 18px;
-    height: 20px;
-  }
-  .chip-name {
-    font-size: 0.68rem;
-  }
-  .chip-colors {
-    display: none;
-  }
-  .drawer-vs-pill {
-    padding: 1px 5px;
-    font-size: 0.55rem;
+  .drawer-brand-sub {
+    font-size: 0.6rem;
   }
   .nav-link-title {
     font-size: 0.88rem;
@@ -641,23 +575,18 @@
 }
 
 @media (max-width: 360px) {
-  .drawer-schools-showcase {
-    gap: 3px;
+  .drawer-brand-showcase {
+    gap: 8px;
   }
-  .drawer-school-chip {
-    padding: 2px 4px;
-    gap: 3px;
+  .drawer-brand-logo-wrap {
+    width: 32px;
+    height: 38px;
   }
-  .chip-flag-box {
-    width: 18px;
-    height: 12px;
+  .drawer-brand-title {
+    font-size: 0.78rem;
   }
-  .chip-crest-circle {
-    width: 16px;
-    height: 18px;
-  }
-  .chip-name {
-    font-size: 0.62rem;
+  .drawer-brand-sub {
+    font-size: 0.55rem;
   }
   .mobile-nav-close {
     width: 32px;

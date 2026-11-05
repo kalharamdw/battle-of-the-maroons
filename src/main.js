@@ -19,6 +19,7 @@ import { initLoadingScreen } from './components/loading-screen.js';
 import { createNavigation } from './components/navigation.js';
 import { createFooter } from './components/footer.js';
 import { initLightbox } from './components/lightbox.js';
+import { initGlobalImageFullscreen } from './utils/image-fullscreen.js';
 import { initRouter } from './router.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -41,6 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize Lightbox container
   initLightbox();
+
+  // Initialize Global Image Full-Screen Viewer for all content photos
+  initGlobalImageFullscreen();
 
   // Initialize Router
   if (appMount) {

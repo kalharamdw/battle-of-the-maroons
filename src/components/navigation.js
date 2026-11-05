@@ -64,38 +64,16 @@ export function createNavigation() {
     <!-- Mobile Drawer Overlay -->
     <div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-hidden="true">
       <div class="mobile-nav-header">
-        <div class="drawer-schools-showcase">
-          <!-- Ananda College Badge -->
-          <div class="drawer-school-chip ananda" title="Ananda College (Maroon & Gold)">
-            <div class="chip-flag-box">
-              <img src="/assets/images/branding/ananda_flag.jpg" alt="Ananda Flag" class="chip-flag-img" />
-            </div>
-            <div class="chip-crest-circle">
-              <img src="/assets/images/schools/ananda_crest.svg" alt="Ananda Crest" class="chip-crest-img" />
-            </div>
-            <div class="chip-text">
-              <span class="chip-name">ANANDA</span>
-              <span class="chip-colors">Maroon & Gold</span>
-            </div>
+        <!-- Battle of the Maroons Official Tournament Brand -->
+        <a href="#/" class="drawer-brand-showcase" id="drawer-brand-link" title="Battle of the Maroons - Official">
+          <div class="drawer-brand-logo-wrap">
+            <img src="/assets/images/branding/bom_logo.png" alt="Battle of the Maroons Official Shield Logo" class="drawer-brand-logo-img" />
           </div>
-
-          <!-- Separator VS -->
-          <div class="drawer-vs-pill">VS</div>
-
-          <!-- Nalanda College Badge -->
-          <div class="drawer-school-chip nalanda" title="Nalanda College (Maroon & Silver)">
-            <div class="chip-crest-circle">
-              <img src="/assets/images/schools/nalanda_crest.png" alt="Nalanda Crest" class="chip-crest-img" />
-            </div>
-            <div class="chip-flag-box">
-              <img src="/assets/images/branding/nalanda_flag.jpg" alt="Nalanda Flag" class="chip-flag-img" />
-            </div>
-            <div class="chip-text">
-              <span class="chip-name">NALANDA</span>
-              <span class="chip-colors">Maroon & Silver</span>
-            </div>
+          <div class="drawer-brand-text">
+            <span class="drawer-brand-title">BATTLE OF THE MAROONS</span>
+            <span class="drawer-brand-sub">Ananda vs Nalanda • Official</span>
           </div>
-        </div>
+        </a>
 
         <button type="button" class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -276,6 +254,11 @@ function initNavEvents(header) {
 
   closeBtn.addEventListener('click', closeDrawer);
   backdrop.addEventListener('click', closeDrawer);
+
+  const drawerBrand = header.querySelector('#drawer-brand-link');
+  if (drawerBrand) {
+    drawerBrand.addEventListener('click', closeDrawer);
+  }
 
   mobileLinks.forEach(link => {
     link.addEventListener('click', closeDrawer);

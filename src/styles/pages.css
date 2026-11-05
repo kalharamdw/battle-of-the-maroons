@@ -230,24 +230,43 @@
   border-color: var(--color-gold);
 }
 
+.hof-card {
+  background: var(--color-charcoal-light);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth);
+  cursor: pointer;
+  position: relative;
+}
+
+.hof-card:hover,
+.hof-card:focus-within {
+  transform: translateY(-4px);
+  border-color: var(--color-gold);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
 .hof-photo-wrap {
   width: 100%;
-  height: 200px;
+  height: 220px;
   overflow: hidden;
   position: relative;
   background: var(--color-charcoal);
+  cursor: pointer;
 }
 
 .hof-photo-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top;
+  object-position: center 15%;
   transition: transform var(--transition-smooth);
 }
 
-.hof-card:hover .hof-photo-wrap img {
-  transform: scale(1.05);
+.hof-card:hover .hof-photo-wrap img,
+.hof-photo-wrap:focus img {
+  transform: scale(1.06);
 }
 
 .hof-card-content {
@@ -455,6 +474,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.cherished-img-frame:hover {
+  border-color: var(--color-gold);
+  box-shadow: 0 16px 36px rgba(139, 21, 56, 0.35);
 }
 
 .cherished-img-frame img {
@@ -475,6 +502,7 @@
 
 .cherished-img-frame.aspect-tall img {
   object-fit: cover;
+  object-position: center 20%;
 }
 
 .cherished-sub-card {
@@ -484,6 +512,8 @@
   padding: 18px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  position: relative;
   transition: all 0.35s ease;
 }
 

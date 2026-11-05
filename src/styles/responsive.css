@@ -1028,18 +1028,88 @@
     height: 230px;
   }
 
-  /* Lightbox Modal */
-  .lightbox-content-box {
-    padding: 10px;
-    max-width: 95vw;
+  /* Lightbox Modal (Mobile View) */
+  .lightbox-modal {
+    padding: 70px 12px 24px 12px !important;
+  }
+
+  .lightbox-top-bar {
+    top: 14px !important;
+    left: 14px !important;
+    right: 14px !important;
+  }
+
+  .lightbox-counter {
+    font-size: 0.74rem !important;
+    padding: 5px 10px !important;
+  }
+
+  .lightbox-content-wrap {
+    max-width: 100% !important;
+    max-height: 88vh !important;
+    width: 100% !important;
+  }
+
+  .lightbox-img-box {
+    max-height: 62vh !important;
+    width: 100% !important;
+  }
+
+  .lightbox-img {
+    max-height: 62vh !important;
+    max-width: 100% !important;
+    width: auto !important;
+    object-fit: contain !important;
+    border-radius: 6px !important;
+  }
+
+  .lightbox-img.is-zoomed {
+    transform: scale(1.8) !important;
+  }
+
+  .lightbox-close-btn,
+  .lightbox-tool-btn {
+    width: 40px !important;
+    height: 40px !important;
+    background: rgba(139, 21, 56, 0.9) !important;
+    border: 1px solid rgba(212, 175, 55, 0.5) !important;
   }
 
   .lightbox-close-btn {
-    top: -44px;
-    right: 0;
-    width: 36px;
-    height: 36px;
-    font-size: 1.2rem;
+    font-size: 1.5rem !important;
+  }
+
+  .lightbox-nav-btn {
+    width: 42px !important;
+    height: 42px !important;
+    font-size: 1.3rem !important;
+    background: rgba(14, 5, 9, 0.88) !important;
+    border-color: rgba(212, 175, 55, 0.4) !important;
+  }
+
+  .lightbox-nav-prev {
+    left: 8px !important;
+  }
+
+  .lightbox-nav-next {
+    right: 8px !important;
+  }
+
+  .lightbox-caption-box {
+    margin-top: 10px !important;
+    max-height: 22vh !important;
+    overflow-y: auto !important;
+    padding: 0 8px !important;
+  }
+
+  .lightbox-caption-title {
+    font-size: 1rem !important;
+    margin-bottom: 2px !important;
+  }
+
+  .lightbox-caption-text {
+    font-size: 0.82rem !important;
+    line-height: 1.4 !important;
   }
 
   /* Section Headers */

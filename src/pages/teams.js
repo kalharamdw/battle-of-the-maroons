@@ -157,10 +157,19 @@ export function renderTeamsPage(container) {
             </div>
 
             <div class="hof-cards-grid">
-              ${(school.cricketHallOfFame || []).map(legend => `
-                <div class="hof-card">
-                  <div class="hof-photo-wrap">
+              ${(school.cricketHallOfFame || []).map((legend, idx) => `
+                <div class="hof-card" data-hof-index="${idx}" title="Tap to view ${legend.name} in full screen">
+                  <div class="hof-photo-wrap" tabindex="0" role="button" aria-label="View ${legend.name} full screen">
                     <img src="${legend.image}" alt="${legend.name}" loading="lazy" />
+                    <span class="img-expand-pill" aria-hidden="true">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <polyline points="9 21 3 21 3 15"></polyline>
+                        <line x1="21" y1="3" x2="14" y2="10"></line>
+                        <line x1="3" y1="21" x2="10" y2="14"></line>
+                      </svg>
+                      Full Screen
+                    </span>
                   </div>
                   <div class="hof-card-content">
                     <h4 class="hof-player-name">${legend.name}</h4>
