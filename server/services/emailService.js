@@ -319,10 +319,62 @@ export async function sendTicketConfirmationEmail(order) {
 
   const recipient = order.buyerEmail.trim().toLowerCase();
   const orderRef = order.orderRef || 'BOM-PASS';
+  const mailTransporter = getTransporter();
   const resendApiKey = process.env.RESEND_API_KEY;
 
   // --------------------------------------------------------------------------
-  // METHOD 1: Resend HTTP REST API (Zero Password / API Key only)
+  // METHOD 1: Direct SMTP / Gmail (Instant 1-2s delivery bypassing shared queues)
+  // --------------------------------------------------------------------------
+  if (mailTransporter) {
+    try {
+      const sender = process.env.SMTP_FROM || process.env.SMTP_USER || '"Battle of the Maroons Official" <tickets@battleofthemaroons.lk>';
+      const subject = `Your Official 97th Battle of the Maroons E-Ticket (${orderRef})`;
+
+      // Convert base64 data URL to image buffer for inline CID attachment
+      const attachments = [];
+      let qrCid = 'gate-entry-qr';
+
+      if (order.qrCodeData && order.qrCodeData.startsWith('data:image/')) {
+        const base64Data = order.qrCodeData.split(',')[1];
+        if (base64Data) {
+          const qrBuffer = Buffer.from(base64Data, 'base64');
+          attachments.push({
+            filename: `${orderRef}-pass-qrcode.png`,
+            content: qrBuffer,
+            cid: qrCid,
+            contentType: 'image/png'
+          });
+        }
+      } else {
+        qrCid = null;
+      }
+
+      const html = buildTicketEmailHtml(order, qrCid);
+
+      const mailOptions = {
+        from: sender,
+        to: recipient,
+        subject,
+        html,
+        attachments
+      };
+
+      const info = await mailTransporter.sendMail(mailOptions);
+      console.log(`⚡ [EMAIL SERVICE: SMTP] E-Ticket delivered instantly to ${recipient} (Ref: ${orderRef}, MessageId: ${info.messageId})`);
+
+      return {
+        success: true,
+        simulated: false,
+        messageId: info.messageId
+      };
+    } catch (err) {
+      console.error(`❌ [EMAIL SERVICE: SMTP] Failed:`, err.message || err);
+      // Fall through to Resend if SMTP failed
+    }
+  }
+
+  // --------------------------------------------------------------------------
+  // METHOD 2: Resend HTTP REST API
   // --------------------------------------------------------------------------
   if (resendApiKey) {
     try {
@@ -358,7 +410,7 @@ export async function sendTicketConfirmationEmail(order) {
 
       const resData = await res.json();
       if (res.ok) {
-        console.log(`✅ [EMAIL SERVICE: RESEND] E-Ticket delivered to ${recipient} (Ref: ${orderRef}, ID: ${resData.id})`);
+        console.log(`✅ [EMAIL SERVICE: RESEND] E-Ticket sent to ${recipient} (Ref: ${orderRef}, ID: ${resData.id})`);
         return { success: true, simulated: false, messageId: resData.id };
       } else {
         console.error(`❌ [EMAIL SERVICE: RESEND] API Error:`, resData);
@@ -368,68 +420,12 @@ export async function sendTicketConfirmationEmail(order) {
     }
   }
 
-  // --------------------------------------------------------------------------
-  // METHOD 2: Standard SMTP / Gmail (Nodemailer)
-  // --------------------------------------------------------------------------
-  const mailTransporter = getTransporter();
-
   // If neither Resend nor SMTP is configured
-  if (!mailTransporter) {
-    console.log(`✉️ [EMAIL SERVICE] Notice: To send real emails to ${recipient}, please add either a Gmail App Password (SMTP_USER + SMTP_PASS) or a free Resend key (RESEND_API_KEY) in .env.`);
-    return {
-      success: true,
-      simulated: true,
-      message: 'Email service simulated. Configure SMTP_USER/PASS or RESEND_API_KEY in .env for live inbox delivery.'
-    };
-  }
-
-  try {
-    const sender = process.env.SMTP_FROM || process.env.SMTP_USER || '"Battle of the Maroons Official" <tickets@battleofthemaroons.lk>';
-    const subject = `Your Official 97th Battle of the Maroons E-Ticket (${orderRef})`;
-
-    // Convert base64 data URL to image buffer for inline CID attachment
-    const attachments = [];
-    let qrCid = 'gate-entry-qr';
-
-    if (order.qrCodeData && order.qrCodeData.startsWith('data:image/')) {
-      const base64Data = order.qrCodeData.split(',')[1];
-      if (base64Data) {
-        const qrBuffer = Buffer.from(base64Data, 'base64');
-        attachments.push({
-          filename: `${orderRef}-pass-qrcode.png`,
-          content: qrBuffer,
-          cid: qrCid,
-          contentType: 'image/png'
-        });
-      }
-    } else {
-      qrCid = null;
-    }
-
-    const html = buildTicketEmailHtml(order, qrCid);
-
-    const mailOptions = {
-      from: sender,
-      to: recipient,
-      subject,
-      html,
-      attachments
-    };
-
-    const info = await mailTransporter.sendMail(mailOptions);
-    console.log(`✅ [EMAIL SERVICE: SMTP] E-Ticket dispatched successfully to ${recipient} (Ref: ${orderRef}, MessageId: ${info.messageId})`);
-
-    return {
-      success: true,
-      simulated: false,
-      messageId: info.messageId
-    };
-  } catch (err) {
-    console.error(`❌ [EMAIL SERVICE: SMTP] Failed to send e-ticket email to ${recipient}:`, err.message || err);
-    return {
-      success: false,
-      error: err.message
-    };
-  }
+  console.log(`✉️ [EMAIL SERVICE] Notice: To send real emails to ${recipient}, please configure SMTP_USER/PASS or RESEND_API_KEY in .env.`);
+  return {
+    success: true,
+    simulated: true,
+    message: 'Email service simulated.'
+  };
 }
 
