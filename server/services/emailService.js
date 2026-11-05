@@ -299,6 +299,10 @@ function buildTicketEmailHtml(order, qrCid) {
 /**
  * Dispatch Ticket Confirmation Email with Embedded QR
  * 
+ * Supports:
+ * 1. Resend HTTP API (via RESEND_API_KEY — no email passwords needed)
+ * 2. Standard SMTP / Gmail (via SMTP_USER and SMTP_PASS)
+ * 
  * @param {Object} order - Full ticket order object
  * @returns {Promise<{success: boolean, simulated?: boolean, messageId?: string, error?: string}>}
  */
@@ -310,15 +314,67 @@ export async function sendTicketConfirmationEmail(order) {
 
   const recipient = order.buyerEmail.trim().toLowerCase();
   const orderRef = order.orderRef || 'BOM-PASS';
+  const resendApiKey = process.env.RESEND_API_KEY;
+
+  // --------------------------------------------------------------------------
+  // METHOD 1: Resend HTTP REST API (Zero Password / API Key only)
+  // --------------------------------------------------------------------------
+  if (resendApiKey) {
+    try {
+      const fromSender = process.env.EMAIL_FROM || process.env.SMTP_FROM || 'Battle of the Maroons <onboarding@resend.dev>';
+      const subject = `Your Official 97th Battle of the Maroons E-Ticket (${orderRef})`;
+      const html = buildTicketEmailHtml(order, null);
+
+      const attachments = [];
+      if (order.qrCodeData && order.qrCodeData.startsWith('data:image/')) {
+        const base64Data = order.qrCodeData.split(',')[1];
+        if (base64Data) {
+          attachments.push({
+            filename: `${orderRef}-pass-qrcode.png`,
+            content: base64Data
+          });
+        }
+      }
+
+      const res = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${resendApiKey.trim()}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          from: fromSender,
+          to: [recipient],
+          subject,
+          html,
+          attachments
+        })
+      });
+
+      const resData = await res.json();
+      if (res.ok) {
+        console.log(`✅ [EMAIL SERVICE: RESEND] E-Ticket delivered to ${recipient} (Ref: ${orderRef}, ID: ${resData.id})`);
+        return { success: true, simulated: false, messageId: resData.id };
+      } else {
+        console.error(`❌ [EMAIL SERVICE: RESEND] API Error:`, resData);
+      }
+    } catch (apiErr) {
+      console.error(`❌ [EMAIL SERVICE: RESEND] Network error:`, apiErr.message || apiErr);
+    }
+  }
+
+  // --------------------------------------------------------------------------
+  // METHOD 2: Standard SMTP / Gmail (Nodemailer)
+  // --------------------------------------------------------------------------
   const mailTransporter = getTransporter();
 
-  // If SMTP is not yet configured by admin, log clean simulation and proceed safely
+  // If neither Resend nor SMTP is configured
   if (!mailTransporter) {
-    console.log(`✉️ [EMAIL SERVICE] SMTP not configured in .env. E-Ticket email simulated for: ${recipient} (Ref: ${orderRef}).`);
+    console.log(`✉️ [EMAIL SERVICE] Notice: To send real emails to ${recipient}, please add either a Gmail App Password (SMTP_USER + SMTP_PASS) or a free Resend key (RESEND_API_KEY) in .env.`);
     return {
       success: true,
       simulated: true,
-      message: 'SMTP not configured in .env; email dispatch simulated successfully.'
+      message: 'Email service simulated. Configure SMTP_USER/PASS or RESEND_API_KEY in .env for live inbox delivery.'
     };
   }
 
@@ -356,7 +412,7 @@ export async function sendTicketConfirmationEmail(order) {
     };
 
     const info = await mailTransporter.sendMail(mailOptions);
-    console.log(`✅ [EMAIL SERVICE] E-Ticket dispatched successfully to ${recipient} (Ref: ${orderRef}, MessageId: ${info.messageId})`);
+    console.log(`✅ [EMAIL SERVICE: SMTP] E-Ticket dispatched successfully to ${recipient} (Ref: ${orderRef}, MessageId: ${info.messageId})`);
 
     return {
       success: true,
@@ -364,7 +420,7 @@ export async function sendTicketConfirmationEmail(order) {
       messageId: info.messageId
     };
   } catch (err) {
-    console.error(`❌ [EMAIL SERVICE] Failed to send e-ticket email to ${recipient}:`, err.message || err);
+    console.error(`❌ [EMAIL SERVICE: SMTP] Failed to send e-ticket email to ${recipient}:`, err.message || err);
     return {
       success: false,
       error: err.message
