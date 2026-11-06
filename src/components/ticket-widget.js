@@ -391,15 +391,50 @@ export function createTicketWidget() {
       ? `https://api.whatsapp.com/send?phone=${buyerPhoneFormatted}&text=${whatsappMsg}`
       : `https://api.whatsapp.com/send?text=${whatsappMsg}`;
 
-    return `
-      <div class="commemorative-pass-card" style="margin-top: 24px; background: linear-gradient(135deg, rgba(84, 12, 26, 0.95), rgba(26, 4, 8, 0.98)); border: 2px solid var(--color-gold); border-radius: 16px; padding: 32px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); position: relative; overflow: hidden;">
-        <!-- Watermark ornament -->
-        <div style="position: absolute; right: -20px; bottom: -20px; font-size: 12rem; opacity: 0.05; pointer-events: none; font-family: var(--font-display); color: var(--color-gold);">
-          97
-        </div>
+    const formatTitle = pass.matchFormat === '3day'
+      ? '97th 3-Day Traditional Encounter'
+      : 'Limited Overs One-Day Encounter (Day-Night)';
 
-        <!-- Instant Phone Save & WhatsApp Delivery (Zero Email Setup Needed) -->
-        <div style="background: linear-gradient(135deg, rgba(37, 211, 102, 0.18) 0%, rgba(16, 185, 129, 0.1) 100%); border: 1.5px solid #25d366; border-radius: 12px; padding: 18px 22px; margin-bottom: 22px; box-shadow: 0 4px 18px rgba(0,0,0,0.35);">
+    const matchTypeBadge = pass.matchFormat === '3day'
+      ? '🏏 3-DAY TRADITIONAL TEST ENCOUNTER'
+      : '🏆 50-OVER LIMITED OVERS MATCH';
+
+    const datesText = pass.matchFormat === '3day'
+      ? 'March 2027 • Days 1, 2 & 3'
+      : 'March 2027 • 2:00 PM Onwards';
+
+    const qrSrc = pass.qrCodeData || `https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=3&color=0-0-0&data=${encodeURIComponent(pass.orderRef)}`;
+
+    return `
+      <style>
+        @media print {
+          body * {
+            visibility: hidden !important;
+          }
+          #print-souvenir-ticket, #print-souvenir-ticket * {
+            visibility: visible !important;
+          }
+          #print-souvenir-ticket {
+            position: absolute !important;
+            left: 0 !important;
+            top: 0 !important;
+            width: 100% !important;
+            max-width: 800px !important;
+            margin: 0 auto !important;
+            box-shadow: none !important;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+          }
+          .pass-no-print {
+            display: none !important;
+          }
+        }
+      </style>
+
+      <div class="commemorative-pass-wrapper" style="margin-top: 24px;">
+        
+        <!-- Instant Phone Save & WhatsApp Delivery Bar -->
+        <div class="pass-no-print" style="background: linear-gradient(135deg, rgba(37, 211, 102, 0.18) 0%, rgba(16, 185, 129, 0.1) 100%); border: 1.5px solid #25d366; border-radius: 12px; padding: 18px 22px; margin-bottom: 22px; box-shadow: 0 4px 18px rgba(0,0,0,0.35);">
           <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
             <div>
               <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
@@ -436,80 +471,153 @@ export function createTicketWidget() {
           </div>
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; border-bottom: 1px dashed rgba(212,175,55,0.4); padding-bottom: 20px; margin-bottom: 20px;">
-          <div>
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <span style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-gold-bright); font-weight: 700;">
-                BATTLE OF THE MAROONS — OFFICIAL PASS
-              </span>
-              <span style="padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-family: var(--font-mono); font-weight: 700; background: #22bb55; color: #ffffff; letter-spacing: 0.05em;">
-                VERIFIED PASS
+        <!-- Master Souvenir Cricket E-Ticket -->
+        <div id="print-souvenir-ticket" class="commemorative-pass-card" style="background: linear-gradient(135deg, #2c050e 0%, #170207 100%); border: 2.5px solid var(--color-gold); border-radius: 18px; overflow: hidden; box-shadow: 0 16px 50px rgba(0,0,0,0.85); position: relative;">
+          
+          <!-- Top Gold Trim Line -->
+          <div style="height: 6px; background: linear-gradient(90deg, #d4af37 0%, #fff1a8 50%, #d4af37 100%);"></div>
+
+          <!-- Masthead & Centenary Crest -->
+          <div style="background: linear-gradient(180deg, #4a0715 0%, #29040c 100%); padding: 26px 28px 20px; border-bottom: 1.5px solid rgba(212, 175, 55, 0.35); text-align: center; position: relative;">
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(212, 175, 55, 0.15); border: 1px solid var(--color-gold); border-radius: 50px; padding: 4px 16px; margin-bottom: 12px;">
+              <span style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: #ffd700; letter-spacing: 0.15em; text-transform: uppercase;">
+                ★ 97TH CENTENARY COMMEMORATIVE PASS ★
               </span>
             </div>
-            <h2 style="font-family: var(--font-display); font-size: 1.6rem; color: var(--color-wool); margin-top: 6px;">
-              ${pass.categoryName || 'SSC Ground Pass'}
-            </h2>
-            <div style="font-size: 0.85rem; color: var(--color-wool-muted);">
-              ${pass.matchFormat === '3day' ? '97th 3-Day Traditional Encounter' : 'One Day Encounter (Day-Night)'} • SSC Grounds, Colombo
+
+            <h1 style="font-family: var(--font-display); font-size: 1.85rem; color: #ffffff; margin: 0 0 4px; letter-spacing: 0.04em; text-shadow: 0 3px 12px rgba(0,0,0,0.8);">
+              🏏 BATTLE OF THE MAROONS 🏏
+            </h1>
+            <div style="font-family: var(--font-display); font-size: 1.15rem; color: #ffd700; font-weight: 700; margin-bottom: 6px;">
+              ANANDA COLLEGE <span style="color: #ffffff; font-weight: 400; padding: 0 6px;">vs</span> NALANDA COLLEGE
+            </div>
+            <div style="font-size: 0.85rem; color: #e5cfd5; letter-spacing: 0.05em; text-transform: uppercase;">
+              🏟️ Sinhalese Sports Club (SSC) Grounds &bull; Maitland Place, Colombo
+            </div>
+
+            <div style="margin-top: 14px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+              <span style="background: #064e3b; border: 1px solid #10b981; color: #6ee7b7; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 800; padding: 5px 14px; border-radius: 6px; letter-spacing: 0.05em;">
+                ${matchTypeBadge}
+              </span>
+              <span style="background: rgba(212, 175, 55, 0.2); border: 1px solid var(--color-gold); color: #ffd700; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 800; padding: 5px 14px; border-radius: 6px;">
+                REF: ${pass.orderRef}
+              </span>
             </div>
           </div>
 
-          <div style="text-align: right;">
-            <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-wool-muted);">ORDER REFERENCE</div>
-            <div style="font-family: var(--font-mono); font-size: 1.3rem; font-weight: 900; color: var(--color-gold); letter-spacing: 0.05em;">
-              ${pass.orderRef}
-            </div>
-          </div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; align-items: center;">
-          <!-- Left: Passholder Details -->
-          <div>
-            <div style="margin-bottom: 12px;">
-              <span style="font-size: 0.75rem; color: var(--color-wool-subtle); font-family: var(--font-mono); display: block;">PASSHOLDER</span>
-              <span style="font-size: 1.1rem; font-weight: 700; color: var(--color-wool);">${pass.buyerName}</span>
-            </div>
-
-            <div style="margin-bottom: 12px;">
-              <span style="font-size: 0.75rem; color: var(--color-wool-subtle); font-family: var(--font-mono); display: block;">CONFIRMED EMAIL</span>
-              <span style="font-size: 0.95rem; font-weight: 600; color: #6ee7b7; font-family: var(--font-mono);">${pass.buyerEmail || 'N/A'}</span>
-            </div>
-
-            <div style="margin-bottom: 12px;">
-              <span style="font-size: 0.75rem; color: var(--color-wool-subtle); font-family: var(--font-mono); display: block;">ADMISSION QUANTITY</span>
-              <span style="font-size: 1.1rem; font-weight: 700; color: var(--color-gold);">${pass.quantity} Person(s)</span>
-            </div>
-
-            <div style="margin-bottom: 12px;">
-              <span style="font-size: 0.75rem; color: var(--color-wool-subtle); font-family: var(--font-mono); display: block;">TOTAL AMOUNT</span>
-              <span style="font-size: 1.1rem; font-weight: 700; color: var(--color-wool);">LKR ${(pass.totalAmount || 0).toLocaleString()}</span>
-            </div>
-
+          <!-- Quick Timings Ribbon -->
+          <div style="background: #110206; padding: 10px 24px; border-bottom: 1px solid rgba(212,175,55,0.2); display: flex; justify-content: space-around; text-align: center; flex-wrap: wrap; gap: 12px;">
             <div>
-              <span style="font-size: 0.75rem; color: var(--color-wool-subtle); font-family: var(--font-mono); display: block;">AFFILIATION</span>
-              <span style="font-size: 0.9rem; color: var(--color-wool); text-transform: capitalize;">${pass.schoolAffiliation || 'Cricket Supporter'}</span>
+              <div style="font-family: var(--font-mono); font-size: 0.65rem; color: #a89299; text-transform: uppercase;">Dates &amp; Play</div>
+              <div style="font-size: 0.82rem; font-weight: 800; color: #ffffff;">${datesText}</div>
+            </div>
+            <div style="border-left: 1px solid rgba(212,175,55,0.2); padding-left: 16px;">
+              <div style="font-family: var(--font-mono); font-size: 0.65rem; color: #a89299; text-transform: uppercase;">Gates Open</div>
+              <div style="font-size: 0.82rem; font-weight: 800; color: #ffd700;">08:00 AM Prompt</div>
+            </div>
+            <div style="border-left: 1px solid rgba(212,175,55,0.2); padding-left: 16px;">
+              <div style="font-family: var(--font-mono); font-size: 0.65rem; color: #a89299; text-transform: uppercase;">First Ball</div>
+              <div style="font-size: 0.82rem; font-weight: 800; color: #ffffff;">09:45 AM</div>
             </div>
           </div>
 
-          <!-- Right: Digital QR Code -->
-          <div style="text-align: center; background: rgba(0,0,0,0.3); border: 1px solid var(--border-gold); border-radius: 12px; padding: 18px;">
-            ${(() => {
-              const qrSrc = pass.qrCodeData || `https://api.qrserver.com/v1/create-qr-code/?size=250x250&margin=4&color=0-0-0&data=${encodeURIComponent(pass.orderRef)}`;
-              return `
-                <img src="${qrSrc}" alt="Admission QR Code" style="width: 160px; height: 160px; border-radius: 8px; background: white; padding: 6px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.4);" />
-                <div style="margin-top: 8px; font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-gold-bright); letter-spacing: 0.08em; font-weight: 700;">
-                  VALIDATED GATE SCAN CODE
+          <!-- Main Ticket Body: Details & QR Pod -->
+          <div style="padding: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; align-items: center;">
+            
+            <!-- Left: Match Passholder Details -->
+            <div>
+              <!-- Enclosure Card -->
+              <div style="background: linear-gradient(135deg, rgba(84, 12, 26, 0.7) 0%, rgba(36, 5, 13, 0.8) 100%); border: 1.5px solid var(--color-gold); border-radius: 10px; padding: 14px 18px; margin-bottom: 16px;">
+                <div style="font-family: var(--font-mono); font-size: 0.68rem; color: #ffd700; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 800;">
+                  ASSIGNED GROUND ENCLOSURE
                 </div>
-                <div style="font-size: 0.65rem; color: var(--color-wool-subtle); margin-top: 2px;">
-                  Present at Ground Gates for Entry
+                <div style="font-family: var(--font-display); font-size: 1.35rem; font-weight: 900; color: #ffffff; margin-top: 2px;">
+                  ${pass.categoryName || 'SSC Ground Pass'}
                 </div>
-              `;
-            })()}
+                <div style="font-size: 0.75rem; color: #6ee7b7; margin-top: 2px;">
+                  📍 Turnstiles: Gate 02 &amp; Gate 03 (Maitland Place Entrance)
+                </div>
+              </div>
+
+              <!-- Specs Grid -->
+              <div style="background: rgba(0,0,0,0.3); border: 1px solid rgba(212,175,55,0.2); border-radius: 10px; padding: 14px 18px;">
+                <div style="display: flex; justify-content: space-between; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.06);">
+                  <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #a89299; text-transform: uppercase;">Passholder</span>
+                  <span style="font-size: 0.92rem; font-weight: 700; color: #ffffff;">${pass.buyerName}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+                  <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #a89299; text-transform: uppercase;">Confirmed Email</span>
+                  <span style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: #6ee7b7;">${pass.buyerEmail || 'N/A'}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+                  <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #a89299; text-transform: uppercase;">Mobile Number</span>
+                  <span style="font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; color: #ffffff;">${pass.buyerPhone || 'N/A'}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+                  <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #a89299; text-transform: uppercase;">Admissions</span>
+                  <span style="font-size: 0.95rem; font-weight: 800; color: #ffd700;">${pass.quantity} Person(s)</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
+                  <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #a89299; text-transform: uppercase;">Total Paid</span>
+                  <span style="font-family: var(--font-mono); font-size: 1rem; font-weight: 900; color: #ffd700;">LKR ${(pass.totalAmount || 0).toLocaleString()}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding-top: 8px;">
+                  <span style="font-family: var(--font-mono); font-size: 0.72rem; color: #a89299; text-transform: uppercase;">Affiliation</span>
+                  <span style="font-size: 0.85rem; color: #ffffff; text-transform: capitalize;">${pass.schoolAffiliation || 'Cricket Supporter'}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Scannable Turnstile QR Gate Pod -->
+            <div style="text-align: center; background: linear-gradient(180deg, rgba(30, 4, 10, 0.7) 0%, rgba(15, 2, 5, 0.9) 100%); border: 1.5px solid var(--color-gold); border-radius: 14px; padding: 22px 18px; position: relative;">
+              <div style="font-family: var(--font-mono); font-size: 0.72rem; font-weight: 800; color: #ffd700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 12px;">
+                ⚡ OPTICAL TURNSTILE SCAN CODE ⚡
+              </div>
+
+              <!-- Pure White QR Card with Gold Trim -->
+              <div style="background: #ffffff; border: 3px solid var(--color-gold); border-radius: 12px; padding: 12px; display: inline-block; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                <img src="${qrSrc}" alt="Admission QR Code" style="width: 170px; height: 170px; display: block; border-radius: 4px;" />
+                <div style="margin-top: 8px; font-family: var(--font-mono); font-size: 1.05rem; font-weight: 900; color: #150206; letter-spacing: 0.08em;">
+                  ${pass.orderRef}
+                </div>
+                <div style="font-size: 0.65rem; font-weight: 800; color: #064e3b; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 1px;">
+                  ✓ COMMITTEE VERIFIED PASS
+                </div>
+              </div>
+
+              <div style="margin-top: 14px; background: rgba(16, 185, 129, 0.12); border: 1px solid #10b981; border-radius: 6px; padding: 6px 12px; font-size: 0.75rem; color: #34d399; font-weight: 700; font-family: var(--font-mono);">
+                ⚡ Present QR at SSC Turnstile for Gate Admission
+              </div>
+              <div style="margin-top: 6px; font-size: 0.68rem; color: var(--color-wool-subtle);">
+                Ensure phone screen brightness is at maximum when scanning
+              </div>
+            </div>
+
           </div>
+
+          <!-- Match Day Notice Strip -->
+          <div style="background: rgba(0,0,0,0.4); padding: 12px 28px; border-top: 1px dashed rgba(212,175,55,0.25); border-bottom: 1px solid rgba(212,175,55,0.2); font-size: 0.72rem; color: #c9b8be; line-height: 1.5;">
+            <strong style="color: #ffd700; text-transform: uppercase; font-family: var(--font-mono);">Ground Admission Notice:</strong>
+            Turnstiles open 08:00 AM. This pass admits ${pass.quantity} Person(s) to ${pass.categoryName || 'designated enclosure'}. Unique QR code valid for official match entry. Standard SSC regulations apply.
+          </div>
+
+          <!-- Souvenir Committee Footer -->
+          <div style="background: #090104; padding: 16px 28px; text-align: center;">
+            <div style="font-family: var(--font-mono); font-size: 0.65rem; color: var(--color-gold); font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 2px;">
+              ★ JOINT MATCH ORGANIZING COMMITTEE ★
+            </div>
+            <div style="font-size: 0.75rem; color: #ffffff; font-weight: 700;">
+              Ananda College Colombo &bull; Nalanda College Colombo
+            </div>
+          </div>
+
+          <!-- Bottom Gold Trim Line -->
+          <div style="height: 6px; background: linear-gradient(90deg, #d4af37 0%, #fff1a8 50%, #d4af37 100%);"></div>
+
         </div>
 
-        <!-- Action Bar -->
-        <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: flex-end; gap: 12px; flex-wrap: wrap;">
+        <!-- Action Bar (Hidden in Print) -->
+        <div class="pass-no-print" style="margin-top: 22px; display: flex; justify-content: flex-end; gap: 12px; flex-wrap: wrap;">
           <a 
             href="https://api.whatsapp.com/send?text=${encodeURIComponent(`Official Battle of the Maroons Pass (${pass.orderRef}) for ${pass.buyerName}. Enclosure: ${pass.categoryName}. Quantity: ${pass.quantity}. View pass online: ${window.location.origin}/#/ticketing?ref=${pass.orderRef}`)}" 
             target="_blank" 
@@ -522,7 +630,7 @@ export function createTicketWidget() {
           <button type="button" class="btn-primary-cinematic" id="btn-print-pass" style="padding: 10px 20px; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 8px;">
             ${Icons.print()} Print / Save Pass
           </button>
-          <a href="${pass.qrCodeData || `https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=4&color=0-0-0&data=${encodeURIComponent(pass.orderRef)}`}" download="${pass.orderRef}-qrcode.png" class="btn-outline-gold" style="padding: 10px 20px; font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--color-gold); border-radius: 6px; color: var(--color-gold); font-family: var(--font-mono);">
+          <a href="${qrSrc}" download="${pass.orderRef}-qrcode.png" class="btn-outline-gold" style="padding: 10px 20px; font-size: 0.85rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--color-gold); border-radius: 6px; color: var(--color-gold); font-family: var(--font-mono);">
             ${Icons.download()} Download QR
           </a>
         </div>
