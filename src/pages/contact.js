@@ -57,7 +57,7 @@ export function renderContactPage(container) {
                 <div style="display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; background: rgba(255, 255, 255, 0.03); border-radius: 8px; border: 1px solid var(--border-subtle);">
                   <span style="font-size: 1.1rem; flex-shrink: 0; display: flex; align-items: center; color: var(--color-gold);">${Icons.mapPin()}</span>
                   <div>
-                    <strong style="color: var(--color-wool); display: block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">Campus Address</strong>
+                    <strong style="color: var(--color-wool); display: block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">School Address</strong>
                     <span>Kularatne Mawatha, Colombo 10, Sri Lanka</span>
                   </div>
                 </div>
@@ -112,7 +112,7 @@ export function renderContactPage(container) {
                 <div style="display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; background: rgba(255, 255, 255, 0.03); border-radius: 8px; border: 1px solid var(--border-subtle);">
                   <span style="font-size: 1.1rem; flex-shrink: 0; display: flex; align-items: center; color: var(--color-silver);">${Icons.mapPin()}</span>
                   <div>
-                    <strong style="color: var(--color-wool); display: block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">Campus Address</strong>
+                    <strong style="color: var(--color-wool); display: block; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">School Address</strong>
                     <span>Nalanda College, Colombo 10, Sri Lanka</span>
                   </div>
                 </div>
